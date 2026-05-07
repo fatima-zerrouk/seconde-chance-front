@@ -16,23 +16,23 @@
   body {
     @apply text-brown;
     /* Texte Regular : 16px mobile -> 18px PC */
-    font-size: 1rem; 
+    font-size: 1rem;
     @variant md {
       font-size: 1.125rem;
     }
   }
 }
 @layer components {
-/* H1 Bold : 32px mobile -> 48px PC */
+  /* H1 Bold : 32px mobile -> 48px PC */
   .title-h1 {
     @apply font-bold text-brown;
-    font-size: 2rem; 
+    font-size: 2rem;
     line-height: 1.2;
     @variant md {
       font-size: 3rem;
     }
   }
-/* H2 Semi-bold : 24px mobile -> 32px PC */
+  /* H2 Semi-bold : 24px mobile -> 32px PC */
   .title-h2 {
     @apply font-semibold text-brown;
     font-size: 1.5rem;
@@ -40,7 +40,7 @@
       font-size: 2rem;
     }
   }
-/* H3 Medium : 20px mobile -> 24px PC */
+  /* H3 Medium : 20px mobile -> 24px PC */
   .title-h3 {
     @apply font-medium text-brown;
     font-size: 1.25rem;
@@ -48,7 +48,7 @@
       font-size: 1.5rem;
     }
   }
-/* Texte Regular : séjà géré dans le body, mais au cas où */
+  /* Texte Regular : séjà géré dans le body, mais au cas où */
   .text-main {
     @apply font-normal text-brown;
     font-size: 1rem;
