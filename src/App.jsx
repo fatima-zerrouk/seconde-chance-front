@@ -1,10 +1,20 @@
-import './App.css';
+// import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { Header } from './components/layout/Header';
+import Home from './pages/Home';
+import { Footer } from './components/layout/Footer';
 
 function App() {
   return (
-    <section className="bg-test p-10">
-      <h1 className="text-center text-4xl font-bold">Seconde chance </h1>
-    </section>
+    <>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </main>
+      <Footer />
+    </>
   );
 }
 
