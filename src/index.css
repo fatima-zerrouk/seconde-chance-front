@@ -6,6 +6,9 @@
   --color-cream: #faf2e5;
   --color-lin: #ede8e2;
   --color-brown: #3e1a0a;
+  --shadow-line-b: 0 4px 4px rgba(62, 26, 10, 0.3);
+  --shadow-line-t: 0 -4px 4px rgba(62, 26, 10, 0.3);
+  --shadow-card: 0 10px 30px rgba(62, 26, 10, 0.3);
   --font-poppins: 'Poppins', sans-serif;
 }
 @layer base {

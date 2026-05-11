@@ -7,7 +7,7 @@ export function Header() {
   const linkActive = ({ isActive }) => (isActive ? 'font-bold' : '');
 
   return (
-    <header className="flex justify-between items-center px-18 py-3 shadow-[0_2px_5px_rgba(62,26,10,0.3)]">
+    <header className="flex justify-between items-center px-6 py-6 md:px-12 md:py-4 shadow-line-b">
       <Link to="/" className="font-bold text-2xl uppercase">
         Seconde<span className="display: block">chance</span>
       </Link>
@@ -20,7 +20,7 @@ export function Header() {
         </button>
         <ul
           className={`
-           fixed inset-0 bg-cream flex-col items-center text-center gap-4 p-10 lg:p-0
+           fixed inset-0 bg-white flex-col items-center text-center gap-4 p-10 lg:p-0
            ${isOpen ? 'flex' : 'hidden'} 
            lg:static lg:flex lg:flex-row lg:bg-transparent lg:inset-auto lg:gap-8 lg:items-center text-base
          `}
