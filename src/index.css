@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap'); */
 
 @theme {
   --color-terracotta: #d48269;
@@ -10,9 +10,18 @@
   --shadow-line-t: 0 -4px 4px rgba(62, 26, 10, 0.3);
   --shadow-card: 0 10px 30px rgba(62, 26, 10, 0.3);
   --font-poppins: 'Poppins', sans-serif;
+
+  --radius-input: 6px;
+  --radius-button: 8px;
+  --radius-card: 12px;
+  /* --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 48px; */
+  --margin-mobile: 24px;
 }
 @layer base {
-  * {
+  body {
     text-decoration: none;
     font-family: var(--font-poppins);
   }

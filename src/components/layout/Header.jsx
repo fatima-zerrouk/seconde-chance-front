@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, logout } = useContext(AuthContext);
 
-  const linkActive = ({ isActive }) => (isActive ? 'font-bold' : '');
+  const linkActive = ({ isActive }) => (isActive ? 'font-semibold' : '');
 
   return (
     <header className="flex justify-between items-center px-6 py-6 md:px-12 md:py-4 shadow-line-b">
@@ -52,16 +54,27 @@ export function Header() {
               Conditions d&apos;adoption
             </NavLink>
           </li>
-          <li className="bg-terracotta py-2 px-5 rounded-lg w-40 lg:w-35">
-            {' '}
-            <NavLink
-              to="/login"
-              onClick={() => setIsOpen(false)}
-              className={linkActive}
-            >
-              Connexion
-            </NavLink>
-          </li>
+          {isAuthenticated ? (
+            <li>
+              <button
+                onClick={logout}
+                className="bg-terracotta py-2 px-5 rounded-lg w-40 lg:w-35"
+              >
+                Déconnexion
+              </button>
+            </li>
+          ) : (
+            <li className="bg-terracotta py-2 px-5 rounded-lg w-40 lg:w-35">
+              {' '}
+              <NavLink
+                to="/login"
+                onClick={() => setIsOpen(false)}
+                className={linkActive}
+              >
+                Connexion
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
