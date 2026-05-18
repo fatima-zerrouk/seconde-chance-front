@@ -6,13 +6,12 @@ import { isTokenValid } from '../utils/jwt.utils';
 
 // composant qui protège les routes privées
 export default function PrivateRoute({ children, role }) {
-  const { isAuthenticated, logout } = useContext(AuthContext); //récupère isAuthenticated (booléen) et logout
+  const { isAuthenticated } = useContext(AuthContext); //récupère isAuthenticated (booléen) et logout
 
   const token = localStorage.getItem('token'); // récupère token dans le localStorage
 
   if (!isAuthenticated || !isTokenValid(token)) {
     // vérifie : si l'utilisateur est connecté ou si le token est valide/non expiré
-    logout(); // déconnecte l'utilisateur
     return <Navigate to="/login" />;
   }
 

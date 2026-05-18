@@ -1,12 +1,13 @@
-import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+// import { useContext } from 'react';
+// import { AuthContext } from '../context/AuthContext';
 
 export function useFetch() {
-  const { logout } = useContext(AuthContext);
+  // const { logout } = useContext(AuthContext);
   const API_URL = import.meta.env.VITE_API_URL;
 
   async function apiFetch(url, options = {}) {
     const token = localStorage.getItem('token'); //récupère token
+
     const res = await fetch(`${API_URL}${url}`, {
       ...options,
       headers: {
@@ -16,20 +17,17 @@ export function useFetch() {
       },
     });
 
-    if (res.status === 401) {
-      logout();
-      return;
+    const data = await res.json();
+    // si c'est une erreur de validation 400 (bad request), retourne l'objet attendu
+    if (res.status === 400) {
+      return { validationErrors: data.errors };
     }
-    if (res.status === 204) {
-      // gestion du statut 204 (pas de contenue)
-      return null;
-    }
+    // si c'est une autre erreur (401, 403, 404, 500...), jette une erreur pour le toast
     if (!res.ok) {
-      // si erreur API
-      const data = await res.json(); // lecture message erreur back
-      throw new Error(data.message || 'Erreur API'); // lance erreur
+      throw new Error(data.message || 'Une erreur est survenue.');
     }
-    return await res.json(); // retourne les données JSON
+    // si tout est ok, retourne les données le token, etc
+    return data;
   }
   return { apiFetch };
 }

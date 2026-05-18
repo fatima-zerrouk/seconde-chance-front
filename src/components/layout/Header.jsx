@@ -22,7 +22,7 @@ export function Header() {
         </button>
         <ul
           className={`
-           fixed inset-0 bg-white flex-col items-center text-center gap-4 p-10 lg:p-0
+           fixed inset-0 z-1 bg-white flex-col items-center text-center gap-4 p-10 lg:p-0
            ${isOpen ? 'flex' : 'hidden'} 
            lg:static lg:flex lg:flex-row lg:bg-transparent lg:inset-auto lg:gap-8 lg:items-center text-base
          `}

@@ -6,9 +6,11 @@ import { Footer } from './components/layout/Footer';
 import Login from './pages/Login';
 import Dashboard from './pages/DashboardAdmin/Dashboard';
 import PrivateRoute from './routes/PrivateRoute';
+import { Toaster } from 'sonner';
 function App() {
   return (
     <>
+      <Toaster richColors position="top-right" />
       <Header />
       <main>
         <Routes>

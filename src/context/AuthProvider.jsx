@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { isTokenValid } from '../utils/jwt.utils.js';
+import { toast } from 'sonner';
 
 export function AuthProvider({ children }) {
   const storedToken = localStorage.getItem('token');
@@ -20,6 +21,7 @@ export function AuthProvider({ children }) {
   function logout() {
     localStorage.removeItem('token'); // supprime le token du localStorage
     setIsAuthenticated(false); // utilisateur déconnecté
+    toast.success('Vous avez bien été déconnecté');
   }
   return (
     // Provider partage les données à tous les composants enfants
