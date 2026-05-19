@@ -1,10 +1,14 @@
 import React from 'react';
 import OptimizedImage from '../components/ui/OptimizedImage';
 import { ButtonTerracota } from '../components/ui/Buttons';
+import { SectionSubtitles } from '../components/ui/Sections';
+import { CardMission } from '../components/ui/Cards';
+import { dataMisson } from '../components/DataCards';
 
 export default function Home() {
   return (
     <>
+      {/* Section hero */}
       <section className="flex flex-col justify-between pb-16 md:pb-10 lg:flex-row-reverse items-center bg-lin px-(--margin-mobile) md:px-(--margin-desktop)">
         <OptimizedImage
           src="src/assets/dog-home.png"
@@ -44,6 +48,29 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Section mission */}
+      <SectionSubtitles title={'Notre mission'}>
+        <p className="md:inline-block">
+          Seconde Chance œuvre chaque jour pour offrir une nouvelle vie aux
+          <span className="inline-block">
+            {' '}
+            animaux abandonnés et les reconnecter avec des familles aimantes.
+          </span>
+        </p>
+        {/* contenue children */}
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mt-12 ">
+          {dataMisson.map(card => (
+            <CardMission
+              key={card.id}
+              icon={card.icon}
+              title={card.title}
+              text={card.text}
+            />
+          ))}
+        </div>
+      </SectionSubtitles>
     </>
   );
 }
