@@ -62,11 +62,11 @@
     }
   }
   /* Texte Regular : séjà géré dans le body, mais au cas où */
-  .text-main {
+  /* .text-main {
     @apply font-normal text-brown;
     font-size: 1rem;
     @variant md {
       font-size: 1.125rem;
     }
-  }
+  } */
 }

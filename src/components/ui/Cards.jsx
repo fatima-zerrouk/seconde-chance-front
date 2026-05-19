@@ -11,3 +11,14 @@ export function CardMission({ icon: Icon, title, text, className }) {
     </article>
   );
 }
+export function CardHow({ icon: Icon, title, text, className }) {
+  return (
+    <article
+      className={`bg-cream rounded-(--radius-card) shadow-(--shadow-card) p-6  ${className}`}
+    >
+      <Icon className="text-brown text-6xl mb-4" />
+      <h3 className="title-h3 py-2">{title}</h3>
+      <p>{text}</p>
+    </article>
+  );
+}

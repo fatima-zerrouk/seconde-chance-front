@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export function ButtonTerracota({ className = '', value, type = 'button' }) {
   return (
@@ -8,5 +9,16 @@ export function ButtonTerracota({ className = '', value, type = 'button' }) {
     >
       {value}
     </button>
+  );
+}
+
+export function LinkTerracota({ className = '', value, to }) {
+  return (
+    <NavLink
+      to={to}
+      className={`flex justify-center items-center bg-terracotta font-medium h-14 rounded-(--radius-button)  cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out  ${className}`}
+    >
+      {value}
+    </NavLink>
   );
 }

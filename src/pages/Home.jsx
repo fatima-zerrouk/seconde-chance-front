@@ -1,10 +1,11 @@
 import React from 'react';
 import OptimizedImage from '../components/ui/OptimizedImage';
-import { ButtonTerracota } from '../components/ui/Buttons';
+import { ButtonTerracota, LinkTerracota } from '../components/ui/Buttons';
 import { SectionSubtitles } from '../components/ui/Sections';
-import { CardMission } from '../components/ui/Cards';
-import { dataMisson } from '../components/DataCards';
+import { CardHow, CardMission } from '../components/ui/Cards';
+import { dataHow, dataMisson } from '../components/DataCards';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import { NavLink } from 'react-router-dom';
 
 export default function Home() {
   return (
@@ -35,8 +36,8 @@ export default function Home() {
           </p>
 
           <div className="sm:flex gap-6">
-            <ButtonTerracota
-              type="submit"
+            <LinkTerracota
+              to={'/catalog'}
               value={'Découvrez nos animaux'}
               className=" w-full md:w-62 mt-8"
             />
@@ -111,6 +112,37 @@ export default function Home() {
           className="rounded-(--radius-card) my-8 w-full sm:max-w-100 lg:max-w-120 "
         />
       </section>
+
+      {/* Section comment ça marche */}
+      <SectionSubtitles className="">
+        <h2 className="title-h2 text-center ">Comment ça marche ?</h2>
+        <p className="pb-2 pt-4 text-center">
+          Le processus d&apos;adoption en 4 étapes simples.
+        </p>
+
+        {/* contenue children */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 mt-12 ">
+          {dataHow.map(card => (
+            <CardHow
+              key={card.id}
+              icon={card.icon}
+              title={card.title}
+              text={card.text}
+            />
+          ))}
+        </div>
+        {/* <ButtonTerracota
+          type="submit"
+          value={'Découvrez nos animaux'}
+          className=" w-full md:w-62 mt-12 flex justify-center items-center m-auto"
+        /> */}
+
+        <LinkTerracota
+          to={'/catalog'}
+          value={'Découvrez nos animaux'}
+          className=" w-full md:w-62 mt-12  m-auto"
+        />
+      </SectionSubtitles>
     </>
   );
 }
