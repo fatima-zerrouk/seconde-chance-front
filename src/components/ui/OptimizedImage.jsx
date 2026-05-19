@@ -5,6 +5,7 @@ export default function OptimizedImage({
   height,
   lazy = true,
   className = '',
+  fetchPriority,
 }) {
   const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
   return (
@@ -17,6 +18,7 @@ export default function OptimizedImage({
         height={height}
         loading={lazy ? 'lazy' : 'eager'}
         className={className}
+        fetchPriority={fetchPriority}
       />
     </picture>
   );

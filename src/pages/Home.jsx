@@ -9,10 +9,11 @@ export default function Home() {
         <OptimizedImage
           src="src/assets/dog-home.png"
           alt="Photo bannière d'un chien marron dans un drap"
-          width="260"
-          height="520"
+          width="910"
+          height="1820"
           lazy={false}
-          className="lg:mr-80 "
+          fetchPriority="high"
+          className="lg:mr-80 w-full max-w-60 md:max-w-66 h-auto"
         />
 
         <div className="">
