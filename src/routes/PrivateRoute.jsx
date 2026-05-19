@@ -11,7 +11,7 @@ export default function PrivateRoute({ children, role }) {
   const token = localStorage.getItem('token'); // récupère token dans le localStorage
 
   if (!isAuthenticated || !isTokenValid(token)) {
-    // vérifie : si l'utilisateur est connecté ou si le token est valide/non expiré
+    // vérifie si l'utilisateur est connecté ou si le token est valide/non expiré
     return <Navigate to="/login" />;
   }
 

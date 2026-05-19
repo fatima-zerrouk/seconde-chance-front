@@ -19,6 +19,7 @@
   --space-md: 24px;
   --space-lg: 48px; */
   --margin-mobile: 24px;
+  --margin-desktop: 78px;
 }
 @layer base {
   body {
