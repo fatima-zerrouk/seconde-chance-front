@@ -29,7 +29,7 @@ export function SectionSubtitles({
 }) {
   return (
     <section
-      className={`px-(--margin-mobile) md:px-(--margin-desktop) my-12 ${className}`}
+      className={`px-(--margin-mobile) md:px-(--margin-desktop) py-12 md:py-18 ${className}`}
       {...props}
     >
       {/* props classique  */}
@@ -37,7 +37,10 @@ export function SectionSubtitles({
       <p className={`py-1 ${className}`}>{paragraph}</p>
       {/* children c'est une propriété pas du toto il passe du contenue html 
       à la difference de title qui passe que du texte avec les props*/}
-      <div> {children} </div>
+      {/* <div>  */}
+      {children}
+
+      {/* </div> */}
     </section>
   );
 }

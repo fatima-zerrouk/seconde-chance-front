@@ -4,6 +4,7 @@ import { ButtonTerracota } from '../components/ui/Buttons';
 import { SectionSubtitles } from '../components/ui/Sections';
 import { CardMission } from '../components/ui/Cards';
 import { dataMisson } from '../components/DataCards';
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 
 export default function Home() {
   return (
@@ -20,13 +21,13 @@ export default function Home() {
           className="lg:mr-80 w-full max-w-60 md:max-w-66 h-auto"
         />
 
-        <div className="">
+        <div>
           <h1 className="title-h1 mb-8">
             <span className="font-medium block"> Offrez une </span>seconde
             chance <span className="font-medium block"> à un compagnon</span>
           </h1>
 
-          <p className="m">
+          <p>
             Chaque animal mérite un foyer aimant. Découvrez nos{' '}
             <span className="inline-block">
               chiens et chats qui attendent une famille.
@@ -51,15 +52,14 @@ export default function Home() {
 
       {/* Section mission */}
       <SectionSubtitles title={'Notre mission'}>
-        <p className="md:inline-block">
+        <p>
           Seconde Chance œuvre chaque jour pour offrir une nouvelle vie aux
-          <span className="inline-block">
+          <span className="md:inline-block">
             {' '}
             animaux abandonnés et les reconnecter avec des familles aimantes.
           </span>
         </p>
         {/* contenue children */}
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mt-12 ">
           {dataMisson.map(card => (
             <CardMission
@@ -71,6 +71,46 @@ export default function Home() {
           ))}
         </div>
       </SectionSubtitles>
+
+      {/* Section adoption */}
+      <section className="bg-lin flex flex-col m-auto gap-12 lg:flex-row md:items-center md:justify-between px-(--margin-mobile) md:px-(--margin-desktop) py-12">
+        <div className="">
+          <h2 className="title-h2">L&apos;adoption responsable</h2>
+          <p className="pb-2 pt-4">
+            Adopter un animal est un engagement à long
+            <span className="block">
+              terme qui demande réflexion, temps et ressources.
+            </span>
+          </p>
+
+          <p className="flex my-4 gap-2">
+            <IoMdCheckmarkCircleOutline className="text-terracotta text-3xl" />
+            Un engagement de 10 à 20 ans selon l&apos;espèce
+          </p>
+          <p className="flex gap-2">
+            <IoMdCheckmarkCircleOutline className="text-terracotta text-3xl" />
+            Des frais vétérinaires et d&apos;entretien réguliers
+          </p>
+          <p className="flex my-4 gap-2">
+            <IoMdCheckmarkCircleOutline className="text-terracotta text-3xl" />
+            Du temps quotidien pour le bien-être de l&apos;animal
+          </p>
+          <p className="flex gap-2">
+            <IoMdCheckmarkCircleOutline className="text-terracotta text-3xl" />
+            Un environnement adapté à ses besoins
+          </p>
+        </div>
+
+        <OptimizedImage
+          src="src/assets/dog-cat.jpeg"
+          alt="Photo d'un chien et d'un chat côte à côte sur l'herbe"
+          width="2896"
+          height="1704"
+          lazy={true}
+          fetchPriority="low"
+          className="rounded-(--radius-card) my-8 w-full sm:max-w-100 lg:max-w-120 "
+        />
+      </section>
     </>
   );
 }
