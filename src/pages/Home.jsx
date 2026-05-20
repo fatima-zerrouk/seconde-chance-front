@@ -5,7 +5,7 @@ import { SectionSubtitles } from '../components/ui/Sections';
 import { CardHow, CardMission } from '../components/ui/Cards';
 import { dataHow, dataMisson } from '../components/DataCards';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export default function Home() {
   return (
@@ -39,14 +39,15 @@ export default function Home() {
             <LinkTerracota
               to={'/catalog'}
               value={'Découvrez nos animaux'}
+              ariaLabel={'Lien qui mène à la page du catalogue animal '}
               className=" w-full md:w-62 mt-8"
             />
-            <button
-              id="adopt"
-              className="mt-8 h-14 font-medium rounded-(--radius-button) border-2  hover:bg-brown hover:border-0 hover:text-lin transition duration-300 ease-in-out w-full md:w-52 border-terracotta cursor-pointer"
+            <a
+              href="#adopt"
+              className="flex justify-center items-center mt-8 h-14 font-medium rounded-(--radius-button) border-2  hover:bg-brown hover:border-0 hover:text-lin transition duration-300 ease-in-out w-full md:w-52 border-terracotta cursor-pointer"
             >
               Comment adopter
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -114,12 +115,12 @@ export default function Home() {
       </section>
 
       {/* Section comment ça marche */}
-      <SectionSubtitles className="">
-        <h2 className="title-h2 text-center ">Comment ça marche ?</h2>
-        <p className="pb-2 pt-4 text-center">
-          Le processus d&apos;adoption en 4 étapes simples.
-        </p>
-
+      <SectionSubtitles
+        id="adopt"
+        className="text-center"
+        title={' Comment ça marche ?'}
+        paragraph={"Le processus d'adoption en 4 étapes simples."}
+      >
         {/* contenue children */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 mt-12 ">
           {dataHow.map(card => (
@@ -128,20 +129,46 @@ export default function Home() {
               icon={card.icon}
               title={card.title}
               text={card.text}
+              className={'text-left'}
             />
           ))}
         </div>
-        {/* <ButtonTerracota
-          type="submit"
-          value={'Découvrez nos animaux'}
-          className=" w-full md:w-62 mt-12 flex justify-center items-center m-auto"
-        /> */}
 
         <LinkTerracota
           to={'/catalog'}
           value={'Découvrez nos animaux'}
           className=" w-full md:w-62 mt-12  m-auto"
+          ariaLabel={'Lien qui mène à la page du catalogue animal '}
         />
+      </SectionSubtitles>
+
+      {/* Section stats*/}
+      <SectionSubtitles
+        className="text-center "
+        title={'Notre impact'}
+        paragraph={
+          "Depuis notre création, nous avons changé la vie de milliers d'animaux."
+        }
+      >
+        <ul className="mt-14 flex-col md:flex md:flex-row justify-center md:gap-20">
+          <li>
+            <h3 className="title-h2 font-extrabold mt-6">1248</h3>
+            <p>Animaux secourus</p>
+          </li>
+
+          <li>
+            <h3 className="title-h2 font-extrabold mt-6">1032</h3>
+            <p>Adoptions réussies</p>
+          </li>
+          <li>
+            <h3 className="title-h2 font-extrabold mt-6">82%</h3>
+            <p>Taux de réussite</p>
+          </li>
+          <li>
+            <h3 className="title-h2 font-extrabold mt-6">37</h3>
+            <p>Bénévoles</p>
+          </li>
+        </ul>
       </SectionSubtitles>
     </>
   );
