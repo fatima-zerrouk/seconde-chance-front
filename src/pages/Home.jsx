@@ -19,7 +19,7 @@ export default function Home() {
           height="1820"
           lazy={false}
           fetchPriority="high"
-          className="lg:mr-80 w-full max-w-60 md:max-w-66 h-auto"
+          className="lg:mr-80 w-full max-w-60 md:max-w-66 h-auto animate-balance origin-top"
         />
 
         <div>
@@ -35,16 +35,16 @@ export default function Home() {
             </span>
           </p>
 
-          <div className="sm:flex gap-6">
+          <div className="sm:flex gap-8">
             <LinkTerracota
               to={'/catalog'}
               value={'Découvrez nos animaux'}
               ariaLabel={'Lien qui mène à la page du catalogue animal '}
-              className=" w-full md:w-62 mt-8"
+              className=" w-full md:w-62 mt-8  duration-500 hover:translate-x-5"
             />
             <a
               href="#adopt"
-              className="flex justify-center items-center mt-8 h-14 font-medium rounded-(--radius-button) border-2  hover:bg-brown hover:border-0 hover:text-lin transition duration-300 ease-in-out w-full md:w-52 border-terracotta cursor-pointer"
+              className="  hover:translate-x-5 flex justify-center items-center mt-8 h-14 font-medium rounded-(--radius-button) border-2  hover:bg-brown hover:border-0 hover:text-lin transition duration-500 ease-in-out w-full md:w-52 border-terracotta cursor-pointer"
             >
               Comment adopter
             </a>
@@ -137,7 +137,7 @@ export default function Home() {
         <LinkTerracota
           to={'/catalog'}
           value={'Découvrez nos animaux'}
-          className=" w-full md:w-62 mt-12  m-auto transition-transform duration-500 hover:translate-x-6"
+          className=" w-full md:w-62 mt-12  m-auto duration-500 hover:translate-x-6"
           ariaLabel={'Lien qui mène à la page du catalogue animal '}
         />
       </SectionSubtitles>

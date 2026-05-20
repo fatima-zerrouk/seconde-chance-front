@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { ButtonTerracota } from '../ui/Buttons';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,9 +10,9 @@ export function Header() {
   const linkActive = ({ isActive }) => (isActive ? 'font-semibold' : '');
 
   return (
-    <header className="flex justify-between items-center px-6 py-6 md:px-12 md:py-4 shadow-line-b">
-      <Link to="/" className="font-bold text-2xl uppercase">
-        Seconde<span className="display: block">chance</span>
+    <header className="flex justify-between items-center py-6 md:py-3 px-(--margin-mobile) md:px-(--margin-desktop) shadow-line-b">
+      <Link to="/" className="font-bold text-xl uppercase">
+        Seconde<span className="block">chance</span>
       </Link>
       <nav aria-label="Barre de navigation">
         <button
@@ -56,20 +57,26 @@ export function Header() {
           </li>
           {isAuthenticated ? (
             <li>
-              <button
+              <ButtonTerracota
                 onClick={logout}
-                className="bg-terracotta py-2 px-5 rounded-lg w-40 lg:w-35"
-              >
-                Déconnexion
-              </button>
+                value={'Déconnexion'}
+                className="px-4 py-2 h-auto"
+              />
             </li>
           ) : (
-            <li className="bg-terracotta py-2 px-5 rounded-lg w-40 lg:w-35">
+            <li>
               {' '}
               <NavLink
                 to="/login"
                 onClick={() => setIsOpen(false)}
-                className={linkActive}
+                aria-label="Lien qui mène à la page de connexion"
+                className={({ isActive }) =>
+                  `flex justify-center items-center bg-terracotta font-medium h-auto py-2 px-4 rounded-(--radius-button)  cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out ${
+                    isActive
+                      ? ' font-semibold' // css sur la page active
+                      : ''
+                  }`
+                }
               >
                 Connexion
               </NavLink>

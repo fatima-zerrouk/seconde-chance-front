@@ -46,7 +46,7 @@ export function CardContact({
         <a
           href={link}
           target={target}
-          className="inline-block transition-transform duration-300 hover:translate-x-2"
+          className="inline-block transition-transform duration-300 hover:translate-x-4"
         >
           {text}
         </a>
