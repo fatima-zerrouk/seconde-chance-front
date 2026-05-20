@@ -9,14 +9,19 @@ export function Footer() {
   return (
     <section className="py-4 px-6 md:px-12 md:py-8 md:flex md:gap-10 md:justify-around text-base">
       <ul className="pb-4">
-        <h3 className="font-semibold title-h3 mb-4"> Seconde chance</h3>
+        <li>
+          <h3 className="font-semibold title-h3 mb-4"> Seconde chance</h3>
+        </li>
         <li>
           Offrir une nouvelle vie{' '}
           <span className="display: block">aux animaux abandonnés.</span>{' '}
         </li>
       </ul>
+
       <ul className="pb-4">
-        <h3 className="font-semibold title-h3 mb-4"> Navigation</h3>
+        <li>
+          <h3 className="font-semibold title-h3 mb-4"> Navigation</h3>
+        </li>
         <li>
           <NavLink to="/" className={linkActive}>
             Accueil
