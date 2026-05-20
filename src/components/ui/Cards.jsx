@@ -1,4 +1,5 @@
 import React from 'react';
+import { href } from 'react-router-dom';
 
 export function CardMission({ icon: Icon, title, text, className }) {
   return (
@@ -20,5 +21,36 @@ export function CardHow({ icon: Icon, title, text, className }) {
       <h3 className="title-h3 py-2">{title}</h3>
       <p>{text}</p>
     </article>
+  );
+}
+
+export function CardContact({
+  icon: Icon,
+  title,
+  link,
+  className,
+  ariaLabel,
+  text,
+  target,
+}) {
+  return (
+    <li
+      className={`flex flex-row items-center gap-4 bg-[#DD9B87] text rounded-(--radius-card) shadow-(--shadow-card) w p-6  ${className}`}
+    >
+      <Icon
+        aria-label={ariaLabel}
+        className="text-brown  bg-[#E4AF9F] w-auto h-auto text-3xl p-2 rounded-xl"
+      />
+      <div className="w-full lg:w-44">
+        <h3 className="font-semibold">{title}</h3>
+        <a
+          href={link}
+          target={target}
+          className="inline-block transition-transform duration-300 hover:translate-x-2"
+        >
+          {text}
+        </a>
+      </div>
+    </li>
   );
 }

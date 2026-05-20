@@ -2,8 +2,8 @@ import React from 'react';
 import OptimizedImage from '../components/ui/OptimizedImage';
 import { ButtonTerracota, LinkTerracota } from '../components/ui/Buttons';
 import { SectionSubtitles } from '../components/ui/Sections';
-import { CardHow, CardMission } from '../components/ui/Cards';
-import { dataHow, dataMisson } from '../components/DataCards';
+import { CardContact, CardHow, CardMission } from '../components/ui/Cards';
+import { dataContact, dataHow, dataMisson } from '../components/DataCards';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -137,7 +137,7 @@ export default function Home() {
         <LinkTerracota
           to={'/catalog'}
           value={'Découvrez nos animaux'}
-          className=" w-full md:w-62 mt-12  m-auto"
+          className=" w-full md:w-62 mt-12  m-auto transition-transform duration-500 hover:translate-x-6"
           ariaLabel={'Lien qui mène à la page du catalogue animal '}
         />
       </SectionSubtitles>
@@ -150,25 +150,50 @@ export default function Home() {
           "Depuis notre création, nous avons changé la vie de milliers d'animaux."
         }
       >
-        <ul className="mt-14 flex-col md:flex md:flex-row justify-center md:gap-20">
+        <ul className="my-18 flex-col md:flex md:flex-row justify-center md:gap-20">
           <li>
-            <h3 className="title-h2 font-extrabold mt-6">1248</h3>
+            <h3 className="title-h2 font-extrabold">1248</h3>
             <p>Animaux secourus</p>
           </li>
 
           <li>
-            <h3 className="title-h2 font-extrabold mt-6">1032</h3>
+            <h3 className="title-h2 font-extrabold ">1032</h3>
             <p>Adoptions réussies</p>
           </li>
           <li>
-            <h3 className="title-h2 font-extrabold mt-6">82%</h3>
+            <h3 className="title-h2 font-extrabold ">82%</h3>
             <p>Taux de réussite</p>
           </li>
           <li>
-            <h3 className="title-h2 font-extrabold mt-6">37</h3>
+            <h3 className="title-h2 font-extrabold">37</h3>
             <p>Bénévoles</p>
           </li>
         </ul>
+      </SectionSubtitles>
+
+      {/* Section contact*/}
+      <SectionSubtitles
+        className="text-center bg-terracotta "
+        title={'Contactez-nous'}
+        paragraph={
+          "Une question ? N'hésitez pas à nous contacter, notre équipe est là pour vous accompagner."
+        }
+      >
+        <address className="not-italic">
+          <ul className="mt-14 flex-col lg:flex lg:flex-row lg:justify-center md:gap-8">
+            {dataContact.map(card => (
+              <CardContact
+                key={card.id}
+                icon={card.icon}
+                title={card.title}
+                text={card.text}
+                link={card.link}
+                target={card.target}
+                className={' text-left my-8'}
+              />
+            ))}
+          </ul>
+        </address>
       </SectionSubtitles>
     </>
   );

@@ -4,11 +4,11 @@ import { isTokenValid } from '../utils/jwt.utils.js';
 import { toast } from 'sonner';
 
 export function AuthProvider({ children }) {
-  //children composant enfant a qui les données vont être transmise
+  //children composant enfant à qui les données vont être transmises
   const storedToken = localStorage.getItem('token');
 
   if (storedToken && !isTokenValid(storedToken)) {
-    //si y a un token mais qu'il n'est pas valide
+    //si y a un token, mais qu'il n'est pas valide
     localStorage.removeItem('token'); //supprime du local storage
   }
   // initalise unn état true ou false
@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
     setIsAuthenticated(true); // utilisateur connecté
   }
 
-  // fonction appelée a la déconnexion
+  // fonction appelée à la déconnexion
   function logout() {
     localStorage.removeItem('token'); // supprime le token du localStorage
     setIsAuthenticated(false); // utilisateur déconnecté
@@ -39,7 +39,7 @@ export function AuthProvider({ children }) {
         logout,
       }}
     >
-      {children} {/* transmet login, logout, isAuthenticated au enfant*/}
+      {children} {/* transmet login, logout, isAuthenticated aux enfants*/}
     </AuthContext.Provider>
   );
 }

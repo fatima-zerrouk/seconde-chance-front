@@ -9,7 +9,7 @@ export function SectionSubtitles({
 }) {
   return (
     <section
-      className={`px-(--margin-mobile) md:px-(--margin-desktop) py-12 md:py-18 ${className}`}
+      className={`px-(--margin-mobile) md:px-(--margin-desktop) py-12 md:py-24 ${className}`}
       {...props}
     >
       {/* props classique  */}
