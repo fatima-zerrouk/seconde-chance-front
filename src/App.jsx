@@ -9,10 +9,13 @@ import PrivateRoute from './routes/PrivateRoute';
 import { Toaster } from 'sonner';
 function App() {
   return (
-    <>
+    <div className="flex flex-col h-screen">
+      {' '}
+      {/* pour dimmension écran */}
       <Toaster richColors position="top-right" />
       <Header />
-      <main>
+      <main className="flex-1">
+        {/* pour dimmension écran */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -27,7 +30,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

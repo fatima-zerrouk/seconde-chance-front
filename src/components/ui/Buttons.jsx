@@ -1,12 +1,26 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-export function ButtonTerracota({ className = '', value, type = 'button' }) {
+export function ButtonTerracota({ className = '', value, type, onClick }) {
   return (
     <button
       type={type}
-      className={`bg-terracotta font-medium py-2 h-12 rounded-(--radius-button) w-40 lg:w-35 cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out ${className}`}
+      onClick={onClick}
+      className={`bg-terracotta font-medium h-14 rounded-(--radius-button)  cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out ${className}`}
     >
       {value}
     </button>
+  );
+}
+
+export function LinkTerracota({ className = '', value, to, ariaLabel }) {
+  return (
+    <NavLink
+      to={to}
+      aria-label={ariaLabel}
+      className={`flex justify-center items-center bg-terracotta font-medium h-14 rounded-(--radius-button)  cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out  ${className}`}
+    >
+      {value}
+    </NavLink>
   );
 }

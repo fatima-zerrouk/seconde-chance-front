@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { ButtonTerracota } from '../ui/Buttons';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,23 +10,29 @@ export function Header() {
   const linkActive = ({ isActive }) => (isActive ? 'font-semibold' : '');
 
   return (
-    <header className="flex justify-between items-center px-6 py-6 md:px-12 md:py-4 shadow-line-b">
-      <Link to="/" className="font-bold text-2xl uppercase">
-        Seconde<span className="display: block">chance</span>
-      </Link>
-      <nav aria-label="Barre de navigation">
-        <button
-          className="lg:hidden text-3xl z-50 relative justify-end ml-auto"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? '✖' : ' ☰'}
-        </button>
+    <header className="py-6 md:py-3 px-(--margin-mobile) md:px-(--margin-desktop) z-1 shadow-line-b">
+      <nav
+        aria-label="Barre de navigation"
+        className="flex flex-col lg:flex-row lg:items-center lg:justify-between"
+      >
+        <div className="flex justify-between items-center md:w-auto ">
+          <Link to="/" className="font-bold text-xl uppercase">
+            Seconde<span className="block">chance</span>
+          </Link>
+
+          <button
+            className="lg:hidden text-3xl "
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? '✖' : ' ☰'}
+          </button>
+        </div>
+
         <ul
           className={`
-           fixed inset-0 z-1 bg-white flex-col items-center text-center gap-4 p-10 lg:p-0
+            bg-white flex-col items-center gap-4 px-4 py-10 lg:p-0
            ${isOpen ? 'flex' : 'hidden'} 
-           lg:static lg:flex lg:flex-row lg:bg-transparent lg:inset-auto lg:gap-8 lg:items-center text-base
-         `}
+          lg:flex lg:flex-row lg:gap-8 lg:items-center text-base`}
         >
           <li>
             <NavLink
@@ -56,20 +63,26 @@ export function Header() {
           </li>
           {isAuthenticated ? (
             <li>
-              <button
+              <ButtonTerracota
                 onClick={logout}
-                className="bg-terracotta py-2 px-5 rounded-lg w-40 lg:w-35"
-              >
-                Déconnexion
-              </button>
+                value={'Déconnexion'}
+                className="px-4 py-2 h-auto"
+              />
             </li>
           ) : (
-            <li className="bg-terracotta py-2 px-5 rounded-lg w-40 lg:w-35">
+            <li>
               {' '}
               <NavLink
                 to="/login"
                 onClick={() => setIsOpen(false)}
-                className={linkActive}
+                aria-label="Lien qui mène à la page de connexion"
+                className={({ isActive }) =>
+                  `flex justify-center items-center bg-terracotta font-medium h-auto py-2 px-4 rounded-(--radius-button)  cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out ${
+                    isActive
+                      ? ' font-semibold' // css sur la page active
+                      : ''
+                  }`
+                }
               >
                 Connexion
               </NavLink>
