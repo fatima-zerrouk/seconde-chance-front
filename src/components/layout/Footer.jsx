@@ -7,7 +7,7 @@ export function Footer() {
   const linkActive = ({ isActive }) => (isActive ? 'font-bold' : '');
 
   return (
-    <section className="py-4 px-6 md:px-12 md:py-8 md:flex md:gap-10 md:justify-around text-base">
+    <section className="shadow-line-t py-4 px-6 md:px-12 md:py-8 md:flex md:gap-10 md:justify-around text-base">
       <ul className="pb-4">
         <li>
           <h2 className=" title-h3 mb-4"> Seconde chance</h2>

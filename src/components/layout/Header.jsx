@@ -8,25 +8,38 @@ export function Header() {
   const { isAuthenticated, logout } = useContext(AuthContext);
 
   const linkActive = ({ isActive }) => (isActive ? 'font-semibold' : '');
+  
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        console.log('Escape key was pressed!')
+        // Close modal, cancel action, etc.
+    }
+})
 
   return (
-    <header className="flex justify-between items-center py-6 md:py-3 px-(--margin-mobile) md:px-(--margin-desktop) shadow-line-b">
-      <Link to="/" className="font-bold text-xl uppercase">
-        Seconde<span className="block">chance</span>
-      </Link>
-      <nav aria-label="Barre de navigation">
-        <button
-          className="lg:hidden text-3xl z-50 relative justify-end ml-auto"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? '✖' : ' ☰'}
-        </button>
+    <header className="py-6 md:py-3 px-(--margin-mobile) md:px-(--margin-desktop) z-1 shadow-line-b">
+      <nav
+        aria-label="Barre de navigation"
+        className="flex flex-col lg:flex-row lg:items-center lg:justify-between"
+      >
+        <div className="flex justify-between items-center md:w-auto ">
+          <Link to="/" className="font-bold text-xl uppercase">
+            Seconde<span className="block">chance</span>
+          </Link>
+
+          <button
+            className="lg:hidden text-3xl "
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? '✖' : ' ☰'}
+          </button>
+        </div>
+
         <ul
           className={`
-           fixed inset-0 z-1 bg-white flex-col items-center text-center gap-4 p-10 lg:p-0
+            bg-white flex-col items-center gap-4 px-4 py-10 lg:p-0
            ${isOpen ? 'flex' : 'hidden'} 
-           lg:static lg:flex lg:flex-row lg:bg-transparent lg:inset-auto lg:gap-8 lg:items-center text-base
-         `}
+          lg:flex lg:flex-row lg:gap-8 lg:items-center text-base`}
         >
           <li>
             <NavLink

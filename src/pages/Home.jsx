@@ -1,17 +1,16 @@
 import React from 'react';
 import OptimizedImage from '../components/ui/OptimizedImage';
-import { ButtonTerracota, LinkTerracota } from '../components/ui/Buttons';
+import { LinkTerracota } from '../components/ui/Buttons';
 import { SectionSubtitles } from '../components/ui/Sections';
 import { CardContact, CardHow, CardMission } from '../components/ui/Cards';
 import { dataContact, dataHow, dataMisson } from '../components/DataCards';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
-import { Link, NavLink } from 'react-router-dom';
 
 export default function Home() {
   return (
     <>
       {/* Section hero */}
-      <section className="flex flex-col justify-between pb-16 md:pb-10 lg:flex-row-reverse items-center bg-lin px-(--margin-mobile) md:px-(--margin-desktop)">
+      <section className=" flex flex-col justify-between pb-16 md:pb-10 lg:flex-row-reverse items-center bg-lin px-(--margin-mobile) md:px-(--margin-desktop)">
         <OptimizedImage
           src="src/assets/dog-home.png"
           alt="Photo bannière d'un chien marron dans un drap"

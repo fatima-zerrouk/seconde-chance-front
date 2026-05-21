@@ -24,21 +24,3 @@ export function LinkTerracota({ className = '', value, to, ariaLabel }) {
     </NavLink>
   );
 }
-
-// export function LinkTerracota({ className = '', value, to, ariaLabel, onClick }) {
-//   return (
-//     <NavLink
-//       to={to}
-//       aria-label={ariaLabel}
-//       onClick={onClick}
-//       className={({isActive}) => {
-//         const dynamicClass = typeof className === 'function'
-//           ? className({ isActive })
-//           : className;
-
-//        return  `flex justify-center items-center bg-terracotta font-medium h-14 rounded-(--radius-button)  cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out  ${className}`}
-//     }>
-//       {value}
-//     </NavLink>
-//   );
-// }
