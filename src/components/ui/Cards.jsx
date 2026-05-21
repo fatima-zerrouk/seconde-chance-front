@@ -35,7 +35,7 @@ export function CardContact({
 }) {
   return (
     <li
-      className={`flex flex-row items-center gap-4 bg-[#DD9B87] text rounded-(--radius-card) shadow-(--shadow-card) w p-6  ${className}`}
+      className={`flex flex-row items-center gap-4 bg-[#DD9B87] text rounded-(--radius-card) shadow-(--shadow-card) p-6  ${className}`}
     >
       <Icon
         aria-label={ariaLabel}

@@ -8,13 +8,6 @@ export function Header() {
   const { isAuthenticated, logout } = useContext(AuthContext);
 
   const linkActive = ({ isActive }) => (isActive ? 'font-semibold' : '');
-  
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        console.log('Escape key was pressed!')
-        // Close modal, cancel action, etc.
-    }
-})
 
   return (
     <header className="py-6 md:py-3 px-(--margin-mobile) md:px-(--margin-desktop) z-1 shadow-line-b">

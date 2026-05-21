@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       {/* Section hero */}
-      <section className=" flex flex-col justify-between pb-16 md:pb-10 lg:flex-row-reverse items-center bg-lin px-(--margin-mobile) md:px-(--margin-desktop)">
+      <section className=" flex flex-col justify-between pb-14 md:pb-6 lg:flex-row-reverse items-center bg-lin px-(--margin-mobile) md:px-(--margin-desktop)">
         <OptimizedImage
           src="src/assets/dog-home.png"
           alt="Photo bannière d'un chien marron dans un drap"
@@ -74,10 +74,10 @@ export default function Home() {
       </SectionSubtitles>
 
       {/* Section adoption */}
-      <section className="bg-lin flex flex-col m-auto gap-12 lg:flex-row md:items-center md:justify-between px-(--margin-mobile) md:px-(--margin-desktop) py-12">
-        <div className="">
+      <section className="bg-lin flex flex-col m-auto gap-12 lg:flex-row md:items-center md:justify-between py-12 md:py-16 px-(--margin-mobile) md:px-(--margin-desktop)">
+        <div>
           <h2 className="title-h2">L&apos;adoption responsable</h2>
-          <p className="pb-2 pt-4">
+          <p className="pb-6 pt-2">
             Adopter un animal est un engagement à long
             <span className="block">
               terme qui demande réflexion, temps et ressources.
@@ -109,19 +109,19 @@ export default function Home() {
           height="1704"
           lazy={true}
           fetchPriority="low"
-          className="rounded-(--radius-card) my-8 w-full sm:max-w-100 lg:max-w-120 "
+          className="rounded-(--radius-card) w-full sm:max-w-100 lg:max-w-130 "
         />
       </section>
 
       {/* Section comment ça marche */}
       <SectionSubtitles
         id="adopt"
-        className="text-center"
+        className="text-center "
         title={' Comment ça marche ?'}
         paragraph={"Le processus d'adoption en 4 étapes simples."}
       >
         {/* contenue children */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 mt-12 ">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 mt-10 ">
           {dataHow.map(card => (
             <CardHow
               key={card.id}
@@ -136,7 +136,7 @@ export default function Home() {
         <LinkTerracota
           to={'/catalog'}
           value={'Découvrez nos animaux'}
-          className=" w-full md:w-62 mt-12  m-auto duration-500 hover:translate-x-6"
+          className=" w-full md:w-62 mt-11 m-auto duration-500 hover:translate-x-6"
           ariaLabel={'Lien qui mène à la page du catalogue animal '}
         />
       </SectionSubtitles>
@@ -149,7 +149,7 @@ export default function Home() {
           "Depuis notre création, nous avons changé la vie de milliers d'animaux."
         }
       >
-        <ul className="my-18 flex-col md:flex md:flex-row justify-center md:gap-20">
+        <ul className="py-14 flex-col md:flex md:flex-row justify-center md:gap-20">
           <li>
             <h3 className="title-h2 font-extrabold">1248</h3>
             <p>Animaux secourus</p>
@@ -179,7 +179,7 @@ export default function Home() {
         }
       >
         <address className="not-italic">
-          <ul className="mt-14 flex-col lg:flex lg:flex-row lg:justify-center md:gap-8">
+          <ul className="py- flex-col lg:flex lg:flex-row lg:justify-center md:gap-8">
             {dataContact.map(card => (
               <CardContact
                 key={card.id}
