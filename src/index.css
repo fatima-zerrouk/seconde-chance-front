@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap'); */
 
 @theme {
   --color-terracotta: #d48269;
@@ -14,10 +13,7 @@
   --radius-input: 6px;
   --radius-button: 8px;
   --radius-card: 12px;
-  /* --space-xs: 8px;
-  --space-sm: 16px;
-  --space-md: 24px;
-  --space-lg: 48px; */
+  
   --margin-mobile: 28px;
   --margin-desktop: 78px;
 
@@ -73,12 +69,4 @@
       font-size: 1.5rem;
     }
   }
-  /* Texte Regular : séjà géré dans le body, mais au cas où */
-  /* .text-main {
-    @apply font-normal text-brown;
-    font-size: 1rem;
-    @variant md {
-      font-size: 1.125rem;
-    }
-  } */
 }
