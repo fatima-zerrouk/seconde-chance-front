@@ -1,24 +1,35 @@
 // import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { Header } from './components/layout/Header';
+// import { Header } from './components/layout/Header';
 import Home from './pages/Home';
-import { Footer } from './components/layout/Footer';
+// import { Footer } from './components/layout/Footer';
 import Login from './pages/Login';
 import Dashboard from './pages/DashboardAdmin/Dashboard';
 import PrivateRoute from './routes/PrivateRoute';
 import { Toaster } from 'sonner';
+import PublicLayout from './components/layout/PublicLayout';
+import AdminLayout from './components/layout/AdminLayout';
+
 function App() {
   return (
-    <div className="flex flex-col h-screen">
-      {' '}
-      {/* pour dimmension écran */}
-      <Toaster richColors position="top-right" />
-      <Header />
-      <main className="flex-1">
-        {/* pour dimmension écran */}
-        <Routes>
+    <>
+      <Toaster
+        richColors
+        position="top-right"
+        toastOptions={{
+          className: 'mt-16',
+        }}
+      />
+
+      {/* Routes layout public */}
+      <Routes>
+        <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+        </Route>
+
+        {/* Routes layout ADMIN */}
+        <Route element={<AdminLayout />}>
           <Route
             path="/dashboard"
             element={
@@ -27,10 +38,9 @@ function App() {
               </PrivateRoute>
             }
           />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+        </Route>
+      </Routes>
+    </>
   );
 }
 

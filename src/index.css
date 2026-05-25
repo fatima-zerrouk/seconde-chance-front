@@ -5,30 +5,39 @@
   --color-cream: #faf2e5;
   --color-lin: #ede8e2;
   --color-brown: #3e1a0a;
+  /* Ombre */
   --shadow-line-b: 0 4px 4px rgba(62, 26, 10, 0.3);
   --shadow-line-t: 0 -4px 4px rgba(62, 26, 10, 0.3);
   --shadow-card: 0 10px 30px rgba(62, 26, 10, 0.3);
   --font-poppins: 'Poppins', sans-serif;
-
+  /* Arrondi */
   --radius-input: 6px;
   --radius-button: 8px;
   --radius-card: 12px;
-  
+  /* Marge */
   --margin-mobile: 28px;
   --margin-desktop: 78px;
+  --margin-dashboard: 48px;
 
   /* Animation chien */
   --animate-balance: balance 3s ease-in-out infinite;
   @keyframes balance {
+    /* Début / fin rotation vers la gauche */
     0%,
     100% {
       transform: rotate(-3deg);
     }
+    /* Milieu rotation vers la droite */
     50% {
       transform: rotate(3deg);
     }
   }
 }
+/* Scroll fluide */
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   body {
     text-decoration: none;
@@ -43,6 +52,7 @@
     }
   }
 }
+
 @layer components {
   /* H1 Bold : 32px mobile -> 48px PC */
   .title-h1 {

@@ -1,9 +1,11 @@
 import React from 'react';
+import { SectionAdmin } from '../../components/ui/Sections';
 
 export default function Dashboard() {
   return (
-    <section>
-      <h1 className="text-8xl">Dashboard</h1>
-    </section>
+    <SectionAdmin
+      title={'Tableau de bord'}
+      paragraph={'Statisitiques refuge'}
+    ></SectionAdmin>
   );
 }
