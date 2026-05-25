@@ -32,11 +32,13 @@ export default function Login() {
 
       // si erreur validation
       if (result?.validationErrors) {
+        //tableau d'erreurs
         result.validationErrors.forEach(({ path, msg }) => {
+          //boucle dessus
           // mets l'erreur au bon champ sous l'email ou mdp
           setError(path, { message: msg });
         });
-        return; // arrête la fonction ici
+        return; // sort de la fonction et exécute pas le reste (login)
       }
 
       //si succès

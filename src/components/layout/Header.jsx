@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { ButtonTerracota } from '../ui/Buttons';
+import { CgProfile } from 'react-icons/cg';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, logout } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
   const linkActive = ({ isActive }) => (isActive ? 'font-semibold' : '');
 
@@ -30,9 +30,14 @@ export function Header() {
 
         <ul
           className={`
-            bg-white flex-col items-center gap-4 px-4 py-10 lg:p-0
-           ${isOpen ? 'flex' : 'hidden'} 
-          lg:flex lg:flex-row lg:gap-8 lg:items-center text-base`}
+    bg-white flex flex-col items-center gap-4 px-4 text-base transition-all duration-300 ease-in-out origin-top
+    ${
+      isOpen
+        ? 'opacity-100 max-h-125 py-10 scale-y-100' //ouvert
+        : 'opacity-0 max-h-0 py-0 scale-y-0 overflow-hidden' //fermer
+    } 
+    lg:flex lg:flex-row lg:gap-8 lg:items-center lg:p-0 lg:opacity-100 lg:scale-y-100 lg:overflow-visible
+  `}
         >
           <li>
             <NavLink
@@ -63,11 +68,9 @@ export function Header() {
           </li>
           {isAuthenticated ? (
             <li>
-              <ButtonTerracota
-                onClick={logout}
-                value={'Déconnexion'}
-                className="px-4 py-2 h-auto"
-              />
+              <NavLink to="/dashboard" aria-label="Lien vers mon profil">
+                <CgProfile className="w-12 md:10 h-auto hover:bg-terracotta hover:text-brown rounded-4xl bg-brown text-white transition duration-300 ease-in-out " />
+              </NavLink>
             </li>
           ) : (
             <li>

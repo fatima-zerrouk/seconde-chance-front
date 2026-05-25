@@ -21,3 +21,23 @@ export function SectionSubtitles({
     </section>
   );
 }
+
+export function SectionAdmin({
+  title,
+  paragraph,
+  children,
+  className = '',
+  ...props
+}) {
+  return (
+    <section
+      className={`px-(--margin-mobile) lg:px-(--margin-dashboard) pt-18 lg:pt-8 ${className}`}
+      {...props}
+    >
+      <h1 className="title-h1 ">{title}</h1>
+      <p className={`py-2 ${className}`}>{paragraph}</p>
+
+      {children}
+    </section>
+  );
+}

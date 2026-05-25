@@ -9,6 +9,7 @@ export function useFetch() {
     const token = localStorage.getItem('token'); //récupère token
 
     const res = await fetch(`${API_URL}${url}`, {
+      //API_URL évite d'écrire en dur l'url pour qu'il s'adapte quand il sera en déploiement
       ...options,
       headers: {
         'Content-Type': 'application/json',
