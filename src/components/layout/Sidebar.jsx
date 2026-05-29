@@ -54,7 +54,7 @@ export default function SideBar() {
 
             <li>
               <NavLink
-                to="/dashboard/add"
+                to="/add"
                 onClick={() => setIsOpen(false)}
                 className={linkActive}
               >

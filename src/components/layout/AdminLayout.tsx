@@ -3,7 +3,7 @@ import SideBar from './Sidebar';
 
 export default function AdminLayout() {
   return (
-    <div className="flex min-h-screen ">  {/* Sidebar affichée à gauche */}
+    <div className="flex h-screen">  {/* Sidebar affichée à gauche */}
       <SideBar /> 
       {/*Contenu à droite de la Sidebar */}
       <main className="flex-1 w-full overflow-x-hidden">
