@@ -6,8 +6,8 @@ export default function AdminLayout() {
     <div className="flex h-screen">  {/* Sidebar affichée à gauche */}
       <SideBar /> 
       {/*Contenu à droite de la Sidebar */}
-      <main className="flex-1 w-full overflow-x-hidden">
-        <Outlet />  {/* Affiche la route enfant (dashboard) correspondante d'une route parente (AdminLayout)*/}
+      <main className="flex-1 w-full overflow-x-auto ">
+        <Outlet />  {/* Affiche la route enfant (dashboard) d'une route parente (AdminLayout)*/}
       </main>
     </div>
   );
