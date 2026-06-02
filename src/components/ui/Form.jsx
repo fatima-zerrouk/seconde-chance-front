@@ -3,28 +3,32 @@ import { ButtonTerracota } from './Buttons';
 import { useNavigate } from 'react-router-dom';
 // import { useFetch } from '../../hooks/useFetch';
 import { useForm } from 'react-hook-form';
-// import { toast } from 'sonner';
 import { FaStarOfLife } from 'react-icons/fa6';
 
-export default function Form({ onSubmit, animalEdit, animalError }) {
+export default function Form({ onSubmit, animalEdit }) {
   const navigate = useNavigate();
   const isEdit = Boolean(animalEdit);
 
   const {
     register,
     handleSubmit,
+    setError, //ajoute les erreurs du back
     formState: { errors },
   } = useForm({
     mode: 'onTouched',
     // Si animalEdit existe, React Hook Form pré-remplit les champs tout seul !
     defaultValues: animalEdit,
   });
+  // fonction pour empaqueter la data et setError
+  const interceptedSubmit = data => {
+    onSubmit(data, { setError });
+  };
 
   return (
     <section>
       {' '}
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(interceptedSubmit)}
         className=" rounded-(--radius-card) shadow-card mb-12 bg-lin p-8 w-full h-auto  transition-all duration-300 ease-in-out"
       >
         <fieldset className="">
@@ -44,12 +48,17 @@ export default function Form({ onSubmit, animalEdit, animalError }) {
                 {...register('name', {
                   required: 'Le nom est requis',
                   minLength: {
-                    value: 2,
+                    value: 1,
                     message: 'Le nom doit faire 2 caractères minimum',
                   },
                   maxLength: {
                     value: 50,
                     message: 'Le nom doit faire 50 caractères maximum',
+                  },
+                  pattern: {
+                    value: /^[a-zA-ZàâäéèêëîïôöùûüçÉÀÂÄÈÊËÎÏÔÖÙÛÜÇ\s-]+$/,
+                    message:
+                      'Le nom ne doit contenir que des lettres, des tirets ou des espaces',
                   },
                 })}
               />
@@ -85,13 +94,14 @@ export default function Form({ onSubmit, animalEdit, animalError }) {
                 htmlFor={'specie'}
                 id={'specie'}
                 name={'specie'}
-                // option={''}
+                option={''}
                 {...register('specie', {
                   required: "L'espèce est requise",
+                  valueAsNumber: true,
                 })}
               >
-                <option value="Cat">Chat</option>
-                <option value="Dog">Chien</option>
+                <option value="2">Chat</option>
+                <option value="1">Chien</option>
               </Select>
               {errors.specie && (
                 <p className="text-red-700">{errors.specie.message}</p>
@@ -186,8 +196,6 @@ export default function Form({ onSubmit, animalEdit, animalError }) {
         {errors.description && (
           <p className="text-red-700">{errors.description.message}</p>
         )}
-
-        {animalError && <p className="text-red-700 mb-4">{animalError}</p>}
 
         <div className="flex flex-col md:flex-row gap-6 justify-end mt-4 m">
           <button

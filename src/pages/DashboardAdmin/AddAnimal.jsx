@@ -4,19 +4,17 @@ import Form from '../../components/ui/Form';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
-// import { ButtonTerracota } from '../../components/ui/Buttons';
-// import { Field } from '../../components/ui/Field'
 
 export default function AddAnimal() {
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState(null);
+  const [globalError, setGlobalError] = useState(null); // pour erreur générals crash serveur ect
   const { apiFetch } = useFetch();
   const navigate = useNavigate();
 
-  const handleAddForm = async data => {
+  const handleAddForm = async (data, methods) => {
     try {
       setLoading(false);
-      setErr(null);
+      setGlobalError(null);
 
       data.status = 'available';
       data.is_visible = true;
@@ -27,21 +25,23 @@ export default function AddAnimal() {
       });
 
       if (response?.validationErrors) {
+        // si le back détecte des fautes via express validator
         response.validationErrors.forEach(validationError => {
-          setErr(validationError.path, { message: validationError.msg });
+          methods.setError(validationError.path, {
+            type: 'server',
+            message: validationError.msg, // Le message rédigé dans ton validateur Node.js
+          });
+
+          // setGlobalError(validationError.path, { message: validationError.msg });
         });
         return;
       }
-      // if (response?.validationErrors) {
-      //   setErr("Le formulaire contient des données invalides. Veuillez vérifier vos saisies.");
-      //   return;
-      // }
 
       toast.success('Animal créé');
       navigate('/dashboard');
     } catch (error) {
       toast.error(error.message);
-      setErr(error.message);
+      setGlobalError(error.message);
     } finally {
       setLoading(false);
     }
@@ -55,8 +55,9 @@ export default function AddAnimal() {
       title={'Ajouter un animal'}
       paragraph={'Remplissez tous les champs pour ajouter un nouvel animal'}
     >
+      {globalError && <p className="text-red-700">{globalError} </p>}
       {/* passe la fonction POST au composant form */}
-      <Form onSubmit={handleAddForm} err={err} />
+      <Form onSubmit={handleAddForm} />
     </SectionAdmin>
   );
 }

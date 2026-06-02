@@ -43,7 +43,7 @@ export function FieldAdd({
         placeholder={placeholder}
         id={id}
         {...props}
-        className={`mt-2 mb-4 bg-white rounded-(--radius-input) border-[1.4px] border-brown w-full h-12 p-2 ${className}`}
+        className={`capitalize mt-2 mb-4 bg-white rounded-(--radius-input) border-[1.4px] border-brown w-full h-12 p-2 ${className}`}
       />
     </>
   );
