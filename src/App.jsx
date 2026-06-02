@@ -9,6 +9,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import { Toaster } from 'sonner';
 import PublicLayout from './components/layout/PublicLayout';
 import AdminLayout from './components/layout/AdminLayout';
+import AddAnimal from './pages/DashboardAdmin/AddAnimal';
 
 function App() {
   return (
@@ -38,6 +39,17 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          <Route
+            path="/add"
+            element={
+              <PrivateRoute role={'admin'}>
+                <AddAnimal />
+              </PrivateRoute>
+            }
+          >
+            {' '}
+          </Route>
         </Route>
       </Routes>
     </>

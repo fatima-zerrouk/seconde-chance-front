@@ -24,7 +24,7 @@ export default function SideBar() {
       </button>
 
       <aside
-        className={`bg-lin w-80 px-(--margin-mobile)  pt-22 pb-8 h-screen flex flex-col fixed lg:sticky  transition-transform duration-300 ease-in-out
+        className={`bg-lin w-80 px-(--margin-mobile)  pt-22 pb-8 h-full flex flex-col fixed lg:sticky  transition-transform duration-300 ease-in-out
            ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
            lg:translate-x-0  lg:p-8`}
       >
@@ -54,7 +54,7 @@ export default function SideBar() {
 
             <li>
               <NavLink
-                to="/dashboard/add"
+                to="/add"
                 onClick={() => setIsOpen(false)}
                 className={linkActive}
               >
@@ -68,7 +68,7 @@ export default function SideBar() {
                 onClick={() => setIsOpen(false)}
                 className={linkActive}
               >
-                Gestion des aniamux
+                Gestion des animaux
               </NavLink>
             </li>
           </ul>

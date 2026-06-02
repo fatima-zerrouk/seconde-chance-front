@@ -35,7 +35,7 @@ export function SectionAdmin({
       {...props}
     >
       <h1 className="title-h1 ">{title}</h1>
-      <p className={`py-2 ${className}`}>{paragraph}</p>
+      <p className={`pt-2 pb-14  ${className}`}>{paragraph}</p>
 
       {children}
     </section>
