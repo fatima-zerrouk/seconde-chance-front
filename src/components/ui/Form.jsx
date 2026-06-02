@@ -100,8 +100,8 @@ export default function Form({ onSubmit, animalEdit }) {
                   valueAsNumber: true,
                 })}
               >
-                <option value="2">Chat</option>
                 <option value="1">Chien</option>
+                <option value="2">Chat</option>
               </Select>
               {errors.specie && (
                 <p className="text-red-700">{errors.specie.message}</p>
@@ -119,10 +119,31 @@ export default function Form({ onSubmit, animalEdit }) {
                   valueAsNumber: true, // Convertit la chaîne "1" en nombre 1
                 })}
               >
-                <option value="1">Labrador Retriever</option>
-                <option value="2">Berger Allemand</option>
-                <option value="11">Siamois</option>
-                <option value="12">Maine Coon</option>
+                <optgroup label="Chien">
+                  <option value="1">Labrador Retriever</option>
+                  <option value="2">Berger Allemand</option>
+                  <option value="3">Golden retriever</option>
+                  <option value="4">Bouledogue Français</option>
+                  <option value="5">Beagle</option>
+                  <option value="6">Border collie</option>
+                  <option value="7">Jack Russell terrier</option>
+                  <option value="8">Chihuahua</option>
+                  <option value="9">Cocker spaniel</option>
+                  <option value="10">Croisé / Autre</option>
+                </optgroup>
+
+                <optgroup label="Chat">
+                  <option value="11">Siamois</option>
+                  <option value="12">Maine Coon</option>
+                  <option value="13">Persan</option>
+                  <option value="14">Bengal</option>
+                  <option value="15">Ragdoll</option>
+                  <option value="16">Sacré de birmanie</option>
+                  <option value="17">British shorthair</option>
+                  <option value="18">Labrador Retriever</option>
+                  <option value="19">Européen</option>
+                  <option value="20">Croisé / Autre</option>
+                </optgroup>
               </Select>
               {errors.id_breed && (
                 <p className="text-red-700">{errors.id_breed.message}</p>

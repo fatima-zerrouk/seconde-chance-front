@@ -31,8 +31,6 @@ export default function AddAnimal() {
             type: 'server',
             message: validationError.msg, // Le message rédigé dans ton validateur Node.js
           });
-
-          // setGlobalError(validationError.path, { message: validationError.msg });
         });
         return;
       }
