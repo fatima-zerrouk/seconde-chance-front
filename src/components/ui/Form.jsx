@@ -1,9 +1,10 @@
 import { FieldAdd, Select } from './Field';
 import { ButtonTerracota } from './Buttons';
 import { useNavigate } from 'react-router-dom';
-// import { useFetch } from '../../hooks/useFetch';
 import { useForm } from 'react-hook-form';
 import { FaStarOfLife } from 'react-icons/fa6';
+import { useEffect } from 'react';
+import { ImageUploader } from '../ImageUploader';
 
 export default function Form({ onSubmit, animalEdit }) {
   const navigate = useNavigate();
@@ -12,14 +13,41 @@ export default function Form({ onSubmit, animalEdit }) {
   const {
     register,
     handleSubmit,
-    setError, //ajoute les erreurs du back
+    setError, // Ajoute les erreurs du back
+    setValue, // Pour injecter l'URL de l'image reçue
+    watch, // Permet de suivre l'état de l'URL pour l'aperçu
     formState: { errors },
   } = useForm({
     mode: 'onTouched',
     // Si animalEdit existe, React Hook Form pré-remplit les champs tout seul !
     defaultValues: animalEdit,
   });
-  // fonction pour empaqueter la data et setError
+
+  useEffect(() => {
+    // Enregistre 'urls' comme un tableau requis
+    register('urls', {
+      required: 'Une image minimum est requise',
+      validate: value =>
+        (value && value.length >= 1) || 'Il faut au moins une photo',
+    });
+  }, [register]);
+
+  const currentUrls = watch('urls') || []; // Récupère le tableau d'images actuel ou un tableau vide
+
+  const handleImageUploaded = (index, url) => {
+    const newUrls = [...currentUrls];
+    newUrls[index] = url; // Place l'URL au bon index (0, 1 ou 2)
+    setValue('urls', newUrls, { shouldValidate: true });
+  };
+
+  const handleImageRemoved = index => {
+    const newUrls = [...currentUrls];
+    // Au lieu de supprimer la case (ce qui décalerait les boîtes), met la valeur à undefined ou null
+    newUrls[index] = undefined;
+    setValue('urls', newUrls, { shouldValidate: true });
+  };
+
+  // Fonction pour empaqueter la data et setError
   const interceptedSubmit = data => {
     onSubmit(data, { setError });
   };
@@ -80,7 +108,7 @@ export default function Form({ onSubmit, animalEdit }) {
                   valueAsNumber: true, //retourne un nombre "1" en 1
 
                   validate: value =>
-                    Number.isInteger(value) || "L'âge doit être un entier", //isInteger Vérifie nombre entier si 1.1 erreur
+                    Number.isInteger(value) || "L'âge doit être un entier", //isInteger vérifie nombre entier, si 1.1 erreur
                 })}
               />
               {errors.age && (
@@ -190,7 +218,6 @@ export default function Form({ onSubmit, animalEdit }) {
             </li>
           </ul>
         </fieldset>
-
         <label
           htmlFor="description"
           className="flex flex-row gap-4 font-medium mt-6"
@@ -218,7 +245,25 @@ export default function Form({ onSubmit, animalEdit }) {
           <p className="text-red-700">{errors.description.message}</p>
         )}
 
-        <div className="flex flex-col md:flex-row gap-6 justify-end mt-4 m">
+        <p className="font-medium mt-6 flex flex-row gap-4">
+          Galerie <FaStarOfLife className="text-red-700 w-2 h-auto" />
+        </p>
+        <div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-7 mb-6">
+          {[0, 1, 2].map(index => (
+            <ImageUploader
+              key={index}
+              index={index}
+              currentUrl={currentUrls[index]}
+              onUploadSuccess={url => handleImageUploaded(index, url)}
+              onRemove={() => handleImageRemoved(index)}
+            />
+          ))}
+        </div>
+        {errors.urls && (
+          <p className="text-red-700 mb-8">{errors.urls.message}</p>
+        )}
+
+        <div className="flex flex-col md:flex-row gap-6 justify-end mt-12">
           <button
             onClick={() => navigate('/dashboard')}
             className="mt-8 md:mt-0 w-full md:w-60  h-14 font-medium rounded-(--radius-button)  border-[1.4px] hover:bg-brown hover:border-0 hover:text-lin  border-brown cursor-pointer"

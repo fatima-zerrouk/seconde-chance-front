@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AddAnimal() {
   const [loading, setLoading] = useState(false);
-  const [globalError, setGlobalError] = useState(null); // pour erreur générals crash serveur ect
+  const [globalError, setGlobalError] = useState(null); // Pour erreur générals crash serveur ect
   const { apiFetch } = useFetch();
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export default function AddAnimal() {
       });
 
       if (response?.validationErrors) {
-        // si le back détecte des fautes via express validator
+        // Si le back détecte des fautes via express validator
         response.validationErrors.forEach(validationError => {
           methods.setError(validationError.path, {
             type: 'server',
@@ -54,7 +54,7 @@ export default function AddAnimal() {
       paragraph={'Remplissez tous les champs pour ajouter un nouvel animal'}
     >
       {globalError && <p className="text-red-700">{globalError} </p>}
-      {/* passe la fonction POST au composant form */}
+      {/* Passe la fonction POST au composant form */}
       <Form onSubmit={handleAddForm} />
     </SectionAdmin>
   );
