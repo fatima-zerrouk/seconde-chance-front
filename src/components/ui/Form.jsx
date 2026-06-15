@@ -11,15 +11,15 @@ export default function Form({ onSubmit, animalEdit }) {
   const isEdit = Boolean(animalEdit);
 
   const {
-    register,
+    register, // Connecte un input à RHF
     handleSubmit,
     setError, // Ajoute les erreurs du back
     setValue, // Pour injecter l'URL de l'image reçue
-    watch, // Permet de suivre l'état de l'URL pour l'aperçu
-    formState: { errors },
+    watch, // Observe en temps réel l'état de l'URL pour l'aperçu image
+    formState: { errors }, // Contient toutes les erreurs des champs
   } = useForm({
     mode: 'onTouched',
-    // Si animalEdit existe, React Hook Form pré-remplit les champs tout seul !
+    // Si animalEdit existe, RHF préremplit les champs tout seul
     defaultValues: animalEdit,
   });
 
@@ -27,12 +27,13 @@ export default function Form({ onSubmit, animalEdit }) {
     // Enregistre 'urls' comme un tableau requis
     register('urls', {
       required: 'Une image minimum est requise',
-      validate: value =>
-        (value && value.length >= 1) || 'Il faut au moins une photo',
+      validate: (
+        value //Vérifie qu'il y a au moins une URL
+      ) => (value && value.length >= 1) || 'Il faut au moins une photo',
     });
   }, [register]);
 
-  const currentUrls = watch('urls') || []; // Récupère le tableau d'images actuel ou un tableau vide
+  const currentUrls = watch('urls') || []; // Récupère le tableau d'images (urls) actuel
 
   const handleImageUploaded = (index, url) => {
     const newUrls = [...currentUrls];
@@ -42,7 +43,7 @@ export default function Form({ onSubmit, animalEdit }) {
 
   const handleImageRemoved = index => {
     const newUrls = [...currentUrls];
-    // Au lieu de supprimer la case (ce qui décalerait les boîtes), met la valeur à undefined ou null
+    // Au lieu de supprimer la case (qui décalerait les boîtes), la valeur est à undefined
     newUrls[index] = undefined;
     setValue('urls', newUrls, { shouldValidate: true });
   };
@@ -76,7 +77,7 @@ export default function Form({ onSubmit, animalEdit }) {
                 {...register('name', {
                   required: 'Le nom est requis',
                   minLength: {
-                    value: 1,
+                    value: 2,
                     message: 'Le nom doit faire 2 caractères minimum',
                   },
                   maxLength: {
@@ -105,8 +106,7 @@ export default function Form({ onSubmit, animalEdit }) {
                 className=" w-60"
                 {...register('age', {
                   required: "L'age est requis",
-                  valueAsNumber: true, //retourne un nombre "1" en 1
-
+                  valueAsNumber: true, // Convertit la chaîne "1" en nombre 1
                   validate: value =>
                     Number.isInteger(value) || "L'âge doit être un entier", //isInteger vérifie nombre entier, si 1.1 erreur
                 })}
@@ -144,7 +144,7 @@ export default function Form({ onSubmit, animalEdit }) {
                 option={''}
                 {...register('id_breed', {
                   required: 'La race est requise',
-                  valueAsNumber: true, // Convertit la chaîne "1" en nombre 1
+                  valueAsNumber: true,
                 })}
               >
                 <optgroup label="Chien">
@@ -166,9 +166,9 @@ export default function Form({ onSubmit, animalEdit }) {
                   <option value="13">Persan</option>
                   <option value="14">Bengal</option>
                   <option value="15">Ragdoll</option>
-                  <option value="16">Sacré de birmanie</option>
-                  <option value="17">British shorthair</option>
-                  <option value="18">Labrador Retriever</option>
+                  <option value="16">Chartreux</option>
+                  <option value="17">Sacré de birmanie</option>
+                  <option value="18">British shorthair</option>
                   <option value="19">Européen</option>
                   <option value="20">Croisé / Autre</option>
                 </optgroup>

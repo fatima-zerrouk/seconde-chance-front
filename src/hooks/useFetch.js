@@ -10,7 +10,7 @@ export function useFetch() {
     const res = await fetch(`${API_URL}${url}`, {
       ...options,
       headers: {
-        // Ajoute 'application/json' QUE si ce n'est pas du FormData !
+        // Ajoute 'application/json' que si ce n'est pas du FormData
         ...(!isFormData && { 'Content-Type': 'application/json' }),
         ...(token && { Authorization: `Bearer ${token}` }),
         ...options.headers,
@@ -19,12 +19,15 @@ export function useFetch() {
 
     const data = await res.json();
 
-    if (res.status === 400) {
-      return { validationErrors: data.errors };
-    }
-
     if (!res.ok) {
-      throw new Error(data.message || 'Une erreur est survenue.');
+      const error = new Error(data.message || 'Une erreur est survenue.');
+
+      // Si Express-Validator a renvoyé un tableau d'erreurs dans data.errors
+      if (data.errors) {
+        error.validationErrors = data.errors;
+      }
+
+      throw error; // Propulse l'erreur directement dans le catch() du composant
     }
 
     return data;
