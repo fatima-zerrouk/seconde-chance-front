@@ -7,37 +7,42 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AddAnimal() {
   const [loading, setLoading] = useState(false);
-  const [globalError, setGlobalError] = useState(null); // pour erreur générals crash serveur ect
+  const [globalError, setGlobalError] = useState(null); // Stocke les erreurs générales crash serveur, ect.
   const { apiFetch } = useFetch();
   const navigate = useNavigate();
 
   const handleAddForm = async (data, methods) => {
     try {
-      setLoading(false);
+      setLoading(true);
       setGlobalError(null);
 
+      // date, ajoute par défaut des propriétés avant l'envoi
       data.status = 'available';
       data.is_visible = true;
 
-      const response = await apiFetch('/animals', {
+      // Envoie les données vers le Back
+      await apiFetch('/animals', {
         method: 'POST',
         body: JSON.stringify(data),
       });
 
-      if (response?.validationErrors) {
-        // si le back détecte des fautes via express validator
-        response.validationErrors.forEach(validationError => {
+      toast.success('Animal créé');
+      navigate('/dashboard');
+    } catch (error) {
+      // Gestion des erreurs de validation
+      if (error.validationErrors) {
+        toast.error('Veuillez vérifier les champs du formulaire.');
+
+        error.validationErrors.forEach(validationError => {
+          // Lie l'erreur au bon champ RHF
           methods.setError(validationError.path, {
             type: 'server',
-            message: validationError.msg, // Le message rédigé dans ton validateur Node.js
+            message: validationError.msg, // Message du validateur Node
           });
         });
         return;
       }
 
-      toast.success('Animal créé');
-      navigate('/dashboard');
-    } catch (error) {
       toast.error(error.message);
       setGlobalError(error.message);
     } finally {
@@ -45,16 +50,13 @@ export default function AddAnimal() {
     }
   };
 
-  // if (loading) return <p>Chargement en cours</p>;
-  // if (err) return <p>{'Erreur en cours : ' + err}</p>;
-
   return (
     <SectionAdmin
       title={'Ajouter un animal'}
       paragraph={'Remplissez tous les champs pour ajouter un nouvel animal'}
     >
       {globalError && <p className="text-red-700">{globalError} </p>}
-      {/* passe la fonction POST au composant form */}
+      {/* Passe la fonction POST au composant form */}
       <Form onSubmit={handleAddForm} />
     </SectionAdmin>
   );
