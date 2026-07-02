@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { SectionAdmin } from '../../components/ui/Sections';
 import Form from '../../components/ui/Form';
 import { useFetch } from '../../hooks/useFetch';
@@ -16,7 +16,13 @@ export default function UpdateAnimal() {
     const loadAnimal = async () => {
       try {
         const response = await apiFetch(`/animals/${id}`, { method: 'GET' });
-        setAnimal(response); // Stocke le résultat
+        // setAnimal(response); // Stocke le résultat
+        const deducedSpecie = response.id_breed <= 10 ? 1 : 2;
+        setAnimal({
+          ...response,
+          specie: deducedSpecie,
+          urls: response.urls || [], // Évite que la galerie d'images plante si c'est undefined
+        });
       } catch (error) {
         console.error('Erreurs lors du chargement', error);
       }
