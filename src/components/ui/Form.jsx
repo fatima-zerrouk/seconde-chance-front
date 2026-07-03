@@ -22,8 +22,8 @@ export default function Form({ onSubmit, animalEdit }) {
     // Si animalEdit existe, RHF préremplit les champs tout seul
     defaultValues: animalEdit,
   });
-// watch() Regarde le champ name. Si il ne le trouves pas encore, il prends le nom de animalEdit, et si il n'y a rien, mets 'l'animal'
-const animalAltForm = watch('name', animalEdit?.name) || "l'animal";
+  // watch() Regarde le champ name. Si il ne le trouves pas encore, il prends le nom de animalEdit, et si il n'y a rien, mets 'l'animal'
+  const animalAltForm = watch('name', animalEdit?.name) || "l'animal";
 
   useEffect(() => {
     // Enregistre 'urls' comme un tableau requis
@@ -258,7 +258,7 @@ const animalAltForm = watch('name', animalEdit?.name) || "l'animal";
               key={index}
               index={index}
               currentUrl={currentUrls[index]}
-              animalAlt={animalAltForm} 
+              animalAlt={animalAltForm}
               onUploadSuccess={url => handleImageUploaded(index, url)}
               onRemove={() => handleImageRemoved(index)}
             />

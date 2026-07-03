@@ -10,7 +10,7 @@ export default function UpdateAnimal() {
   const [animal, setAnimal] = useState(null); // Valeur initial
   const { apiFetch } = useFetch();
   const navigate = useNavigate();
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Appel les données au montage du composant
@@ -26,8 +26,8 @@ export default function UpdateAnimal() {
         });
       } catch (err) {
         console.error('Erreurs lors du chargement', err);
-        setError(err.message)
-        toast.error("Impossible de charger l'animal")
+        setError(err.message);
+        toast.error("Impossible de charger l'animal");
       }
     };
     loadAnimal();
@@ -52,17 +52,20 @@ export default function UpdateAnimal() {
           });
         });
       } else {
-        toast.error(error.message)
+        toast.error(error.message);
       }
     }
   };
 
   if (error) {
     return (
-      <SectionAdmin title={'Modifier un animal'} paragraph={'Modifier les informations de l\'animal'}>
+      <SectionAdmin
+        title={'Modifier un animal'}
+        paragraph={"Modifier les informations de l'animal"}
+      >
         <div className="text-center my-10 p-6 bg-red-50 rounded-xl border border-red-200 max-w-lg mx-auto">
           <p className="text-red-700 font-semibold text-lg mb-4">{error}</p>
-          <button 
+          <button
             onClick={() => navigate('/dashboard')}
             className="cursor-pointer px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-900 transition duration-300 ease-in-out"
           >
@@ -75,11 +78,18 @@ export default function UpdateAnimal() {
 
   if (animal === null) {
     //Si l'animal vaut null affiche ce message
-    return <p className='flex justify-center my-50 font-medium animate-pulse'>Chargement des données...</p>;
+    return (
+      <p className="flex justify-center my-50 font-medium animate-pulse">
+        Chargement des données...
+      </p>
+    );
   }
 
   return (
-    <SectionAdmin title={'Modifier un animal'} paragraph={'Modifier les informations de l\'animal'}>
+    <SectionAdmin
+      title={'Modifier un animal'}
+      paragraph={"Modifier les informations de l'animal"}
+    >
       <Form animalEdit={animal} onSubmit={handleUpdateForm} />
     </SectionAdmin>
   );

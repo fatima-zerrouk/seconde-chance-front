@@ -8,7 +8,7 @@ export function ImageUploader({
   onRemove,
   currentUrl,
   index, // Pour connaitre l'emplacement dans le tableau 0, 1 ou 2
-  animalAlt = "l'animal" // Valeur par défaut de alt
+  animalAlt = "l'animal", // Valeur par défaut de alt
 }) {
   const { apiFetch } = useFetch();
   const [loading, setLoading] = useState(false);
