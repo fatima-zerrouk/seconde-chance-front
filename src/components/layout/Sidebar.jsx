@@ -16,7 +16,7 @@ export default function SideBar() {
   return (
     <section>
       <button
-        className="lg:hidden fixed left-7 py-6 z-10 text-3xl cursor-pointer"
+        className="lg:hidden fixed left-7 py-6 z-20 text-3xl cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
         aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
       >
@@ -24,7 +24,7 @@ export default function SideBar() {
       </button>
 
       <aside
-        className={`bg-lin w-80 px-(--margin-mobile)  pt-22 pb-8 h-full flex flex-col fixed lg:sticky  transition-transform duration-300 ease-in-out
+        className={`bg-lin z-10 w-80 px-(--margin-mobile)  pt-22 pb-8 h-full flex flex-col fixed lg:sticky  transition-transform duration-300 ease-in-out
            ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
            lg:translate-x-0  lg:p-8`}
       >

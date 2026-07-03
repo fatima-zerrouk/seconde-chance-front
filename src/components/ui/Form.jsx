@@ -22,14 +22,18 @@ export default function Form({ onSubmit, animalEdit }) {
     // Si animalEdit existe, RHF préremplit les champs tout seul
     defaultValues: animalEdit,
   });
+  // watch() Regarde le champ name. Si il ne le trouves pas encore, il prends le nom de animalEdit, et si il n'y a rien, mets 'l'animal'
+  const animalAltForm = watch('name', animalEdit?.name) || "l'animal";
 
   useEffect(() => {
     // Enregistre 'urls' comme un tableau requis
     register('urls', {
-      required: 'Une image minimum est requise',
-      validate: (
-        value //Vérifie qu'il y a au moins une URL
-      ) => (value && value.length >= 1) || 'Il faut au moins une photo',
+      validate: value => {
+        // Garde que les éléments qui contiennent une vraie URL pas null, '', ou undefind
+        const trueImages = value ? value.filter(Boolean) : [];
+        // Vérifie s'il en reste au moins une sinon message
+        return trueImages.length >= 1 || 'Il faut au moins une photo';
+      },
     });
   }, [register]);
 
@@ -254,6 +258,7 @@ export default function Form({ onSubmit, animalEdit }) {
               key={index}
               index={index}
               currentUrl={currentUrls[index]}
+              animalAlt={animalAltForm}
               onUploadSuccess={url => handleImageUploaded(index, url)}
               onRemove={() => handleImageRemoved(index)}
             />

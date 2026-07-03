@@ -8,6 +8,7 @@ export function ImageUploader({
   onRemove,
   currentUrl,
   index, // Pour connaitre l'emplacement dans le tableau 0, 1 ou 2
+  animalAlt = "l'animal", // Valeur par défaut de alt
 }) {
   const { apiFetch } = useFetch();
   const [loading, setLoading] = useState(false);
@@ -83,7 +84,7 @@ export function ImageUploader({
           <div className="w-full h-full relative">
             <img
               src={currentUrl}
-              alt="Aperçu image"
+              alt={`Photo ${index + 1} de ${animalAlt}`}
               className="h-full w-full object-cover rounded-(--radius-input)"
             />
             <button

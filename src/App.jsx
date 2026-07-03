@@ -10,6 +10,7 @@ import { Toaster } from 'sonner';
 import PublicLayout from './components/layout/PublicLayout';
 import AdminLayout from './components/layout/AdminLayout';
 import AddAnimal from './pages/DashboardAdmin/AddAnimal';
+import UpdateAnimal from './pages/DashboardAdmin/UpdateAnimal';
 
 function App() {
   return (
@@ -50,6 +51,15 @@ function App() {
           >
             {' '}
           </Route>
+
+          <Route
+            path="/update/:id"
+            element={
+              <PrivateRoute role={'admin'}>
+                <UpdateAnimal />
+              </PrivateRoute>
+            }
+          ></Route>
         </Route>
       </Routes>
     </>

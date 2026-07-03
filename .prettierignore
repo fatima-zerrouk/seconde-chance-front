@@ -1,0 +1,10 @@
+# Dossiers de build et de dépendances
+node_modules/
+dist/
+build/
+
+# Cache de Vite et outils
+.vite/
+
+# Fichiers de configuration ou formats qui n'ont pas besoin d'être touchés
+package-lock.json
