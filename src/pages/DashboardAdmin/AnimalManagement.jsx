@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SectionAdmin } from '../../components/ui/Sections';
 import { useFetch } from '../../hooks/useFetch';
 import AnimalRow from '../../components/ui/AnimalRow';
+import Pagination from '../../components/ui/Pagination';
 
 export default function AnimalManagement() {
   const { apiFetch } = useFetch();
@@ -15,6 +16,8 @@ export default function AnimalManagement() {
   const [error, setError] = useState(null);
 
   const limit = 9;
+
+  const totalPages = Math.round(total / limit);
 
   // L'effet qui se déclenche quand 'page' ou 'search' change
   useEffect(() => {
@@ -89,6 +92,12 @@ export default function AnimalManagement() {
           ))}
         </tbody>
       </table>
+
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        onPageChange={requestedPage => setPage(requestedPage)}
+      />
     </SectionAdmin>
   );
 }

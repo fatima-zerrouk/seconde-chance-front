@@ -23,7 +23,7 @@ export default function AnimalRow({ animal }) {
       {/* bouton qui redirige sur la page de modification */}
       <td>
         <NavLink
-          className="bg-lin px-4 py-[4.6px] font-medium border rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out"
+          className="bg-lin px-4 py-2 text-base font-medium border rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out"
           to={`/dashboard/update/${animal.id}`}
         >
           Modifier{' '}
@@ -32,7 +32,7 @@ export default function AnimalRow({ animal }) {
       {/* bouton qui supprime l'animal mais avec avertissement avant et toast de confirmation après */}
       <td>
         {' '}
-        <button className="bg-terracotta px-4 py-[4.6px]  flex font-medium  rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out">
+        <button className="bg-terracotta px-4 py-2 text-base flex font-medium  rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out">
           Supprimer
         </button>
       </td>

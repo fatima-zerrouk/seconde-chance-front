@@ -33,3 +33,15 @@ export function LinkTerracota({ className = '', value, to, ariaLabel, icon }) {
     </NavLink>
   );
 }
+
+export function ButtonPagination({ disabled, onClick, value }) {
+  return (
+    <button
+      disabled={disabled}
+      onClick={onClick}
+      className="items-center rounded-(--radius-button) bg-cream  border border-lin px-4 py-2 text-base font-medium hover:bg-brown hover:text-lin disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+    >
+      {value}
+    </button>
+  );
+}
