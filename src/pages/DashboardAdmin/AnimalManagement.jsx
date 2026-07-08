@@ -4,6 +4,7 @@ import { useFetch } from '../../hooks/useFetch';
 import AnimalRow from '../../components/ui/AnimalRow';
 import Pagination from '../../components/ui/Pagination';
 import SearchBar from '../../components/ui/SearchBar';
+import { TableHead } from '../../components/ui/Field';
 
 export default function AnimalManagement() {
   const { apiFetch } = useFetch();
@@ -15,7 +16,7 @@ export default function AnimalManagement() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const limit = 9;
+  const limit = 5;
 
   // L'effet qui se déclenche quand 'page' ou 'search' change
   useEffect(() => {
@@ -45,15 +46,21 @@ export default function AnimalManagement() {
 
   const totalPages = Math.ceil(total / limit); // Arrondit au supérieur (1.22 devient 2)
 
+  // Désactive la pagination si y a qu'une page
+  const handlePageChange = requestedPage => {
+    if (requestedPage >= 1 && requestedPage <= totalPages) {
+      setPage(requestedPage);
+    }
+  };
   return (
-    <SectionAdmin title={'Gestion des animaux'}>
-      {/* Affichage des erreurs si le serveur plante */}
+    <SectionAdmin
+      title={'Gestion des animaux'}
+      className="flex flex-col justify-center"
+    >
+      {/* Affichage des erreurs serveur */}
       {error && (
-        <div
-          className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg"
-          role="alert"
-        >
-          <span className="font-medium">Erreur :</span> {error}
+        <div className="text-center  my-10 p-6 bg-red-50 rounded-xl border border-red-200 max-w-lg mx-auto">
+          <p className="text-red-700 font-semibold text-lg">Erreur : {error}</p>
         </div>
       )}
 
@@ -65,28 +72,43 @@ export default function AnimalManagement() {
         }}
       />
 
-      <table className="w-full my-16">
-        <thead>
-          <tr className="bg-lin flex flex-row gap-14 px-6 py-3  border rounded-t-lg ">
-            <th>Photo </th>
-            <th>Prénom </th>
-            <th>Espèce </th>
-            <th>Statut </th>
-            <th>Actions </th>
+      <table className="w-full  md:table my-8">
+        <thead className="hidden bg-lin border-[1.4px] md:table-header-group text-base">
+          <tr>
+            <TableHead value={'Photo'} />
+            <TableHead value={'Prénom'} />
+            <TableHead value={'Espèce'} />
+            <TableHead value={'Statut'} />
+            <TableHead value={'Modifier'} />
+            <TableHead value={'Supprimer'} />
+            <TableHead value={'Voir'} />
           </tr>
         </thead>
 
-        <tbody className="">
-          {animals.map(animal => (
-            <AnimalRow key={animal.id} animal={animal} />
-          ))}
+        {/* <tbody className=""> */}
+        <tbody className="md:table-row-group md:shadow-(--shadow-card)">
+          {loading ? (
+            <tr>
+              <td className="text-center py-8 font-medium" colSpan="7">
+                Chargement des animaux...
+              </td>
+            </tr>
+          ) : animals.length === 0 ? (
+            <tr>
+              <td colSpan="7" className="text-center py-8 font-medium">
+                Aucun animal ne correspond à votre recherche.
+              </td>
+            </tr>
+          ) : (
+            animals.map(animal => <AnimalRow key={animal.id} animal={animal} />)
+          )}
         </tbody>
       </table>
 
       <Pagination
         currentPage={page}
         totalPages={totalPages}
-        onPageChange={requestedPage => setPage(requestedPage)}
+        onPageChange={handlePageChange}
       />
     </SectionAdmin>
   );
