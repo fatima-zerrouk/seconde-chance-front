@@ -43,7 +43,7 @@ export default function AnimalManagement() {
     loadAnimals();
   }, [page, search]); //Les dépendances
 
-  const totalPages = Math.round(total / limit);
+  const totalPages = Math.ceil(total / limit); // Arrondit au supérieur (1.22 devient 2)
 
   return (
     <SectionAdmin title={'Gestion des animaux'}>
