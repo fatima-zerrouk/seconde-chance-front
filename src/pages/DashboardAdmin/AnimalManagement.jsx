@@ -3,6 +3,7 @@ import { SectionAdmin } from '../../components/ui/Sections';
 import { useFetch } from '../../hooks/useFetch';
 import AnimalRow from '../../components/ui/AnimalRow';
 import Pagination from '../../components/ui/Pagination';
+import SearchBar from '../../components/ui/SearchBar';
 
 export default function AnimalManagement() {
   const { apiFetch } = useFetch();
@@ -11,13 +12,10 @@ export default function AnimalManagement() {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const limit = 9;
-
-  const totalPages = Math.round(total / limit);
 
   // L'effet qui se déclenche quand 'page' ou 'search' change
   useEffect(() => {
@@ -45,6 +43,8 @@ export default function AnimalManagement() {
     loadAnimals();
   }, [page, search]); //Les dépendances
 
+  const totalPages = Math.round(total / limit);
+
   return (
     <SectionAdmin title={'Gestion des animaux'}>
       {/* Affichage des erreurs si le serveur plante */}
@@ -57,23 +57,13 @@ export default function AnimalManagement() {
         </div>
       )}
 
-      <search className="mb-6">
-        <label htmlFor="search-animal" className="sr-only">
-          Rechercher un animal par son prénom
-        </label>
-        <input
-          id="search-animal"
-          type="text"
-          maxLength={50}
-          value={search}
-          onChange={e => {
-            setSearch(e.target.value);
-            setPage(1); // Force le retour à la page 1 à chaque frappe
-          }}
-          placeholder="Rechercher par prénom"
-          className="w-full shadow-(--shadow-card)  px-4 py-3 border-[1.5px] rounded-(--radius-input)"
-        />
-      </search>
+      <SearchBar
+        value={search}
+        onChange={newValue => {
+          setSearch(newValue);
+          setPage(1); // Reset la page à 1
+        }}
+      />
 
       <table className="w-full my-16">
         <thead>

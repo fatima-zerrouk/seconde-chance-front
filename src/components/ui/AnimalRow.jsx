@@ -17,10 +17,7 @@ export default function AnimalRow({ animal }) {
 
       <td className="">{animal.name}</td>
       <td className="">{animal.specie_name}</td>
-      {/*plus tard faire une liste statut 
-        (available, in_progress, adopted)*/}
       <td className="">{animal.status}</td>
-      {/* bouton qui redirige sur la page de modification */}
       <td>
         <NavLink
           className="bg-lin px-4 py-2 text-base font-medium border rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out"
@@ -29,7 +26,6 @@ export default function AnimalRow({ animal }) {
           Modifier{' '}
         </NavLink>{' '}
       </td>
-      {/* bouton qui supprime l'animal mais avec avertissement avant et toast de confirmation après */}
       <td>
         {' '}
         <button className="bg-terracotta px-4 py-2 text-base flex font-medium  rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out">
