@@ -45,6 +45,7 @@ export default function SideBar() {
             <li>
               <NavLink
                 to="/dashboard"
+                end
                 onClick={() => setIsOpen(false)}
                 className={linkActive}
               >
@@ -54,7 +55,7 @@ export default function SideBar() {
 
             <li>
               <NavLink
-                to="/add"
+                to="/dashboard/add"
                 onClick={() => setIsOpen(false)}
                 className={linkActive}
               >

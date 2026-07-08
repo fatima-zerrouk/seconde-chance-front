@@ -11,6 +11,7 @@ import PublicLayout from './components/layout/PublicLayout';
 import AdminLayout from './components/layout/AdminLayout';
 import AddAnimal from './pages/DashboardAdmin/AddAnimal';
 import UpdateAnimal from './pages/DashboardAdmin/UpdateAnimal';
+import AnimalManagement from './pages/DashboardAdmin/AnimalManagement';
 
 function App() {
   return (
@@ -42,7 +43,18 @@ function App() {
           />
 
           <Route
-            path="/add"
+            path="/dashboard/animals"
+            element={
+              <PrivateRoute role={'admin'}>
+                <AnimalManagement />
+              </PrivateRoute>
+            }
+          >
+            {' '}
+          </Route>
+
+          <Route
+            path="/dashboard/add"
             element={
               <PrivateRoute role={'admin'}>
                 <AddAnimal />
@@ -53,7 +65,7 @@ function App() {
           </Route>
 
           <Route
-            path="/update/:id"
+            path="/dashboard/update/:id"
             element={
               <PrivateRoute role={'admin'}>
                 <UpdateAnimal />
