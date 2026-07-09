@@ -64,7 +64,7 @@ export default function Login() {
 
         <fieldset className="grid grid-cols-1 mt-6">
           <label htmlFor="email" className="font-medium">
-            Email
+            Votre email
           </label>
           <Field
             type="text"
@@ -80,7 +80,7 @@ export default function Login() {
           )}
 
           <label htmlFor="psw" className="font-medium mt-8">
-            Mot de passe
+            Votre mot de passe
           </label>
           <div className="relative">
             <Field
