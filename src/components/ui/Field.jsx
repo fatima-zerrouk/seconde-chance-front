@@ -79,16 +79,16 @@ export function Select({
 export function TableData({ td, value, children, className = '' }) {
   return (
     <td
-      className={`flex justify-between border-b gap-4 items-center md:table-cell py-2 md:px-5 md:py-4 text-base ${className}`}
+      className={`flex justify-between border-b gap-5 items-center md:table-cell py-2 md:px-3 md:py-3 text-base ${className}`}
     >
       <span className="font-semibold uppercase md:hidden">{td}</span>
       {/* Si value existe ajoute span sinon non */}
-      {value && <span className="">{value}</span>}
+      {value && <span className="capitalize">{value}</span>}
       {children}
     </td>
   );
 }
 
 export function TableHead({ value }) {
-  return <th className="px-6 py-4 font-medium">{value}</th>;
+  return <th className="px-5 py-4 font-medium text-left">{value}</th>;
 }

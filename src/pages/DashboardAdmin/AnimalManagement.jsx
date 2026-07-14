@@ -85,7 +85,6 @@ export default function AnimalManagement() {
           </tr>
         </thead>
 
-        {/* <tbody className=""> */}
         <tbody className="md:table-row-group md:shadow-(--shadow-card)">
           {loading ? (
             <tr>
