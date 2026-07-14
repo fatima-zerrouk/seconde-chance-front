@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
 
-export default function AnimalRow({ animal }) {
+export default function AnimalRow({ animal, onDelete }) {
   const { apiFetch } = useFetch();
   const [status, setStatus] = useState(animal.status); // Initialise le statut avec celui reçu dans les props
 
@@ -59,10 +59,10 @@ export default function AnimalRow({ animal }) {
 
       <TableData td={'Statut :'}>
         <select
-          value={status}
-          onChange={handleStatus}
+          value={status} // Valeur actuellement affichée
+          onChange={handleStatus} // Déclenche la mise à jour du statut
           aria-label={`Modifier le statut de ${animal.name}`}
-          className="cursor-pointer rounded-(--radius-input) border-[1.4px] border-brown py-2 px-1 md:py-1 text-base font-medium focus:outline-none "
+          className="cursor-pointer rounded-(--radius-input) border-[1.4px] border-brown py-2 px-1 md:py-1 text-base "
         >
           <option value="available">Disponible</option>
           <option value="in_progress">En cours d&apos;adoption</option>
@@ -81,7 +81,10 @@ export default function AnimalRow({ animal }) {
       </TableData>
 
       <TableData td={'Supprimer :'}>
-        <button className="bg-terracotta px-3 py-2 text-base font-medium rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out">
+        <button
+          className="bg-terracotta px-3 py-2 text-base font-medium rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out"
+          onClick={() => onDelete(animal.id)}
+        >
           Supprimer
         </button>
       </TableData>

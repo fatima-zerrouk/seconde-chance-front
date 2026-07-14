@@ -5,6 +5,8 @@ import AnimalRow from '../../components/ui/AnimalRow';
 import Pagination from '../../components/ui/Pagination';
 import SearchBar from '../../components/ui/SearchBar';
 import { TableHead } from '../../components/ui/Field';
+import { toast } from 'sonner';
+import ConfirmationModal from '../../components/ui/Modal';
 
 export default function AnimalManagement() {
   const { apiFetch } = useFetch();
@@ -15,6 +17,7 @@ export default function AnimalManagement() {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [animalToDelete, setAnimalToDelete] = useState(null);
 
   const limit = 5;
 
@@ -52,6 +55,53 @@ export default function AnimalManagement() {
       setPage(requestedPage);
     }
   };
+
+  // const handleDelete = async id => {
+  //   const isConfirmed = window.confirm(
+  //     "Etes-vous sur de vouloir supprimer l'animal"
+  //   );
+
+  //   if (!isConfirmed) return;
+
+  //   try {
+  //     await apiFetch(`/animals/${id}`, {
+  //       method: 'DELETE',
+  //     });
+  //     setAnimals(prevAnimals => prevAnimals.filter(animal => animal.id !== id));
+  //     toast.success("L'animal a été supprimé avec succès");
+  //   } catch (error) {
+  //     console.error('Mon erreur de suppression :', error); // 💡 Ajoute cette ligne !
+  //     toast.error(error.message);
+  //   }
+  // };
+
+  // La fonction appelée bouton "Supprimer"
+  const handleOpenConfirm = id => {
+    setAnimalToDelete(id); // Ouvre la modal en stockant l'ID
+  };
+
+  // Function exécutée confirme la suppression
+  const handleConfirmDelete = async () => {
+    if (!animalToDelete) return; // Quitte la fonction si aucun animal n'est sélectionné
+
+    try {
+      await apiFetch(`/animals/${animalToDelete}`, {
+        method: 'DELETE',
+      });
+
+      setAnimals(
+        (
+          prevAnimals //Met à jour la liste sans refaire une requête au serveur
+        ) => prevAnimals.filter(animal => animal.id !== animalToDelete)
+      );
+      toast.success("L'animal a été supprimé avec succès");
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setAnimalToDelete(null); // Ferme le modal de confirmation
+    }
+  };
+
   return (
     <SectionAdmin
       title={'Gestion des animaux'}
@@ -99,9 +149,21 @@ export default function AnimalManagement() {
               </td>
             </tr>
           ) : (
-            animals.map(animal => <AnimalRow key={animal.id} animal={animal} />)
+            animals.map(animal => (
+              <AnimalRow
+                key={animal.id}
+                animal={animal}
+                onDelete={handleOpenConfirm}
+              />
+            ))
           )}
         </tbody>
+        <ConfirmationModal
+          isOpen={animalToDelete !== null} // Ouvre le modal si un ID est stocké
+          onClose={() => setAnimalToDelete(null)} // Ferme la modal sans supprimer l'animal
+          onConfirm={handleConfirmDelete} // Suppression après confirmation
+          message="Êtes-vous sûr de vouloir supprimer cet animal ? Cette action est irréversible."
+        />
       </table>
 
       <Pagination

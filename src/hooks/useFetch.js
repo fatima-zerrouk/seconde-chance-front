@@ -17,6 +17,10 @@ export function useFetch() {
       },
     });
 
+    if (res.status === 204) {
+      return;
+    }
+
     const data = await res.json();
 
     if (!res.ok) {
