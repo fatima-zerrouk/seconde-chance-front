@@ -1,9 +1,29 @@
-// import React from 'react'
 import { FaArrowRight } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { TableData } from '../ui/Field';
+import { useState } from 'react';
+import { useFetch } from '../../hooks/useFetch';
+import { toast } from 'sonner';
 
 export default function AnimalRow({ animal }) {
+  const { apiFetch } = useFetch();
+  const [status, setStatus] = useState(animal.status); // Initialise le statut avec celui reçu dans les props
+
+  const handleStatus = async e => {
+    const newStatus = e.target.value; // Récupère statut sélectionné dans la liste
+
+    try {
+      // Envoie une requête pour mettre à jour le statut
+      await apiFetch(`/animals/${animal.id}/status`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: newStatus }),
+      });
+      setStatus(newStatus); // Met à jour le state pour rafraîchir l'affichage
+    } catch (error) {
+      toast.error("Impossible de modifier le statut de l'animal", error);
+    }
+  };
+
   // Fonction pour optimiser l'URL Cloudinary
   const optimizeCloudinaryUrl = url => {
     if (!url) return 'https://via.placeholder.com/150';
@@ -37,11 +57,22 @@ export default function AnimalRow({ animal }) {
         value={animal.specie_name === 'Dog' ? 'Chien' : 'Chat'}
       ></TableData>
 
-      <TableData td={'Statut :'} value={animal.status}></TableData>
+      <TableData td={'Statut :'}>
+        <select
+          value={status}
+          onChange={handleStatus}
+          aria-label={`Modifier le statut de ${animal.name}`}
+          className="cursor-pointer rounded-(--radius-input) border-[1.4px] border-brown py-2 px-1 md:py-1 text-base font-medium focus:outline-none "
+        >
+          <option value="available">Disponible</option>
+          <option value="in_progress">En cours d&apos;adoption</option>
+          <option value="adopted">Adopter</option>
+        </select>
+      </TableData>
 
       <TableData td={'Modifier :'}>
         <NavLink
-          className="bg-lin px-4 py-2 text-base font-medium rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out"
+          className="bg-lin px-3 py-2 text-base font-medium rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out"
           to={`/dashboard/update/${animal.id}`}
           aria-label={`Lien vers le formulaire de modification de ${animal.name}`}
         >
@@ -50,7 +81,7 @@ export default function AnimalRow({ animal }) {
       </TableData>
 
       <TableData td={'Supprimer :'}>
-        <button className="bg-terracotta px-4 py-2 text-base font-medium rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out">
+        <button className="bg-terracotta px-3 py-2 text-base font-medium rounded-(--radius-button) hover:bg-brown hover:text-lin transition duration-150 ease-in-out">
           Supprimer
         </button>
       </TableData>
