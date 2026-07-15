@@ -4,6 +4,7 @@ import Form from '../../components/ui/Form';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 export default function AddAnimal() {
   const [loading, setLoading] = useState(false);
@@ -51,13 +52,19 @@ export default function AddAnimal() {
   };
 
   return (
-    <SectionAdmin
-      title={'Ajouter un animal'}
-      paragraph={'Remplissez tous les champs pour ajouter un nouvel animal'}
-    >
-      {globalError && <p className="text-red-700">{globalError} </p>}
-      {/* Passe la fonction POST au composant form */}
-      <Form onSubmit={handleAddForm} />
-    </SectionAdmin>
+    <>
+      <Helmet>
+        <title>Ajouter un animal</title>
+      </Helmet>
+
+      <SectionAdmin
+        title={'Ajouter un animal'}
+        paragraph={'Remplissez tous les champs pour ajouter un nouvel animal'}
+      >
+        {globalError && <p className="text-red-700">{globalError} </p>}
+        {/* Passe la fonction POST au composant form */}
+        <Form onSubmit={handleAddForm} />
+      </SectionAdmin>
+    </>
   );
 }

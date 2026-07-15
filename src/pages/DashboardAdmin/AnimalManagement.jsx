@@ -7,6 +7,7 @@ import SearchBar from '../../components/ui/SearchBar';
 import { TableHead } from '../../components/ui/Field';
 import { toast } from 'sonner';
 import ConfirmationModal from '../../components/ui/Modal';
+import { Helmet } from 'react-helmet-async';
 
 export default function AnimalManagement() {
   const { apiFetch } = useFetch();
@@ -56,25 +57,6 @@ export default function AnimalManagement() {
     }
   };
 
-  // const handleDelete = async id => {
-  //   const isConfirmed = window.confirm(
-  //     "Etes-vous sur de vouloir supprimer l'animal"
-  //   );
-
-  //   if (!isConfirmed) return;
-
-  //   try {
-  //     await apiFetch(`/animals/${id}`, {
-  //       method: 'DELETE',
-  //     });
-  //     setAnimals(prevAnimals => prevAnimals.filter(animal => animal.id !== id));
-  //     toast.success("L'animal a été supprimé avec succès");
-  //   } catch (error) {
-  //     console.error('Mon erreur de suppression :', error); // 💡 Ajoute cette ligne !
-  //     toast.error(error.message);
-  //   }
-  // };
-
   // La fonction appelée bouton "Supprimer"
   const handleOpenConfirm = id => {
     setAnimalToDelete(id); // Ouvre la modal en stockant l'ID
@@ -103,74 +85,82 @@ export default function AnimalManagement() {
   };
 
   return (
-    <SectionAdmin
-      title={'Gestion des animaux'}
-      className="flex flex-col justify-center"
-    >
-      {/* Affichage des erreurs serveur */}
-      {error && (
-        <div className="text-center  my-10 p-6 bg-red-50 rounded-xl border border-red-200 max-w-lg mx-auto">
-          <p className="text-red-700 font-semibold text-lg">Erreur : {error}</p>
-        </div>
-      )}
+    <>
+      <Helmet>
+        <title>Gestion des animaux</title>
+      </Helmet>
 
-      <SearchBar
-        value={search}
-        onChange={newValue => {
-          setSearch(newValue);
-          setPage(1); // Reset la page à 1
-        }}
-      />
+      <SectionAdmin
+        title={'Gestion des animaux'}
+        className="flex flex-col justify-center"
+      >
+        {/* Affichage des erreurs serveur */}
+        {error && (
+          <div className="text-center  my-10 p-6 bg-red-50 rounded-xl border border-red-200 max-w-lg mx-auto">
+            <p className="text-red-700 font-semibold text-lg">
+              Erreur : {error}
+            </p>
+          </div>
+        )}
 
-      <table className="w-full  md:table my-8">
-        <thead className="hidden bg-lin border-[1.4px] md:table-header-group text-base">
-          <tr>
-            <TableHead value={'Photo'} />
-            <TableHead value={'Prénom'} />
-            <TableHead value={'Espèce'} />
-            <TableHead value={'Statut'} />
-            <TableHead value={'Modifier'} />
-            <TableHead value={'Supprimer'} />
-            <TableHead value={'Voir'} />
-          </tr>
-        </thead>
-
-        <tbody className="md:table-row-group md:shadow-(--shadow-card)">
-          {loading ? (
-            <tr>
-              <td className="text-center py-8 font-medium" colSpan="7">
-                Chargement des animaux...
-              </td>
-            </tr>
-          ) : animals.length === 0 ? (
-            <tr>
-              <td colSpan="7" className="text-center py-8 font-medium">
-                Aucun animal ne correspond à votre recherche.
-              </td>
-            </tr>
-          ) : (
-            animals.map(animal => (
-              <AnimalRow
-                key={animal.id}
-                animal={animal}
-                onDelete={handleOpenConfirm}
-              />
-            ))
-          )}
-        </tbody>
-        <ConfirmationModal
-          isOpen={animalToDelete !== null} // Ouvre le modal si un ID est stocké
-          onClose={() => setAnimalToDelete(null)} // Ferme la modal sans supprimer l'animal
-          onConfirm={handleConfirmDelete} // Suppression après confirmation
-          message="Êtes-vous sûr de vouloir supprimer cet animal ? Cette action est irréversible."
+        <SearchBar
+          value={search}
+          onChange={newValue => {
+            setSearch(newValue);
+            setPage(1); // Reset la page à 1
+          }}
         />
-      </table>
 
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
-    </SectionAdmin>
+        <table className="w-full  md:table my-8">
+          <thead className="hidden bg-lin border-[1.4px] md:table-header-group text-base">
+            <tr>
+              <TableHead value={'Photo'} />
+              <TableHead value={'Prénom'} />
+              <TableHead value={'Espèce'} />
+              <TableHead value={'Statut'} />
+              <TableHead value={'Modifier'} />
+              <TableHead value={'Supprimer'} />
+              <TableHead value={'Voir'} />
+            </tr>
+          </thead>
+
+          <tbody className="md:table-row-group md:shadow-(--shadow-card)">
+            {loading ? (
+              <tr>
+                <td className="text-center py-8 font-medium" colSpan="7">
+                  Chargement des animaux...
+                </td>
+              </tr>
+            ) : animals.length === 0 ? (
+              <tr>
+                <td colSpan="7" className="text-center py-8 font-medium">
+                  Aucun animal ne correspond à votre recherche.
+                </td>
+              </tr>
+            ) : (
+              animals.map(animal => (
+                <AnimalRow
+                  key={animal.id}
+                  animal={animal}
+                  onDelete={handleOpenConfirm}
+                />
+              ))
+            )}
+          </tbody>
+          <ConfirmationModal
+            isOpen={animalToDelete !== null} // Ouvre le modal si un ID est stocké
+            onClose={() => setAnimalToDelete(null)} // Ferme la modal sans supprimer l'animal
+            onConfirm={handleConfirmDelete} // Suppression après confirmation
+            message="Êtes-vous sûr de vouloir supprimer cet animal ? Cette action est irréversible."
+          />
+        </table>
+
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </SectionAdmin>
+    </>
   );
 }
