@@ -4,6 +4,7 @@ import { SectionAdmin } from '../../components/ui/Sections';
 import Form from '../../components/ui/Form';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
+import { Helmet } from 'react-helmet-async';
 
 export default function UpdateAnimal() {
   const { id } = useParams(); //Destructuration de l'id
@@ -86,11 +87,17 @@ export default function UpdateAnimal() {
   }
 
   return (
-    <SectionAdmin
-      title={'Modifier un animal'}
-      paragraph={"Modifier les informations de l'animal"}
-    >
-      <Form animalEdit={animal} onSubmit={handleUpdateForm} />
-    </SectionAdmin>
+    <>
+      <Helmet>
+        <title>Modifier un animal</title>
+      </Helmet>
+
+      <SectionAdmin
+        title={'Modifier un animal'}
+        paragraph={"Modifier les informations de l'animal"}
+      >
+        <Form animalEdit={animal} onSubmit={handleUpdateForm} />
+      </SectionAdmin>
+    </>
   );
 }
