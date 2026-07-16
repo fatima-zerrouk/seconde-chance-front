@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { CardMission } from './Cards';
 import { it, expect } from 'vitest';
 
-// Mock function qui retourne une div pour simuler une icône
+// Mock simule une icône
 const MockIcon = () => <div data-testid="mock-icon">Icône</div>;
 
 it('Affiche le titre', () => {

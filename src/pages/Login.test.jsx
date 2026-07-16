@@ -5,8 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 
-// Fonctions (Mocks) pour simuler : useNavigate, apiFetch, login du AuthContext
-const mockNavigate = vi.fn(); // vi.fn() pour Vitest function
+const mockNavigate = vi.fn();
 const mockLogin = vi.fn();
 const mockApiFetch = vi.fn();
 
@@ -21,7 +20,7 @@ vi.mock('../hooks/useFetch', () => ({
 }));
 
 describe("Test d'intégration page Login", () => {
-  // Recréer l'environnement du composant Login en fournissant le AuthContext et le routeur
+  // Recréer l'environnement du composant Logina vec AuthContext et routeur
   const renderLogin = () => {
     return render(
       <AuthContext.Provider value={{ login: mockLogin }}>

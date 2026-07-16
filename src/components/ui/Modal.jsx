@@ -6,19 +6,17 @@ export default function ConfirmationModal({
   onConfirm,
   message,
 }) {
-  // Ferme le modal avec la touche échap
   useEffect(() => {
     if (!isOpen) return; // Ne fait rien tant que la modal est fermée
 
     const handleKeyDown = e => {
       if (e.key === 'Escape') {
-        onClose(); // Ferme la modal si j'appuie sur echap
+        onClose();
       }
     };
-    //écouteur de clavier sur la page
     document.addEventListener('keydown', handleKeyDown);
 
-    // Supprime l'écouteur quand le modal se ferme ou si le composant est démonté
+    // Supprime l'écouteur quand le modal se ferme
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };

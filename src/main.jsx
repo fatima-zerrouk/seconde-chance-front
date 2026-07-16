@@ -9,8 +9,6 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        {' '}
-        {/* transmet login, logout, isAuthenticated au enfant*/}
         <App />
       </AuthProvider>
     </BrowserRouter>

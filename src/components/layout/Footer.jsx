@@ -73,7 +73,6 @@ export function Footer() {
           </li>
         </ul>
       </address>
-      {/* <p className='text-center'>© 2026 Seconde chance </p> */}
     </section>
   );
 }

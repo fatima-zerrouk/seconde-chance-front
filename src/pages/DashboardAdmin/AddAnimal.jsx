@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet-async';
 
 export default function AddAnimal() {
   const [loading, setLoading] = useState(false);
-  const [globalError, setGlobalError] = useState(null); // Stocke les erreurs générales crash serveur, ect.
+  const [globalError, setGlobalError] = useState(null);
   const { apiFetch } = useFetch();
   const navigate = useNavigate();
 
@@ -17,18 +17,16 @@ export default function AddAnimal() {
       setLoading(true);
       setGlobalError(null);
 
-      // date, ajoute par défaut des propriétés avant l'envoi
       data.status = 'available';
       data.is_visible = true;
 
-      // Envoie les données vers le Back
       await apiFetch('/animals', {
         method: 'POST',
         body: JSON.stringify(data),
       });
 
-      toast.success('Animal créé');
-      navigate('/dashboard');
+      toast.success("L'Animal a bien été ajouté");
+      navigate('/dashboard/animals');
     } catch (error) {
       // Gestion des erreurs de validation
       if (error.validationErrors) {
@@ -63,7 +61,7 @@ export default function AddAnimal() {
       >
         {globalError && <p className="text-red-700">{globalError} </p>}
         {/* Passe la fonction POST au composant form */}
-        <Form onSubmit={handleAddForm} />
+        <Form onSubmit={handleAddForm} isLoading={loading} />
       </SectionAdmin>
     </>
   );

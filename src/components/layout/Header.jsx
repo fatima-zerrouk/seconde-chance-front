@@ -81,9 +81,7 @@ export function Header() {
                 aria-label="Lien qui mène à la page de connexion"
                 className={({ isActive }) =>
                   `flex justify-center items-center bg-terracotta font-medium h-auto py-2 px-4 rounded-(--radius-button)  cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out ${
-                    isActive
-                      ? ' font-semibold' // css sur la page active
-                      : ''
+                    isActive ? ' font-semibold' : ''
                   }`
                 }
               >
