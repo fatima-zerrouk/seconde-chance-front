@@ -25,32 +25,28 @@ export default function Login() {
 
   const handleSubmitForm = async formData => {
     try {
-      // appelle l'API qui renvoie soit les données, soit { validationErrors })
       const result = await apiFetch('/auth/login', {
         method: 'POST',
         body: JSON.stringify(formData),
       });
 
-      // si erreur validation
+      // Si erreur validation
       if (result?.validationErrors) {
-        //tableau d'erreurs
         result.validationErrors.forEach(({ path, msg }) => {
-          //boucle dessus
-          // mets l'erreur au bon champ sous l'email ou mdp
+          // Mets l'erreur au bon champ
           setError(path, { message: msg });
         });
-        return; // sort de la fonction et exécute pas le reste (login)
+        return;
       }
 
-      //si succès
-      login(result.token); //passe le token reçu dans data
+      login(result.token);
       navigate('/dashboard');
     } catch (error) {
-      // si l'erreur vient des identifiants erreur 401 du back
+      // Si l'erreur vient des identifiants, erreur 401 du back
       if (error.message === 'Identifiants incorrects') {
         setAuthError(error.message);
       } else {
-        toast.error(error.message); //toats global
+        toast.error(error.message);
       }
     }
   };

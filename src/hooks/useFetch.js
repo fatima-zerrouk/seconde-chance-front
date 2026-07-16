@@ -4,7 +4,7 @@ export function useFetch() {
   async function apiFetch(url, options = {}) {
     const token = localStorage.getItem('token');
 
-    // Détection automatique : est-ce qu'on envoie un fichier/FormData
+    // Détection fichier FormData
     const isFormData = options.body instanceof FormData;
 
     const res = await fetch(`${API_URL}${url}`, {

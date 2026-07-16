@@ -7,8 +7,8 @@ export function ImageUploader({
   onUploadSuccess,
   onRemove,
   currentUrl,
-  index, // Pour connaitre l'emplacement dans le tableau 0, 1 ou 2
-  animalAlt = "l'animal", // Valeur par défaut de alt
+  index, // Emplacement tableau 0, 1 ou 2
+  animalAlt = "l'animal",
 }) {
   const { apiFetch } = useFetch();
   const [loading, setLoading] = useState(false);
@@ -19,14 +19,12 @@ export function ImageUploader({
     setLoading(true);
     setErrorMsg('');
 
-    // Validation taille
     if (file.size > 5 * 1024 * 1024) {
       setErrorMsg('Fichier trop lourd (5 Mo maximum)');
       setLoading(false);
       return;
     }
-    // Validation format
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']; // VALIDATION FORMAT
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
       setErrorMsg('Format invalide. Autorisé : JPG, PNG, WEBP');
       setLoading(false);
@@ -37,7 +35,6 @@ export function ImageUploader({
     formData.append('image', file); // 'image' fait écho à uploadMiddleware.single('image') dans le back
 
     try {
-      // Requête vers back
       const response = await apiFetch('/animals/upload', {
         method: 'POST',
         body: formData,
@@ -45,8 +42,7 @@ export function ImageUploader({
 
       onUploadSuccess(response.url); // Transmet l'URL au formulaire parent
     } catch (error) {
-      console.error("Erreur d'upload", error);
-      setErrorMsg(error.message); // Stocke le message d'erreur pour l'affichage
+      setErrorMsg(error.message);
     } finally {
       setLoading(false);
     }
@@ -88,7 +84,7 @@ export function ImageUploader({
               className="h-full w-full object-cover rounded-(--radius-input)"
             />
             <button
-              type="button" // Évite de soumettre le formulaire entier au clic
+              type="button"
               onClick={onRemove} // Appelle la fonction de suppression passée par le parent
               className="absolute top-2 right-2 bg-terracotta rounded-xl p-2 cursor-pointer hover:bg-brown hover:text-lin transition ease-in-out duration-300"
               title="Supprimer l'image"

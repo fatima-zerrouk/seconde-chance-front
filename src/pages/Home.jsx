@@ -9,7 +9,6 @@ import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 export default function Home() {
   return (
     <>
-      {/* Section hero */}
       <section className=" flex flex-col justify-between pb-14 md:pb-6 lg:flex-row-reverse items-center bg-lin px-(--margin-mobile) md:px-(--margin-desktop)">
         <OptimizedImage
           src="src/assets/dog-home.png"
@@ -51,7 +50,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section mission */}
       <SectionSubtitles title={'Notre mission'}>
         <p>
           Seconde Chance œuvre chaque jour pour offrir une nouvelle vie aux
@@ -60,7 +58,6 @@ export default function Home() {
             animaux abandonnés et les reconnecter avec des familles aimantes.
           </span>
         </p>
-        {/* contenue children */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mt-12 ">
           {dataMisson.map(card => (
             <CardMission
@@ -73,7 +70,6 @@ export default function Home() {
         </div>
       </SectionSubtitles>
 
-      {/* Section adoption */}
       <section className="bg-lin flex flex-col m-auto gap-12 lg:flex-row md:items-center md:justify-between py-12 md:py-16 px-(--margin-mobile) md:px-(--margin-desktop)">
         <div>
           <h2 className="title-h2">L&apos;adoption responsable</h2>
@@ -113,14 +109,12 @@ export default function Home() {
         />
       </section>
 
-      {/* Section comment ça marche */}
       <SectionSubtitles
         id="adopt"
         className="text-center "
         title={' Comment ça marche ?'}
         paragraph={"Le processus d'adoption en 4 étapes simples."}
       >
-        {/* contenue children */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 mt-10 ">
           {dataHow.map(card => (
             <CardHow
@@ -141,7 +135,6 @@ export default function Home() {
         />
       </SectionSubtitles>
 
-      {/* Section stats*/}
       <SectionSubtitles
         className="text-center "
         title={'Notre impact'}
@@ -170,7 +163,6 @@ export default function Home() {
         </ul>
       </SectionSubtitles>
 
-      {/* Section contact*/}
       <SectionSubtitles
         className="text-center bg-terracotta "
         title={'Contactez-nous'}

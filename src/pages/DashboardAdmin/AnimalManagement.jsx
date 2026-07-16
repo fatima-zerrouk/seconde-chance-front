@@ -22,14 +22,12 @@ export default function AnimalManagement() {
 
   const limit = 5;
 
-  // L'effet qui se déclenche quand 'page' ou 'search' change
   useEffect(() => {
     async function loadAnimals() {
       setLoading(true);
       setError(null);
 
       try {
-        // Appelle route privée
         const data = await apiFetch(
           `/animals?page=${page}&limit=${limit}&search=${search}`
         );
@@ -38,31 +36,28 @@ export default function AnimalManagement() {
         setAnimals(data.animals);
         setTotal(data.total);
       } catch (err) {
-        // Si useFetch jette une erreur, elle est capturée ici
         setError(err.message);
       } finally {
         setLoading(false);
       }
     }
-
     loadAnimals();
   }, [page, search]); //Les dépendances
 
-  const totalPages = Math.ceil(total / limit); // Arrondit au supérieur (1.22 devient 2)
+  const totalPages = Math.ceil(total / limit); // Arrondit (1.22 devient 2)
 
-  // Désactive la pagination si y a qu'une page
+  // Désactive la pagination s'il y a qu'une page
   const handlePageChange = requestedPage => {
     if (requestedPage >= 1 && requestedPage <= totalPages) {
       setPage(requestedPage);
     }
   };
 
-  // La fonction appelée bouton "Supprimer"
   const handleOpenConfirm = id => {
     setAnimalToDelete(id); // Ouvre la modal en stockant l'ID
   };
 
-  // Function exécutée confirme la suppression
+  // Fonction exécutée confirme la suppression
   const handleConfirmDelete = async () => {
     if (!animalToDelete) return; // Quitte la fonction si aucun animal n'est sélectionné
 
@@ -73,7 +68,7 @@ export default function AnimalManagement() {
 
       setAnimals(
         (
-          prevAnimals //Met à jour la liste sans refaire une requête au serveur
+          prevAnimals // Met à jour la liste sans refaire une requête au serveur
         ) => prevAnimals.filter(animal => animal.id !== animalToDelete)
       );
       toast.success("L'animal a été supprimé avec succès");
@@ -94,7 +89,6 @@ export default function AnimalManagement() {
         title={'Gestion des animaux'}
         className="flex flex-col justify-center"
       >
-        {/* Affichage des erreurs serveur */}
         {error && (
           <div className="text-center  my-10 p-6 bg-red-50 rounded-xl border border-red-200 max-w-lg mx-auto">
             <p className="text-red-700 font-semibold text-lg">
@@ -149,8 +143,8 @@ export default function AnimalManagement() {
           </tbody>
           <ConfirmationModal
             isOpen={animalToDelete !== null} // Ouvre le modal si un ID est stocké
-            onClose={() => setAnimalToDelete(null)} // Ferme la modal sans supprimer l'animal
-            onConfirm={handleConfirmDelete} // Suppression après confirmation
+            onClose={() => setAnimalToDelete(null)} // Ferme la modal sans supprimer
+            onConfirm={handleConfirmDelete} // Suppression
             message="Êtes-vous sûr de vouloir supprimer cet animal ? Cette action est irréversible."
           />
         </table>

@@ -26,7 +26,6 @@ export default function UpdateAnimal() {
           urls: response.urls || [], // Évite que la galerie d'images plante si c'est undefined
         });
       } catch (err) {
-        console.error('Erreurs lors du chargement', err);
         setError(err.message);
         toast.error("Impossible de charger l'animal");
       }
@@ -40,8 +39,8 @@ export default function UpdateAnimal() {
         method: 'PUT',
         body: JSON.stringify(data),
       });
-      toast.success('Animal mis à jour');
-      navigate('/dashboard');
+      toast.success("L'Animal a bien été mis à jour");
+      navigate('/dashboard/animals');
     } catch (error) {
       // Si le backend renvoie des erreurs de validation
       if (error.validationErrors) {

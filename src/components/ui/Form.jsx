@@ -11,10 +11,10 @@ export default function Form({ onSubmit, animalEdit }) {
   const isEdit = Boolean(animalEdit);
 
   const {
-    register, // Connecte un input à RHF
+    register,
     handleSubmit,
-    setError, // Ajoute les erreurs du back
-    setValue, // Pour injecter l'URL de l'image reçue
+    setError,
+    setValue, // Injecte l'URL de l'image reçue
     watch, // Observe en temps réel l'état de l'URL pour l'aperçu image
     formState: { errors }, // Contient toutes les erreurs des champs
   } = useForm({
@@ -22,16 +22,15 @@ export default function Form({ onSubmit, animalEdit }) {
     // Si animalEdit existe, RHF préremplit les champs tout seul
     defaultValues: animalEdit,
   });
-  // watch() Regarde le champ name. Si il ne le trouves pas encore, il prends le nom de animalEdit, et si il n'y a rien, mets 'l'animal'
+  // Text alternatif img
   const animalAltForm = watch('name', animalEdit?.name) || "l'animal";
 
   useEffect(() => {
-    // Enregistre 'urls' comme un tableau requis
     register('urls', {
       validate: value => {
         // Garde que les éléments qui contiennent une vraie URL pas null, '', ou undefind
         const trueImages = value ? value.filter(Boolean) : [];
-        // Vérifie s'il en reste au moins une sinon message
+        // Vérifie s'il en reste au moins une url
         return trueImages.length >= 1 || 'Il faut au moins une photo';
       },
     });
@@ -47,7 +46,7 @@ export default function Form({ onSubmit, animalEdit }) {
 
   const handleImageRemoved = index => {
     const newUrls = [...currentUrls];
-    // Au lieu de supprimer la case (qui décalerait les boîtes), la valeur est à undefined
+    // Au lieu de supprimer la case, la valeur est à undefined
     newUrls[index] = undefined;
     setValue('urls', newUrls, { shouldValidate: true });
   };
@@ -112,7 +111,7 @@ export default function Form({ onSubmit, animalEdit }) {
                   required: "L'age est requis",
                   valueAsNumber: true, // Convertit la chaîne "1" en nombre 1
                   validate: value =>
-                    Number.isInteger(value) || "L'âge doit être un entier", //isInteger vérifie nombre entier, si 1.1 erreur
+                    Number.isInteger(value) || "L'âge doit être un entier",
                 })}
               />
               {errors.age && (
@@ -270,7 +269,7 @@ export default function Form({ onSubmit, animalEdit }) {
 
         <div className="flex flex-col md:flex-row gap-6 justify-end mt-12">
           <button
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/dashboard/animals')}
             className="mt-8 md:mt-0 w-full md:w-60  h-14 font-medium rounded-(--radius-button)  border-[1.4px] hover:bg-brown hover:border-0 hover:text-lin  border-brown cursor-pointer"
           >
             Annuler

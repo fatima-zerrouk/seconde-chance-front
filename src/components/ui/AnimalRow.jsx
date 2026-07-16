@@ -7,18 +7,17 @@ import { toast } from 'sonner';
 
 export default function AnimalRow({ animal, onDelete }) {
   const { apiFetch } = useFetch();
-  const [status, setStatus] = useState(animal.status); // Initialise le statut avec celui reçu dans les props
+  const [status, setStatus] = useState(animal.status); // Initialise avec le statut
 
   const handleStatus = async e => {
-    const newStatus = e.target.value; // Récupère statut sélectionné dans la liste
+    const newStatus = e.target.value; // Récupère statut sélectionné
 
     try {
-      // Envoie une requête pour mettre à jour le statut
       await apiFetch(`/animals/${animal.id}/status`, {
         method: 'PATCH',
         body: JSON.stringify({ status: newStatus }),
       });
-      setStatus(newStatus); // Met à jour le state pour rafraîchir l'affichage
+      setStatus(newStatus); // Met à jour pour rafraîchir l'affichage
     } catch (error) {
       toast.error("Impossible de modifier le statut de l'animal", error);
     }
@@ -26,13 +25,11 @@ export default function AnimalRow({ animal, onDelete }) {
 
   // Fonction pour optimiser l'URL Cloudinary
   const optimizeCloudinaryUrl = url => {
-    if (!url) return 'https://via.placeholder.com/150';
+    if (!url)
+      return 'https://cdn.phototourl.com/free/2026-07-16-68b65eb2-6d21-4c71-a9a7-4e251506c9b1.png';
 
     // Si c'est une URL Cloudinary, injecte les paramètres d'optimisation
     if (url.includes('cloudinary.com')) {
-      // f_auto : choisit le meilleur format (WebP ou AVIF) selon le navigateur
-      // q_auto : compresse intelligemment sans perte de qualité
-      // w_150,c_scale : redimensionne l'image
       return url.replace('/upload/', '/upload/f_auto,q_auto,w_150,c_scale/');
     }
 
