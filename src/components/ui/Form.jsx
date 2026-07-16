@@ -6,7 +6,7 @@ import { FaStarOfLife } from 'react-icons/fa6';
 import { useEffect } from 'react';
 import { ImageUploader } from '../ImageUploader';
 
-export default function Form({ onSubmit, animalEdit }) {
+export default function Form({ onSubmit, animalEdit, isLoading = false }) {
   const navigate = useNavigate();
   const isEdit = Boolean(animalEdit);
 
@@ -269,6 +269,8 @@ export default function Form({ onSubmit, animalEdit }) {
 
         <div className="flex flex-col md:flex-row gap-6 justify-end mt-12">
           <button
+            type="button"
+            disabled={isLoading}
             onClick={() => navigate('/dashboard/animals')}
             className="mt-8 md:mt-0 w-full md:w-60  h-14 font-medium rounded-(--radius-button)  border-[1.4px] hover:bg-brown hover:border-0 hover:text-lin  border-brown cursor-pointer"
           >
@@ -276,6 +278,7 @@ export default function Form({ onSubmit, animalEdit }) {
           </button>
           <ButtonTerracota
             type="submit"
+            disabled={isLoading}
             value={isEdit ? 'Modifier' : 'Ajouter'}
             className="w-full md:w-60 mt-4 md:mt-0"
           />

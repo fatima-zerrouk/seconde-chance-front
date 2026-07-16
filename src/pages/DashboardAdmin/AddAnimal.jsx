@@ -61,7 +61,7 @@ export default function AddAnimal() {
       >
         {globalError && <p className="text-red-700">{globalError} </p>}
         {/* Passe la fonction POST au composant form */}
-        <Form onSubmit={handleAddForm} />
+        <Form onSubmit={handleAddForm} isLoading={loading} />
       </SectionAdmin>
     </>
   );
