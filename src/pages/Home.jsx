@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <section className=" flex flex-col justify-between pb-14 md:pb-6 lg:flex-row-reverse items-center bg-lin px-(--margin-mobile) md:px-(--margin-desktop)">
         <OptimizedImage
-          src="src/assets/dog-home.png"
+          src="/assets/dog-home.png"
           alt="Photo bannière d'un chien marron dans un drap"
           width="910"
           height="1820"
@@ -99,7 +99,7 @@ export default function Home() {
         </div>
 
         <OptimizedImage
-          src="src/assets/dog-cat.jpeg"
+          src="/assets/dog-cat.jpeg"
           alt="Photo d'un chien et d'un chat côte à côte sur l'herbe"
           width="2896"
           height="1704"
