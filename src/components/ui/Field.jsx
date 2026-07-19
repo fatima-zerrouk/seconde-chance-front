@@ -92,3 +92,30 @@ export function TableData({ td, value, children, className = '' }) {
 export function TableHead({ value }) {
   return <th className="px-5 py-4 font-medium text-left">{value}</th>;
 }
+
+export function CatalogSelect({
+  className = '',
+  label,
+  htmlFor,
+  name,
+  id,
+  children,
+  ...props
+}) {
+  return (
+    <>
+      <label htmlFor={htmlFor} className="sr-only">
+        {label}
+      </label>
+      <select
+        name={name}
+        id={id}
+        {...props}
+        className={`mt-2 mb-4 bg-white rounded-(--radius-input) border-[1.4px] border-brown w-full h-12 p-2 ${className}`}
+      >
+        <option value="">{label}</option>
+        {children}
+      </select>
+    </>
+  );
+}
