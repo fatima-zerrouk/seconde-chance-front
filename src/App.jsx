@@ -1,8 +1,5 @@
-// import './App.css';
 import { Routes, Route } from 'react-router-dom';
-// import { Header } from './components/layout/Header';
 import Home from './pages/Home';
-// import { Footer } from './components/layout/Footer';
 import Login from './pages/Login';
 import Dashboard from './pages/DashboardAdmin/Dashboard';
 import PrivateRoute from './routes/PrivateRoute';
@@ -12,6 +9,7 @@ import AdminLayout from './components/layout/AdminLayout';
 import AddAnimal from './pages/DashboardAdmin/AddAnimal';
 import UpdateAnimal from './pages/DashboardAdmin/UpdateAnimal';
 import AnimalManagement from './pages/DashboardAdmin/AnimalManagement';
+import AnimalCatalog from './pages/AnimalCatalog';
 
 function App() {
   return (
@@ -29,6 +27,7 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="catalog" element={<AnimalCatalog />} />
         </Route>
 
         {/* Routes layout ADMIN */}
