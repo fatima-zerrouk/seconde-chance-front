@@ -10,6 +10,7 @@ import AddAnimal from './pages/DashboardAdmin/AddAnimal';
 import UpdateAnimal from './pages/DashboardAdmin/UpdateAnimal';
 import AnimalManagement from './pages/DashboardAdmin/AnimalManagement';
 import AnimalCatalog from './pages/AnimalCatalog';
+import AnimalDetails from './pages/AnimalDetails';
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="catalog" element={<AnimalCatalog />} />
+          <Route path="/catalog" element={<AnimalCatalog />} />
+          <Route path="/catalog/:id" element={<AnimalDetails />} />
         </Route>
 
         {/* Routes layout ADMIN */}
