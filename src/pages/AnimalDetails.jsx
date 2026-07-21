@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import AnimalData from '../components/ui/AnimalData';
 import { SectionSubtitles } from '../components/ui/Sections';
+import Carousel from '../components/ui/Carousel';
+import Contact from '../components/ui/Contact';
+import Status from '../components/ui/Status';
 
 export default function AnimalDetails() {
   const [animal, setAnimal] = useState(null);
@@ -19,7 +22,6 @@ export default function AnimalDetails() {
         setLoading(true);
         const data = await apiFetch(`/animals/public/${id}`, { method: 'GET' });
         setAnimal(data);
-        console.log(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -72,20 +74,25 @@ export default function AnimalDetails() {
         />
       </Helmet>
 
-      <SectionSubtitles>
-        <h1 className="title-h1">{animal.name}</h1>
-        {/* statut */}
-
-        <div>
-          {/* IMG */}
+      <section className="px-(--margin-mobile) md:px-(--margin-desktop) py-12 md:pb-16">
+        <div className="flex flex-col md:flex-row gap-6 items-center mb-6">
+          <h1 className="title-h1 capitalize ">{animal.name}</h1>
+          {/* statut */}
+          <Status status={animal.status} />
+        </div>
+        <div className="flex flex-col md:flex-row justify-between gap-8 md:items-start">
+          <Carousel animal={animal} />
           <AnimalData animal={animal} />
         </div>
+      </section>
 
-        <div>
-          {/* DESCRIPTION */}
-          {/* CONTACT */}
+      <section className="bg-cream py-18 px-(--margin-mobile) md:px-(--margin-desktop) flex flex-col md:flex-row justify-between gap-8 items-center">
+        <div className="w-full md:w-150 h-auto">
+          <h3 className="title-h3 mb-4 font-semibold">Description</h3>
+          <p className="whitespace-pre-line">{animal.description}</p>
         </div>
-      </SectionSubtitles>
+        <Contact animal={animal} />
+      </section>
     </>
   );
 }

@@ -110,7 +110,7 @@ export function CardAnimal({ id, name, status, gender, age, picture_url }) {
         <div className="m-4 flex flex-row items-center justify-between gap-4">
           <p className="font-semibold capitalize truncate">{name}</p>
           <p
-            className={`border rounded-(--radius-input) p-[1.6px] font-medium text-base ${statusClass}`}
+            className={`text-center border rounded-(--radius-input) p-[1.6px] font-medium text-base ${statusClass}`}
           >
             {displayStatus}
           </p>

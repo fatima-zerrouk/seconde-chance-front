@@ -3,7 +3,7 @@ import { DataAnimal } from './Cards';
 
 export default function AnimalData({ animal }) {
   return (
-    <article className="bg-terracotta p-6 rounded-(--radius-card) shadow-(--shadow-card) md:w-110">
+    <article className="bg-terracotta p-6 rounded-(--radius-card) shadow-(--shadow-card) md:w-110 md:h-110">
       <h2 className="title-h2 mb-4">Caractéristique</h2>
 
       <div className="grid grid-cols-2 gap-4 justify-items-center mb-4 ">
