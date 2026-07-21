@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import AnimalData from '../components/ui/AnimalData';
-import { SectionSubtitles } from '../components/ui/Sections';
 import Carousel from '../components/ui/Carousel';
 import Contact from '../components/ui/Contact';
 import Status from '../components/ui/Status';

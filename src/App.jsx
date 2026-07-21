@@ -11,6 +11,7 @@ import UpdateAnimal from './pages/DashboardAdmin/UpdateAnimal';
 import AnimalManagement from './pages/DashboardAdmin/AnimalManagement';
 import AnimalCatalog from './pages/AnimalCatalog';
 import AnimalDetails from './pages/AnimalDetails';
+import AnimalTerms from './pages/AnimalTerms';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/terms" element={<AnimalTerms />} />
           <Route path="/login" element={<Login />} />
           <Route path="/catalog" element={<AnimalCatalog />} />
           <Route path="/catalog/:id" element={<AnimalDetails />} />
