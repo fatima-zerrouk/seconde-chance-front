@@ -31,9 +31,9 @@ export default function AnimalTerms() {
         />
 
         <div className="relative">
-          <h1 className="title-h1 mb-8 ">
+          <h1 className="title-h1 mb-8">
             Règles
-            <span className="font-medium "> pour une adoption</span> réussie
+            <span className="font-medium"> pour une adoption</span> réussie
           </h1>
 
           <p>
@@ -64,7 +64,7 @@ export default function AnimalTerms() {
       <SectionSubtitles
         title={"Conditions d'adoption"}
         paragraph={
-          'Adopter un animal est un acte  de respnsabilité. Voici ce que vous devez savoir avant de vous engager.'
+          'Adopter un animal est un acte  de responsabilité. Voici ce que vous devez savoir avant de vous engager.'
         }
         className="text-center"
       >
