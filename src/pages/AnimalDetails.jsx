@@ -75,9 +75,8 @@ export default function AnimalDetails() {
       </Helmet>
 
       <section className="px-(--margin-mobile) md:px-(--margin-desktop) py-12 md:pb-16">
-        <div className="flex flex-col md:flex-row gap-6 items-center mb-6">
+        <div className="flex gap-6 items-center mb-6">
           <h1 className="title-h1 capitalize ">{animal.name}</h1>
-          {/* statut */}
           <Status status={animal.status} />
         </div>
         <div className="flex flex-col md:flex-row justify-between gap-8 md:items-start">

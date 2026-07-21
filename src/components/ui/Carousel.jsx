@@ -22,10 +22,10 @@ export default function Carousel({ animal }) {
           <img
             alt={`Photo de ${animal.name}`}
             src={optimizeCloudinaryUrl(animal.urls[imgIndex], 600)}
-            className="w-full h-60  md:w-140 md:h-110  object-cover rounded-(--radius-card)"
+            className="w-full h-60 md:w-130 md:h-80  object-cover rounded-(--radius-card)"
           ></img>
         </figure>
-        <div className="flex flex-row justify-between md:justify-start gap-4">
+        <div className="flex flex-row justify-between gap-4 ">
           {animal.urls.map((url, index) => (
             <button
               key={index}
