@@ -57,7 +57,7 @@ export default function Login() {
         <title>Connexion</title>
       </Helmet>
 
-      <section className="px-(--margin-mobile) py-26 bg-cream flex justify-center">
+      <section className="px-(--margin-mobile) py-26 bg-cream flex-1 flex justify-center items-center">
         <form
           onSubmit={handleSubmit(handleSubmitForm)}
           className="rounded-(--radius-card) shadow-card w-100 bg-white p-8 lg:w-110 h-auto transition-all duration-300 ease-in-out"
