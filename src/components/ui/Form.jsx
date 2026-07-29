@@ -1,7 +1,7 @@
 import { FieldAdd, Select } from './Field';
 import { ButtonTerracota } from './Buttons';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FaStarOfLife } from 'react-icons/fa6';
 import { useEffect } from 'react';
 import { ImageUploader } from '../ImageUploader';
@@ -15,7 +15,7 @@ export default function Form({ onSubmit, animalEdit, isLoading = false }) {
     handleSubmit,
     setError,
     setValue, // Injecte l'URL de l'image reçue
-    watch, // Observe en temps réel l'état de l'URL pour l'aperçu image
+    control, // Observe en temps réel l'état de l'URL pour l'aperçu image
     formState: { errors }, // Contient toutes les erreurs des champs
   } = useForm({
     mode: 'onTouched',
@@ -24,7 +24,9 @@ export default function Form({ onSubmit, animalEdit, isLoading = false }) {
   });
 
   // Text alternatif img
-  const animalAltForm = watch('name', animalEdit?.name) || "l'animal";
+  const animalAltForm =
+    useWatch({ control, name: 'name', defaultValue: animalEdit?.name }) ||
+    "l'animal";
 
   useEffect(() => {
     register('urls', {
@@ -37,7 +39,7 @@ export default function Form({ onSubmit, animalEdit, isLoading = false }) {
     });
   }, [register]);
 
-  const currentUrls = watch('urls') || []; // Récupère le tableau d'images (urls) actuel
+  const currentUrls = useWatch({ control, name: 'urls' }) || []; // Récupère le tableau d'images (urls) actuel
 
   const handleImageUploaded = (index, url) => {
     const newUrls = [...currentUrls];
