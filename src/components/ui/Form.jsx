@@ -3,15 +3,12 @@ import { ButtonTerracota } from './Buttons';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FaStarOfLife } from 'react-icons/fa6';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ImageUploader } from '../ImageUploader';
-import { useFetch } from '../../hooks/useFetch';
 
 export default function Form({ onSubmit, animalEdit, isLoading = false }) {
-  const { apiFetch } = useFetch();
   const navigate = useNavigate();
   const isEdit = Boolean(animalEdit);
-  const [breeds, setBreeds] = useState([]); // State les races
 
   const {
     register,
@@ -28,29 +25,6 @@ export default function Form({ onSubmit, animalEdit, isLoading = false }) {
 
   // Text alternatif img
   const animalAltForm = watch('name', animalEdit?.name) || "l'animal";
-  const selectedSpecie = watch('specie');
-
-  // Charger dynamiquement les races lorsque l'espèce change
-  useEffect(() => {
-    async function loadBreeds() {
-      if (!selectedSpecie) {
-        setBreeds([]);
-        return;
-      }
-
-      try {
-        const data = await apiFetch(
-          `/animals/public/breeds?speciesId=${selectedSpecie}`,
-          { method: 'GET' }
-        );
-        setBreeds(data || []);
-      } catch (err) {
-        setError('Erreur lors du chargement des races :', err.message);
-      }
-    }
-
-    loadBreeds();
-  }, [selectedSpecie]);
 
   useEffect(() => {
     register('urls', {
@@ -91,7 +65,7 @@ export default function Form({ onSubmit, animalEdit, isLoading = false }) {
         className=" rounded-(--radius-card) shadow-card mb-12 bg-lin p-8 w-full h-auto  transition-all duration-300 ease-in-out"
       >
         <fieldset className="">
-          <legend className="mb-4">
+          <legend className="sr-only">
             {isEdit ? "Modifier l'animal" : 'Ajouter un animal'}
           </legend>
 
@@ -181,7 +155,7 @@ export default function Form({ onSubmit, animalEdit, isLoading = false }) {
                   valueAsNumber: true,
                 })}
               >
-                {/* <optgroup label="Chien">
+                <optgroup label="Chien">
                   <option value="1">Labrador Retriever</option>
                   <option value="2">Berger Allemand</option>
                   <option value="3">Golden retriever</option>
@@ -205,18 +179,7 @@ export default function Form({ onSubmit, animalEdit, isLoading = false }) {
                   <option value="18">British shorthair</option>
                   <option value="19">Européen</option>
                   <option value="20">Croisé / Autre</option>
-                </optgroup> */}
-
-                <option value="">
-                  {!selectedSpecie
-                    ? "Choisissez d'abord une espèce"
-                    : 'Sélectionner'}
-                </option>
-                {breeds.map(breed => (
-                  <option key={breed.id} value={breed.id}>
-                    {breed.name}
-                  </option>
-                ))}
+                </optgroup>
               </Select>
               {errors.id_breed && (
                 <p className="text-red-700">{errors.id_breed.message}</p>
