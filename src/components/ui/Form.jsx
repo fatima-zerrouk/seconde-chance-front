@@ -1,13 +1,15 @@
 import { FieldAdd, Select } from './Field';
 import { ButtonTerracota } from './Buttons';
 import { useNavigate } from 'react-router-dom';
-import { useForm, useWatch } from 'react-hook-form';
+import { Controller, useForm, useWatch } from 'react-hook-form';
 import { FaStarOfLife } from 'react-icons/fa6';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ImageUploader } from '../ImageUploader';
+import { useFetch } from '../../hooks/useFetch';
 
 export default function Form({ onSubmit, animalEdit, isLoading = false }) {
   const navigate = useNavigate();
+  const { apiFetch } = useFetch();
   const isEdit = Boolean(animalEdit);
 
   const {
@@ -27,6 +29,33 @@ export default function Form({ onSubmit, animalEdit, isLoading = false }) {
   const animalAltForm =
     useWatch({ control, name: 'name', defaultValue: animalEdit?.name }) ||
     "l'animal";
+
+  // Observe l'espèce en temps réel pour filtrer les races
+  const specieValue = useWatch({
+    control,
+    name: 'specie',
+    defaultValue: animalEdit?.specie,
+  });
+
+  const [breeds, setBreeds] = useState([]);
+
+  useEffect(() => {
+    async function loadBreeds() {
+      try {
+        const query = specieValue ? `?speciesId=${specieValue}` : '';
+        const data = await apiFetch(`/animals/public/breeds${query}`, {
+          method: 'GET',
+        });
+        setBreeds(data);
+      } catch {
+        setError('id_breed', {
+          type: 'server',
+          message: 'Erreur lors du chargement des races',
+        });
+      }
+    }
+    loadBreeds();
+  }, [specieValue, setError, apiFetch]);
 
   useEffect(() => {
     register('urls', {
@@ -66,7 +95,7 @@ export default function Form({ onSubmit, animalEdit, isLoading = false }) {
         onSubmit={handleSubmit(interceptedSubmit)}
         className=" rounded-(--radius-card) shadow-card mb-12 bg-lin p-8 w-full h-auto  transition-all duration-300 ease-in-out"
       >
-        <fieldset className="">
+        <fieldset>
           <legend className="sr-only">
             {isEdit ? "Modifier l'animal" : 'Ajouter un animal'}
           </legend>
@@ -146,43 +175,20 @@ export default function Form({ onSubmit, animalEdit, isLoading = false }) {
               )}
             </li>
             <li>
-              <Select
-                label={'Race'}
-                htmlFor={'id_breed'}
-                id={'id_breed'}
-                name={'breed'}
-                option={''}
-                {...register('id_breed', {
-                  required: 'La race est requise',
-                  valueAsNumber: true,
-                })}
-              >
-                <optgroup label="Chien">
-                  <option value="1">Labrador Retriever</option>
-                  <option value="2">Berger Allemand</option>
-                  <option value="3">Golden retriever</option>
-                  <option value="4">Bouledogue Français</option>
-                  <option value="5">Beagle</option>
-                  <option value="6">Border collie</option>
-                  <option value="7">Jack Russell terrier</option>
-                  <option value="8">Chihuahua</option>
-                  <option value="9">Cocker spaniel</option>
-                  <option value="10">Croisé / Autre</option>
-                </optgroup>
-
-                <optgroup label="Chat">
-                  <option value="11">Siamois</option>
-                  <option value="12">Maine Coon</option>
-                  <option value="13">Persan</option>
-                  <option value="14">Bengal</option>
-                  <option value="15">Ragdoll</option>
-                  <option value="16">Chartreux</option>
-                  <option value="17">Sacré de birmanie</option>
-                  <option value="18">British shorthair</option>
-                  <option value="19">Européen</option>
-                  <option value="20">Croisé / Autre</option>
-                </optgroup>
-              </Select>
+              <Controller
+                name="id_breed"
+                control={control}
+                rules={{ required: 'La race est requise' }}
+                render={({ field }) => (
+                  <Select {...field} id={'id_breed'} label={'Race'}>
+                    {breeds.map(breed => (
+                      <option key={breed.id} value={breed.id}>
+                        {breed.name}
+                      </option>
+                    ))}
+                  </Select>
+                )}
+              />
               {errors.id_breed && (
                 <p className="text-red-700">{errors.id_breed.message}</p>
               )}
