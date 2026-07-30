@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { optimizeCloudinaryUrl } from '../../utils/cloudinary';
 
 const STATUS_LABELS = {
   available: 'Disponible',
@@ -85,16 +86,7 @@ export function CardAnimal({ id, name, status, gender, age, picture_url }) {
   const displayStatus = STATUS_LABELS[status] || status;
   const statusClass = STATUS_STYLES[status];
   const sexe = GENDERS[gender];
-
-  const optimizeCloudinaryUrl = url => {
-    if (!url)
-      return 'https://cdn.phototourl.com/free/2026-07-16-68b65eb2-6d21-4c71-a9a7-4e251506c9b1.png';
-
-    if (url.includes('cloudinary.com')) {
-      return url.replace('/upload/', '/upload/f_auto,q_auto,w_500,c_scale/');
-    }
-  };
-  const imageUrl = optimizeCloudinaryUrl(picture_url);
+  const imageUrl = optimizeCloudinaryUrl(picture_url, 500);
 
   return (
     <NavLink to={`/catalog/${id}`}>
