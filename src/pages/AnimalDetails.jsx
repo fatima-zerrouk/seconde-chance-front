@@ -28,7 +28,7 @@ export default function AnimalDetails() {
       }
     }
     detailAnimal();
-  }, [id]);
+  }, [id, apiFetch]);
 
   if (loading) {
     return (

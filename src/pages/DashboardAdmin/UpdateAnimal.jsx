@@ -32,7 +32,7 @@ export default function UpdateAnimal() {
       }
     };
     loadAnimal();
-  }, [id]); // Données en fonction de l'ID
+  }, [id, apiFetch]); // Données en fonction de l'ID
 
   const handleUpdateForm = async (data, methods) => {
     try {

@@ -42,7 +42,7 @@ export default function AnimalManagement() {
       }
     }
     loadAnimals();
-  }, [page, search]); //Les dépendances
+  }, [page, search, apiFetch]); //Les dépendances
 
   const totalPages = Math.ceil(total / limit); // Arrondit (1.22 devient 2)
 

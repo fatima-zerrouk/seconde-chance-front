@@ -51,7 +51,7 @@ export default function Catalog() {
       }
     }
     loadAnimals();
-  }, [page, search, filters]); //Les dépendances
+  }, [page, search, filters, apiFetch]); //Les dépendances
 
   // Effet pour charger dynamiquement les races lorsque l'espèce change
   useEffect(() => {
@@ -68,7 +68,7 @@ export default function Catalog() {
     }
 
     loadBreeds();
-  }, [filters.speciesId]); // Cet effet ne s'exécute que si speciesId change
+  }, [filters.speciesId, apiFetch]); // Cet effet ne s'exécute que si speciesId change
 
   // Changer un filtre sans effacer les autres
   const handleFilterChange = (name, value) => {
