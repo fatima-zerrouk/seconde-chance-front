@@ -1,6 +1,7 @@
 import { useFormContext, useWatch, Controller } from 'react-hook-form';
 import { FieldAdd, Select } from '../ui/Field.jsx';
 import { useAnimalBreeds } from '../../hooks/useAnimalBreeds.js';
+import { GENDER_LABELS, SIZE_LABELS } from '../../utils/animalLabels.js';
 
 export default function AnimalIdentityFields() {
   const {
@@ -112,8 +113,8 @@ export default function AnimalIdentityFields() {
           option=""
           {...register('gender', { required: 'Le genre est requis' })}
         >
-          <option value="male">Mâle</option>
-          <option value="female">Femelle</option>
+          <option value="female">{GENDER_LABELS.female}</option>
+          <option value="male">{GENDER_LABELS.male}</option>
         </Select>
         {errors.gender && (
           <p className="text-red-700">{errors.gender.message}</p>
@@ -129,9 +130,9 @@ export default function AnimalIdentityFields() {
           option=""
           {...register('size', { required: 'La taille est requise' })}
         >
-          <option value="small">Petit</option>
-          <option value="medium">Moyen</option>
-          <option value="big">Grand</option>
+          <option value="small">{SIZE_LABELS.small}</option>
+          <option value="medium">{SIZE_LABELS.medium}</option>
+          <option value="big">{SIZE_LABELS.big}</option>
         </Select>
         {errors.size && <p className="text-red-700">{errors.size.message}</p>}
       </li>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardDataAnimal } from '../animal/AnimalCards';
-import { GENDER_LABELS } from '../../utils/animalLabels.js';
+import { GENDER_LABELS, SIZE_LABELS } from '../../utils/animalLabels.js';
 
 export default function AnimalData({ animal }) {
   return (
@@ -12,25 +12,12 @@ export default function AnimalData({ animal }) {
           label={'Espèce'}
           value={animal.specie_name === 'Dog' ? 'Chien' : 'Chat'}
         />
-        <CardDataAnimal
-          label={'Genre'}
-          // value={animal.gender === 'male' ? 'Mâle' : 'Femelle'}
-          value={GENDER_LABELS[animal.gender]}
-        />
+        <CardDataAnimal label={'Genre'} value={GENDER_LABELS[animal.gender]} />
         <CardDataAnimal
           label={'Age'}
           value={`${animal.age} ${animal.age > 1 ? 'ans' : 'an'}`}
         />
-        <CardDataAnimal
-          label="Taille"
-          value={
-            animal.size === 'small'
-              ? 'Petit'
-              : animal.size === 'medium'
-                ? 'Moyen'
-                : 'Grand'
-          }
-        />
+        <CardDataAnimal label="Taille" value={SIZE_LABELS[animal.size]} />
       </div>
       <CardDataAnimal label={'Race'} value={animal.breed_name} />
     </article>

@@ -6,6 +6,7 @@ import SearchBar from '../components/ui/SearchBar';
 import { CatalogSelect } from '../components/ui/Field';
 import { ButtonTerracota } from '../components/ui/Buttons';
 import { Helmet } from 'react-helmet-async';
+import { GENDER_LABELS } from '../utils/animalLabels';
 
 export default function Catalog() {
   const { apiFetch } = useFetch();
@@ -160,8 +161,8 @@ export default function Catalog() {
               value={filters.gender}
               onChange={e => handleFilterChange('gender', e.target.value)}
             >
-              <option value="female">Femelle</option>
-              <option value="male">Mâle</option>
+              <option value="female">{GENDER_LABELS.female}</option>
+              <option value="male">{GENDER_LABELS.male}</option>
             </CatalogSelect>
             <CatalogSelect
               label="Âge"
