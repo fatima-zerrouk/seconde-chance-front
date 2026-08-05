@@ -105,15 +105,15 @@ export default function AnimalIdentityFields() {
 
       <li>
         <Select
-          label="Sexe"
+          label="Genre"
           htmlFor="gender"
           id="gender"
           name="gender"
           option=""
           {...register('gender', { required: 'Le genre est requis' })}
         >
-          <option value="male">Masculin</option>
-          <option value="female">Féminin</option>
+          <option value="male">Mâle</option>
+          <option value="female">Femelle</option>
         </Select>
         {errors.gender && (
           <p className="text-red-700">{errors.gender.message}</p>

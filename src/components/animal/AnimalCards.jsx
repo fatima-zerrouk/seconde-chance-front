@@ -1,20 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { optimizeCloudinaryUrl } from '../../utils/cloudinary';
-
-const STATUS_LABELS = {
-  available: 'Disponible',
-  in_progress: 'En cours d’adoption',
-  adopted: 'Adopté',
-};
-const STATUS_STYLES = {
-  available: 'w-26 bg-green-100 text-green-900 border-green-200',
-  in_progress: 'w-44 bg-amber-100 text-amber-800 border-amber-200',
-  adopted: 'w-26 bg-blue-100 text-blue-800 border-blue-200',
-};
-const GENDERS = {
-  female: 'Femelle',
-  male: 'Mâle',
-};
+import Status from './AnimalStatus';
+import { GENDER_LABELS } from '../../utils/animalLabels.js';
 
 export function CardDataAnimal({ label, value, className = '' }) {
   return (
@@ -28,9 +15,6 @@ export function CardDataAnimal({ label, value, className = '' }) {
 }
 
 export function CardAnimal({ id, name, status, gender, age, picture_url }) {
-  const displayStatus = STATUS_LABELS[status] || status;
-  const statusClass = STATUS_STYLES[status];
-  const sexe = GENDERS[gender];
   const imageUrl = optimizeCloudinaryUrl(picture_url, 500);
 
   return (
@@ -46,15 +30,13 @@ export function CardAnimal({ id, name, status, gender, age, picture_url }) {
 
         <div className="m-4 flex flex-row items-center justify-between gap-4">
           <p className="font-semibold capitalize truncate">{name}</p>
-          <p
-            className={`text-center border rounded-(--radius-input) p-[1.6px] font-medium text-base ${statusClass}`}
-          >
-            {displayStatus}
+          <p>
+            <Status status={status} />
           </p>
         </div>
 
         <div className="flex flex-row justify-between mx-4 mb-4 ">
-          <p>{sexe}</p>
+          <p>{GENDER_LABELS[gender]}</p>
           <p className="flex flex-row ">{age} ans</p>
         </div>
       </article>
