@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { SectionAdmin } from '../../components/ui/Sections';
-import Form from '../../components/ui/Form';
+import Form from '../../components/animal/AnimalForm';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
-export default function AddAnimal() {
+export default function AnimalAdd() {
   const [loading, setLoading] = useState(false);
   const [globalError, setGlobalError] = useState(null);
   const { apiFetch } = useFetch();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SectionAdmin } from '../../components/ui/Sections';
 import { useFetch } from '../../hooks/useFetch';
-import AnimalRow from '../../components/ui/AnimalRow';
+import AnimalRow from '../../components/animal/AnimalRow';
 import Pagination from '../../components/ui/Pagination';
 import SearchBar from '../../components/ui/SearchBar';
 import { TableHead } from '../../components/ui/Field';

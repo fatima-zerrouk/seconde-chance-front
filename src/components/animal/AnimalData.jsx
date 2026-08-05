@@ -1,5 +1,5 @@
 import React from 'react';
-import { DataAnimal } from './Cards';
+import { CardDataAnimal } from '../animal/AnimalCards';
 
 export default function AnimalData({ animal }) {
   return (
@@ -7,19 +7,19 @@ export default function AnimalData({ animal }) {
       <h2 className="title-h2 mb-4">Caractéristique</h2>
 
       <div className="grid grid-cols-2 gap-4 justify-items-center mb-4 ">
-        <DataAnimal
+        <CardDataAnimal
           label={'Espèce'}
           value={animal.specie_name === 'Dog' ? 'Chien' : 'Chat'}
         />
-        <DataAnimal
+        <CardDataAnimal
           label={'Genre'}
           value={animal.gender === 'male' ? 'Mâle' : 'Femelle'}
         />
-        <DataAnimal
+        <CardDataAnimal
           label={'Age'}
           value={`${animal.age} ${animal.age > 1 ? 'ans' : 'an'}`}
         />
-        <DataAnimal
+        <CardDataAnimal
           label="Taille"
           value={
             animal.size === 'small'
@@ -30,7 +30,7 @@ export default function AnimalData({ animal }) {
           }
         />
       </div>
-      <DataAnimal label={'Race'} value={animal.breed_name} />
+      <CardDataAnimal label={'Race'} value={animal.breed_name} />
     </article>
   );
 }

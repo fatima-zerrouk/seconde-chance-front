@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
-import AnimalData from '../components/ui/AnimalData';
-import Carousel from '../components/ui/Carousel';
+import AnimalData from '../components/animal/AnimalData';
+import Carousel from '../components/animal/AnimalCarousel';
 import Contact from '../components/ui/Contact';
-import Status from '../components/ui/Status';
+import Status from '../components/animal/AnimalStatus';
 
 export default function AnimalDetails() {
   const [animal, setAnimal] = useState(null);

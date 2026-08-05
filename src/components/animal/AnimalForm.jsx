@@ -1,9 +1,9 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { ButtonTerracota } from '../ui/Buttons';
-import AnimalIdentityFields from '../../components/animal-form/AnimalIdentityFields';
-import AnimalDescriptionField from '../animal-form/AnimalDescriptionField';
-import AnimalGalleryField from '../animal-form/AnimalGalleryField';
+import AnimalIdentityFields from './AnimalFormIdentityFields';
+import AnimalDescriptionField from './AnimalFormDescriptionField';
+import AnimalGalleryField from './AnimalFormGalleryField';
 
 export default function AnimalForm({
   onSubmit,

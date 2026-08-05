@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
 import { ImCross } from 'react-icons/im';
-import { useFetch } from '../hooks/useFetch.js';
+import { useFetch } from '../../hooks/useFetch.js';
 
 export function ImageUploader({
   onUploadSuccess,

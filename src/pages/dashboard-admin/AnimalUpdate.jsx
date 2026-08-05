@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { SectionAdmin } from '../../components/ui/Sections';
-import Form from '../../components/ui/Form';
+import Form from '../../components/animal/AnimalForm';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
 import { Helmet } from 'react-helmet-async';
 
-export default function UpdateAnimal() {
+export default function AnimalUpdate() {
   const { id } = useParams(); //Destructuration de l'id
   const [animal, setAnimal] = useState(null); // Valeur initial
   const { apiFetch } = useFetch();

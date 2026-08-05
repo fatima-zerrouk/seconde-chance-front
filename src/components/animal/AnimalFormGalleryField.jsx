@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { FaStarOfLife } from 'react-icons/fa6';
-import { ImageUploader } from '../ImageUploader';
+import { ImageUploader } from '../animal/AnimalImageUploader';
 
 export default function AnimalGalleryField() {
   const {

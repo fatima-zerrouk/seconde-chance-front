@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CardAnimal } from '../components/ui/Cards';
+import { CardAnimal } from '../components/animal/AnimalCards';
 import { useFetch } from '../hooks/useFetch';
 import Pagination from '../components/ui/Pagination';
 import SearchBar from '../components/ui/SearchBar';
