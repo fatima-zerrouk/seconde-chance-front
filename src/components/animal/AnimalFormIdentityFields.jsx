@@ -13,7 +13,7 @@ export default function AnimalIdentityFields() {
   } = useFormContext();
 
   const specieValue = useWatch({ control, name: 'specie' });
-  const breeds = useAnimalBreeds(specieValue, setError);
+  const { breeds = [] } = useAnimalBreeds(specieValue, setError);
 
   return (
     <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">

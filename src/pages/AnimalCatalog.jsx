@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { CardAnimal } from '../components/animal/AnimalCards';
 import { useFetch } from '../hooks/useFetch';
 import Pagination from '../components/ui/Pagination';
-import SearchBar from '../components/ui/SearchBar';
-import { CatalogSelect } from '../components/ui/Field';
-import { ButtonTerracota } from '../components/ui/Buttons';
 import { Helmet } from 'react-helmet-async';
-import { GENDER_LABELS } from '../utils/animalLabels';
+import { useAnimalBreeds } from '../hooks/useAnimalBreeds';
+import AnimalFilters from '../components/animal/AnimalFilters';
+
+const LIMIT = 9;
 
 export default function Catalog() {
   const { apiFetch } = useFetch();
@@ -17,7 +17,7 @@ export default function Catalog() {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [breeds, setBreeds] = useState([]);
+
   const [filters, setFilters] = useState({
     speciesId: '',
     breedId: '',
@@ -25,15 +25,16 @@ export default function Catalog() {
     ageGroup: '',
   });
 
-  const limit = 9;
+  const { breeds } = useAnimalBreeds(filters.speciesId);
 
+  // Chargement de la liste des animaux filtrée et paginée
   useEffect(() => {
     async function loadAnimals() {
       setLoading(true);
       setError(null);
 
       try {
-        let url = `/animals/public?page=${page}&limit=${limit}&search=${search}`;
+        let url = `/animals/public?page=${page}&limit=${LIMIT}&search=${search}`;
 
         if (filters.speciesId) url += `&speciesId=${filters.speciesId}`;
         if (filters.breedId) url += `&breedId=${filters.breedId}`;
@@ -41,8 +42,6 @@ export default function Catalog() {
         if (filters.ageGroup) url += `&ageGroup=${filters.ageGroup}`;
 
         const data = await apiFetch(url, { method: 'GET' });
-
-        // Stocke les résultats dans les états
         setAnimals(data.animals);
         setTotal(data.total);
       } catch (err) {
@@ -51,33 +50,24 @@ export default function Catalog() {
         setLoading(false);
       }
     }
+
     loadAnimals();
-  }, [page, search, filters, apiFetch]); //Les dépendances
-
-  // Effet pour charger dynamiquement les races lorsque l'espèce change
-  useEffect(() => {
-    async function loadBreeds() {
-      try {
-        const data = await apiFetch(
-          `/animals/public/breeds?speciesId=${filters.speciesId}`,
-          { method: 'GET' }
-        );
-        setBreeds(data); // data contient la liste [{id: 1, name: "Labrador..."}, ...]
-      } catch (err) {
-        setError('Erreur lors du chargement des races :', err.message);
-      }
-    }
-
-    loadBreeds();
-  }, [filters.speciesId, apiFetch]); // Cet effet ne s'exécute que si speciesId change
+  }, [page, search, filters, apiFetch]);
 
   // Changer un filtre sans effacer les autres
   const handleFilterChange = (name, value) => {
     setFilters(prev => ({
       ...prev,
       [name]: value, // Met à jour dynamiquement la clé (speciesId, gender...)
+      // Si l'espèce change, réinitialise la race sélectionnée
+      ...(name === 'speciesId' ? { breedId: '' } : {}),
     }));
     setPage(1); // Reset la page à 1 si filtre
+  };
+
+  const handleSearchChange = newValue => {
+    setSearch(newValue);
+    setPage(1);
   };
 
   const resetFilters = () => {
@@ -91,7 +81,7 @@ export default function Catalog() {
     setPage(1);
   };
 
-  const totalPages = Math.ceil(total / limit);
+  const totalPages = Math.ceil(total / LIMIT);
 
   const handlePageChange = requestedPage => {
     if (requestedPage >= 1 && requestedPage <= totalPages) {
@@ -109,96 +99,36 @@ export default function Catalog() {
         />
       </Helmet>
 
-      <section className=" px-(--margin-mobile) md:px-(--margin-desktop) py-22 md:pb-16 justify-items-center">
+      <section className="px-(--margin-mobile) md:px-(--margin-desktop) py-22 md:pb-16 justify-items-center">
         <h1 className="text-center title-h1">Nos animaux à adopter</h1>
         <h2 className="text-center">
           Découvrez tous nos compagnons qui attendent une famille aimante.
         </h2>
 
-        <div className=" bg-cream w-70 md:w-225 p-6 mt-10 rounded-(--radius-button) shadow-(--shadow-card) ">
-          <SearchBar
-            className="shadow-none bg-white "
-            value={search}
-            onChange={newValue => {
-              setSearch(newValue);
-              setPage(1);
-            }}
-          />
+        {/* Filtres */}
+        <AnimalFilters
+          search={search}
+          onSearchChange={handleSearchChange}
+          filters={filters}
+          onFilterChange={handleFilterChange}
+          breeds={breeds}
+          onReset={resetFilters}
+        />
 
-          <div className="flex flex-col md:flex md:flex-row gap-6 ">
-            <CatalogSelect
-              label="Espèce"
-              htmlFor="speciesId"
-              id="speciesId"
-              name="speciesId"
-              value={filters.speciesId}
-              onChange={e => handleFilterChange('speciesId', e.target.value)}
-            >
-              <option value="2">Chat</option>
-              <option value="1">Chien</option>
-            </CatalogSelect>
-
-            <CatalogSelect
-              label="Race"
-              htmlFor="breedId"
-              id="breedId"
-              name="breedId"
-              value={filters.breedId}
-              onChange={e => handleFilterChange('breedId', e.target.value)}
-            >
-              {breeds.map(breed => (
-                <option key={breed.id} value={breed.id}>
-                  {breed.name}
-                </option>
-              ))}
-            </CatalogSelect>
-
-            <CatalogSelect
-              label="Genres"
-              htmlFor="gender"
-              id="gender"
-              name="gender"
-              value={filters.gender}
-              onChange={e => handleFilterChange('gender', e.target.value)}
-            >
-              <option value="female">{GENDER_LABELS.female}</option>
-              <option value="male">{GENDER_LABELS.male}</option>
-            </CatalogSelect>
-            <CatalogSelect
-              label="Âge"
-              htmlFor="ageGroup"
-              id="ageGroup"
-              name="ageGroup"
-              value={filters.ageGroup}
-              onChange={e => handleFilterChange('ageGroup', e.target.value)}
-            >
-              <option value="junior">Junior (Moins de 2 ans)</option>
-              <option value="adult">Adulte (2 à 7 ans)</option>
-              <option value="senior">Senior (Plus de 7 ans)</option>
-            </CatalogSelect>
-          </div>
-          <div className="flex justify-center md:justify-end">
-            <ButtonTerracota
-              value={'Réinitiliser les filtres'}
-              onClick={resetFilters}
-              className="w-full md:w-52 md:px-2 mt-2 "
-            />
-          </div>
-        </div>
-
-        {error && <p className="text-center text-red-700">Erreur : {error}</p>}
+        {error && (
+          <p className="text-center text-red-700 my-8">Erreur : {error}</p>
+        )}
 
         {loading ? (
-          <p className="text-center">Chargement des animaux...</p>
+          <p className="text-center my-18">Chargement des animaux...</p>
         ) : animals.length === 0 ? (
-          <p className="my-18">
-            {' '}
+          <p className="my-18 text-center">
             Aucun animal ne correspond à votre recherche.
           </p>
         ) : (
           <div className="grid grid-cols-1 gap-8 md:gap-x-78 md:grid-cols-3 justify-items-center my-22 md:mx-78">
-            {animals.map(toto => (
-              <CardAnimal key={toto.id} {...toto} />
+            {animals.map(animal => (
+              <CardAnimal key={animal.id} {...animal} />
             ))}
           </div>
         )}

@@ -30,9 +30,7 @@ export function CardAnimal({ id, name, status, gender, age, picture_url }) {
 
         <div className="m-4 flex flex-row items-center justify-between gap-4">
           <p className="font-semibold capitalize truncate">{name}</p>
-          <p>
-            <Status status={status} />
-          </p>
+          <Status status={status} />
         </div>
 
         <div className="flex flex-row justify-between mx-4 mb-4 ">
