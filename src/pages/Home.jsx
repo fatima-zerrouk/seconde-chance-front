@@ -70,7 +70,7 @@ export default function Home() {
         </div>
       </SectionSubtitles>
 
-      <section className="bg-lin flex flex-col m-auto gap-12 lg:flex-row md:items-center md:justify-between py-12 md:py-16 px-(--margin-mobile) md:px-(--margin-desktop)">
+      <section className="bg-lin flex flex-col gap-12 lg:flex-row md:items-center md:justify-between py-12 md:py-16 px-(--margin-mobile) md:px-(--margin-desktop)">
         <div>
           <h2 className="title-h2">L&apos;adoption responsable</h2>
           <p className="pb-6 pt-2">

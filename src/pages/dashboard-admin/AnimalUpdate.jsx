@@ -41,7 +41,7 @@ export default function AnimalUpdate() {
         method: 'PUT',
         body: JSON.stringify(data),
       });
-      toast.success("L'Animal a bien été mis à jour");
+      toast.success("L'animal a bien été mis à jour");
       navigate('/dashboard/animals');
     } catch (error) {
       // Si le backend renvoie des erreurs de validation

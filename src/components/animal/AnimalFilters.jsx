@@ -22,7 +22,7 @@ export default function AnimalFilters({
 
       <div className="flex flex-col md:flex-row gap-6">
         <CatalogSelect
-          label="Espèce"
+          label="Espèces"
           htmlFor="speciesId"
           id="speciesId"
           name="speciesId"
@@ -34,7 +34,7 @@ export default function AnimalFilters({
         </CatalogSelect>
 
         <CatalogSelect
-          label="Race"
+          label="Races"
           htmlFor="breedId"
           id="breedId"
           name="breedId"
@@ -49,7 +49,7 @@ export default function AnimalFilters({
         </CatalogSelect>
 
         <CatalogSelect
-          label="Genre"
+          label="Genres"
           htmlFor="gender"
           id="gender"
           name="gender"
@@ -61,7 +61,7 @@ export default function AnimalFilters({
         </CatalogSelect>
 
         <CatalogSelect
-          label="Âge"
+          label="Âges"
           htmlFor="ageGroup"
           id="ageGroup"
           name="ageGroup"

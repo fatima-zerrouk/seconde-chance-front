@@ -25,7 +25,7 @@ export default function AnimalAdd() {
         body: JSON.stringify(data),
       });
 
-      toast.success("L'Animal a bien été ajouté");
+      toast.success("L'animal a bien été ajouté");
       navigate('/dashboard/animals');
     } catch (error) {
       // Gestion des erreurs de validation
