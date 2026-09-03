@@ -76,7 +76,7 @@ export default function AnimalRow({ animal, onDelete }) {
 
       <TableData td={'Page détail :'}>
         <NavLink
-          to={`/dashboard/animals/${animal.id}`}
+          to={`/catalog/${animal.id}`}
           className="inline-flex p-2 hover:bg-brown hover:text-lin rounded-(--radius-input) transition duration-150 ease-in-out"
           aria-label={`Lien vers la page détail de ${animal.name}`}
         >
