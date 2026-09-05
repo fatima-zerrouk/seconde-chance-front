@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function CardMission({ icon: Icon, title, text, className }) {
   return (
     <article

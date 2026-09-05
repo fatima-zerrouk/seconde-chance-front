@@ -15,7 +15,7 @@ export function CardDataAnimal({ label, value, className = '' }) {
 }
 
 export function CardAnimal({ id, name, status, gender, age, picture_url }) {
-  const imageUrl = optimizeCloudinaryUrl(picture_url, 500);
+  const imageUrl = optimizeCloudinaryUrl(picture_url, 600);
 
   return (
     <NavLink to={`/catalog/${id}`}>
@@ -24,7 +24,7 @@ export function CardAnimal({ id, name, status, gender, age, picture_url }) {
           <img
             src={imageUrl}
             alt={`Photo de ${name}`}
-            className="w-full h-40 object-cover rounded-t-[8px]"
+            className="w-full aspect-video object-cover rounded-t-[8px]"
           />
         </div>
 

@@ -11,7 +11,7 @@ export default function Carousel({ animal }) {
           <img
             alt={`Photo de ${animal.name}`}
             src={optimizeCloudinaryUrl(animal.urls[imgIndex], 900)}
-            className="w-full h-60 md:w-130 md:h-80  object-cover rounded-(--radius-card)"
+            className="aspect-video w-full md:w-130 h-auto  object-cover rounded-(--radius-card)"
           ></img>
         </figure>
         <div className="flex flex-row gap-4 ">
@@ -26,7 +26,7 @@ export default function Carousel({ animal }) {
               <img
                 src={optimizeCloudinaryUrl(url, 250)}
                 alt={`Miniature ${index + 1}`}
-                className="w-26 h-26 md:w-36 md:h-26 object-cover"
+                className="w-28 h-20 md:w-36 md:h-24 object-cover"
               />
             </button>
           ))}

@@ -69,7 +69,7 @@ export function ImageUploader({
         onDragOver={handleDrag}
         onDragLeave={handleDrag}
         onDrop={handleDrop}
-        className={`border rounded-(--radius-input) flex flex-col items-center justify-center h-60 w-70  transition-all
+        className={`border rounded-(--radius-input) flex flex-col items-center justify-center w-70 aspect-video h-40 md:w-full transition-all
          bg-white`}
       >
         {loading ? (
@@ -93,7 +93,7 @@ export function ImageUploader({
             </button>
           </div>
         ) : (
-          <div className="">
+          <div>
             <label
               htmlFor={inputId}
               className="mt-2 text-sm text-center cursor-pointer flex flex-col items-center p-4"
