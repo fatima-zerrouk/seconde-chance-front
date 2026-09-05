@@ -7,7 +7,7 @@ import Carousel from '../components/animal/AnimalCarousel';
 import Contact from '../components/ui/Contact';
 import Status from '../components/animal/AnimalStatus';
 import { NavLink } from 'react-router-dom';
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft } from 'react-icons/fa';
 
 export default function AnimalDetails() {
   const [animal, setAnimal] = useState(null);
@@ -76,9 +76,11 @@ export default function AnimalDetails() {
       </Helmet>
 
       <section className="px-(--margin-mobile) md:px-(--margin-desktop) py-12 md:pb-16">
-     
-       <NavLink to={`/catalog`} className='flex items-center gap-4 mb-8'><FaArrowLeft />Retour </NavLink>
-       
+        <NavLink to={`/catalog`} className="flex items-center gap-4 mb-8">
+          <FaArrowLeft />
+          Retour{' '}
+        </NavLink>
+
         <div className="flex gap-6 items-center mb-6">
           <h1 className="title-h1 capitalize ">{animal.name}</h1>
           <Status status={animal.status} />

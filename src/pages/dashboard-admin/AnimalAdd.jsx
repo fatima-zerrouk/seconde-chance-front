@@ -18,15 +18,15 @@ export default function AnimalAdd() {
       setGlobalError(null);
 
       const cleanedUrls = Array.isArray(data.urls)
-      ? data.urls.filter(Boolean)
-      : [];
+        ? data.urls.filter(Boolean)
+        : [];
 
-    const formattedData = {
-      ...data,
-      status: 'available',
-      is_visible: true,
-      urls: cleanedUrls,
-    };
+      const formattedData = {
+        ...data,
+        status: 'available',
+        is_visible: true,
+        urls: cleanedUrls,
+      };
 
       await apiFetch('/animals', {
         method: 'POST',

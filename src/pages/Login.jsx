@@ -95,7 +95,7 @@ export default function Login() {
                   required: 'Le mot de passe est obligatoire.',
                 })}
               />
-      
+
               <button
                 type="button"
                 className="absolute right-6"
@@ -115,10 +115,10 @@ export default function Login() {
                 )}
               </button>
             </div>
-              {errors.password && (
-                <p className="text-red-700">{errors.password.message}</p>
-              )}
-              
+            {errors.password && (
+              <p className="text-red-700">{errors.password.message}</p>
+            )}
+
             <ButtonTerracota
               type="submit"
               value={'Se connecter'}
