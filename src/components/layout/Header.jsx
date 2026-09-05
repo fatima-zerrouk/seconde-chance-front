@@ -68,7 +68,10 @@ export function Header() {
           </li>
           {isAuthenticated && (
             <li>
-              <NavLink to="/dashboard/animals" aria-label="Lien vers mon profil">
+              <NavLink
+                to="/dashboard/animals"
+                aria-label="Lien vers mon profil"
+              >
                 <CgProfile className="w-12 md:10 h-auto hover:bg-terracotta hover:text-brown rounded-4xl bg-brown text-white transition duration-300 ease-in-out " />
               </NavLink>
             </li>
