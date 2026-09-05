@@ -17,12 +17,20 @@ export default function AnimalAdd() {
       setLoading(true);
       setGlobalError(null);
 
-      data.status = 'available';
-      data.is_visible = true;
+      const cleanedUrls = Array.isArray(data.urls)
+      ? data.urls.filter(Boolean)
+      : [];
+
+    const formattedData = {
+      ...data,
+      status: 'available',
+      is_visible: true,
+      urls: cleanedUrls,
+    };
 
       await apiFetch('/animals', {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: JSON.stringify(formattedData),
       });
 
       toast.success("L'animal a bien été ajouté");

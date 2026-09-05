@@ -14,7 +14,7 @@ export default function Carousel({ animal }) {
             className="w-full h-60 md:w-130 md:h-80  object-cover rounded-(--radius-card)"
           ></img>
         </figure>
-        <div className="flex flex-row justify-between gap-4 ">
+        <div className="flex flex-row gap-4 ">
           {animal.urls.map((url, index) => (
             <button
               key={index}
