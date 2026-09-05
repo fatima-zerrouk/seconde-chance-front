@@ -40,7 +40,7 @@ export default function Login() {
       }
 
       login(result.token);
-      navigate('/dashboard');
+      navigate('/dashboard/animals');
     } catch (error) {
       // Si l'erreur vient des identifiants, erreur 401 du back
       if (error.message === 'Identifiants incorrects') {
