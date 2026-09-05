@@ -141,13 +141,14 @@ export default function AnimalManagement() {
               ))
             )}
           </tbody>
-          <ConfirmationModal
-            isOpen={animalToDelete !== null} // Ouvre le modal si un ID est stocké
-            onClose={() => setAnimalToDelete(null)} // Ferme la modal sans supprimer
-            onConfirm={handleConfirmDelete} // Suppression
-            message="Êtes-vous sûr de vouloir supprimer cet animal ? Cette action est irréversible."
-          />
         </table>
+
+        <ConfirmationModal
+          isOpen={animalToDelete !== null} // Ouvre le modal si un ID est stocké
+          onClose={() => setAnimalToDelete(null)} // Ferme la modal sans supprimer
+          onConfirm={handleConfirmDelete} // Suppression
+          message="Êtes-vous sûr de vouloir supprimer cet animal ? Cette action est irréversible."
+        />
 
         <Pagination
           currentPage={page}
