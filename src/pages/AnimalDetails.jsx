@@ -16,7 +16,7 @@ export default function AnimalDetails() {
 
   const { id } = useParams();
   const { apiFetch } = useFetch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function detailAnimal() {
