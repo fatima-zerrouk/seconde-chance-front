@@ -12,6 +12,7 @@ import AnimalManagement from './pages/dashboard-admin/AnimalManagement';
 import AnimalCatalog from './pages/AnimalCatalog';
 import AnimalDetails from './pages/AnimalDetails';
 import AnimalTerms from './pages/AnimalTerms';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/catalog" element={<AnimalCatalog />} />
           <Route path="/catalog/:id" element={<AnimalDetails />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
 
         {/* Routes layout ADMIN */}
