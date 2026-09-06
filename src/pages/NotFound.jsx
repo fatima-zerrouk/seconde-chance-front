@@ -3,7 +3,7 @@ import { LinkTerracota } from '../components/ui/Buttons';
 export default function NotFound() {
   return (
     <section className="min-h-screen flex flex-col md:flex-row items-center justify-between gap-8 bg-cream text-center md:text-left">
-      <div className="py-12 px-4 flex flex-col items-center md:items-start md:mx-20">
+      <div className="py-12 px-4 flex flex-col items-center md:items-start lg:mx-20">
         <h1 className="title-h1 mb-4">
           404 oups, cette page n&apos;existe pas
         </h1>
