@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { SectionAdmin } from '../../components/ui/Sections';
-import Form from '../../components/ui/Form';
+import AnimalForm from '../../components/animal/AnimalForm';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
-export default function AddAnimal() {
+export default function AnimalAdd() {
   const [loading, setLoading] = useState(false);
   const [globalError, setGlobalError] = useState(null);
   const { apiFetch } = useFetch();
@@ -17,15 +17,23 @@ export default function AddAnimal() {
       setLoading(true);
       setGlobalError(null);
 
-      data.status = 'available';
-      data.is_visible = true;
+      const cleanedUrls = Array.isArray(data.urls)
+        ? data.urls.filter(Boolean)
+        : [];
+
+      const formattedData = {
+        ...data,
+        status: 'available',
+        is_visible: true,
+        urls: cleanedUrls,
+      };
 
       await apiFetch('/animals', {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: JSON.stringify(formattedData),
       });
 
-      toast.success("L'Animal a bien été ajouté");
+      toast.success("L'animal a bien été ajouté");
       navigate('/dashboard/animals');
     } catch (error) {
       // Gestion des erreurs de validation
@@ -61,7 +69,7 @@ export default function AddAnimal() {
       >
         {globalError && <p className="text-red-700">{globalError} </p>}
         {/* Passe la fonction POST au composant form */}
-        <Form onSubmit={handleAddForm} isLoading={loading} />
+        <AnimalForm onSubmit={handleAddForm} isLoading={loading} />
       </SectionAdmin>
     </>
   );

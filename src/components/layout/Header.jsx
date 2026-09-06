@@ -66,26 +66,13 @@ export function Header() {
               Conditions d&apos;adoption
             </NavLink>
           </li>
-          {isAuthenticated ? (
+          {isAuthenticated && (
             <li>
-              <NavLink to="/dashboard" aria-label="Lien vers mon profil">
-                <CgProfile className="w-12 md:10 h-auto hover:bg-terracotta hover:text-brown rounded-4xl bg-brown text-white transition duration-300 ease-in-out " />
-              </NavLink>
-            </li>
-          ) : (
-            <li>
-              {' '}
               <NavLink
-                to="/login"
-                onClick={() => setIsOpen(false)}
-                aria-label="Lien qui mène à la page de connexion"
-                className={({ isActive }) =>
-                  `flex justify-center items-center bg-terracotta font-medium h-auto py-2 px-4 rounded-(--radius-button)  cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out ${
-                    isActive ? ' font-semibold' : ''
-                  }`
-                }
+                to="/dashboard/animals"
+                aria-label="Lien vers mon profil"
               >
-                Connexion
+                <CgProfile className="w-12 md:10 h-auto hover:bg-terracotta hover:text-brown rounded-4xl bg-brown text-white transition duration-300 ease-in-out " />
               </NavLink>
             </li>
           )}

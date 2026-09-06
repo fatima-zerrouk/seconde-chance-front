@@ -7,12 +7,14 @@ export function ButtonTerracota({
   type,
   onClick,
   icon,
+  disabled = false,
 }) {
   return (
     <button
       type={type}
+      disabled={disabled}
       onClick={onClick}
-      className={`bg-terracotta font-medium h-14 rounded-(--radius-button)  cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out ${className}`}
+      className={`bg-terracotta font-medium h-14 rounded-(--radius-button) cursor-pointer hover:bg-brown hover:text-lin transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
     >
       {icon}
       {value}

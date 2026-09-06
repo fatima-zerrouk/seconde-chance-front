@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { SectionAdmin } from '../../components/ui/Sections';
-import Form from '../../components/ui/Form';
+import AnimalForm from '../../components/animal/AnimalForm';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
 import { Helmet } from 'react-helmet-async';
 
-export default function UpdateAnimal() {
+export default function AnimalUpdate() {
   const { id } = useParams(); //Destructuration de l'id
   const [animal, setAnimal] = useState(null); // Valeur initial
   const { apiFetch } = useFetch();
@@ -32,7 +32,7 @@ export default function UpdateAnimal() {
       }
     };
     loadAnimal();
-  }, [id]); // Données en fonction de l'ID
+  }, [id, apiFetch]); // Données en fonction de l'ID
 
   const handleUpdateForm = async (data, methods) => {
     try {
@@ -41,7 +41,7 @@ export default function UpdateAnimal() {
         method: 'PUT',
         body: JSON.stringify(data),
       });
-      toast.success("L'Animal a bien été mis à jour");
+      toast.success("L'animal a bien été mis à jour");
       navigate('/dashboard/animals');
     } catch (error) {
       // Si le backend renvoie des erreurs de validation
@@ -99,7 +99,7 @@ export default function UpdateAnimal() {
         title={'Modifier un animal'}
         paragraph={"Modifier les informations de l'animal"}
       >
-        <Form
+        <AnimalForm
           animalEdit={animal}
           onSubmit={handleUpdateForm}
           isLoading={isUpdating}

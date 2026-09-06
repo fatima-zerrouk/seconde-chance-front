@@ -16,7 +16,9 @@ export default function SideBar() {
   return (
     <section>
       <button
-        className="lg:hidden fixed left-7 py-6 z-20 text-3xl cursor-pointer"
+        className={`lg:hidden fixed left-7 top-4 py-2 px-3 z-20 text-3xl cursor-pointer rounded-lg
+    transition-colors duration-200
+    ${isOpen ? 'bg-transparent' : 'bg-terracotta shadow-(--shadow-line-b)'}`}
         onClick={() => setIsOpen(!isOpen)}
         aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
       >

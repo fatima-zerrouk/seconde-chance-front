@@ -19,7 +19,7 @@ export default function AnimalTerms() {
         />
       </Helmet>
 
-      <section className="relative flex flex-col justify-between  pb-16 lg:flex-row-reverse items-center bg-cream px-(--margin-mobile) md:lts md:ps-20">
+      <section className="relative flex flex-col justify-between pb-16 pt-8 lg:flex-row-reverse items-center bg-cream px-(--margin-mobile) md:lts md:ps-20">
         <OptimizedImage
           src="/assets/cats.png"
           alt="Photo bannière avec deux chatons roux"
