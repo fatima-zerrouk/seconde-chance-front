@@ -51,7 +51,7 @@ export default function AnimalRow({ animal, onDelete }) {
         >
           <option value="available">Disponible</option>
           <option value="in_progress">En cours d&apos;adoption</option>
-          <option value="adopted">Adopter</option>
+          <option value="adopted">Adopté</option>
         </select>
       </TableData>
 
