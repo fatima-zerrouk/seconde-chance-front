@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SectionAdmin } from '../../components/ui/Sections';
-import Form from '../../components/animal/AnimalForm';
+import AnimalForm from '../../components/animal/AnimalForm';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
@@ -69,7 +69,7 @@ export default function AnimalAdd() {
       >
         {globalError && <p className="text-red-700">{globalError} </p>}
         {/* Passe la fonction POST au composant form */}
-        <Form onSubmit={handleAddForm} isLoading={loading} />
+        <AnimalForm onSubmit={handleAddForm} isLoading={loading} />
       </SectionAdmin>
     </>
   );

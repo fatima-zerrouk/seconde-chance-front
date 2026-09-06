@@ -6,7 +6,6 @@ export function useFetch() {
   const apiFetch = useCallback(
     async (url, options = {}) => {
       const token = localStorage.getItem('token');
-
       // Détection fichier FormData
       const isFormData = options.body instanceof FormData;
 
@@ -28,6 +27,7 @@ export function useFetch() {
 
       if (!res.ok) {
         const error = new Error(data.message || 'Une erreur est survenue.');
+        error.status = res.status;
 
         // Si Express-Validator a renvoyé un tableau d'erreurs dans data.errors
         if (data.errors) {

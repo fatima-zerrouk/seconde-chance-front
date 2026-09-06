@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { SectionAdmin } from '../../components/ui/Sections';
-import Form from '../../components/animal/AnimalForm';
+import AnimalForm from '../../components/animal/AnimalForm';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
 import { Helmet } from 'react-helmet-async';
@@ -99,7 +99,7 @@ export default function AnimalUpdate() {
         title={'Modifier un animal'}
         paragraph={"Modifier les informations de l'animal"}
       >
-        <Form
+        <AnimalForm
           animalEdit={animal}
           onSubmit={handleUpdateForm}
           isLoading={isUpdating}

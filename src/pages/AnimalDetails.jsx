@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import AnimalData from '../components/animal/AnimalData';
 import Carousel from '../components/animal/AnimalCarousel';
@@ -16,6 +16,7 @@ export default function AnimalDetails() {
 
   const { id } = useParams();
   const { apiFetch } = useFetch();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     async function detailAnimal() {
@@ -39,24 +40,30 @@ export default function AnimalDetails() {
         role="status"
         aria-live="polite"
       >
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-        <span className="sr-only">
+        <p className="animate-pulse">
           Chargement des détails de l&apos;animal...
-        </span>
+        </p>
       </div>
     );
   }
+
   if (error) {
     return (
       <div
-        className="max-w-xl mx-auto my-8 p-4 bg-red-50 border-l-4 border-red-500 text-red-700"
+        className="text-center my-10 p-6 bg-red-50 rounded-xl border border-red-200 max-w-lg mx-auto"
         role="alert"
       >
-        <p className="font-bold">Une erreur est survenue</p>
-        <p>{error}</p>
+        <p className="text-red-700 font-semibold text-lg mb-4">{error}</p>
+        <button
+          onClick={() => navigate('/catalog')}
+          className="cursor-pointer px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-900 transition duration-300 ease-in-out"
+        >
+          Retour au catalogue
+        </button>
       </div>
     );
   }
+
   if (!animal) {
     return (
       <div className="max-w-xl mx-auto my-8 text-center text-gray-600">
