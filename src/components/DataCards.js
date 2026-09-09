@@ -82,3 +82,61 @@ export const dataContact = [
     target: 'blank',
   },
 ];
+
+export const dataRules = [
+  {
+    id: 1,
+    title: 'Un engagement à long terme',
+    text: "Adopter un animal, c'est s'engager pour toute sa vie, soit 10 à 20 ans selon l'espèce. Cet engagement nécessite du temps, de l'amour et des ressources financières.",
+    items: [
+      "Réfléchissez à votre situation actuelle et future (déménagement, changement de travail, arrivée d'un enfant)",
+      "Assurez-vous que tous les membres de votre foyer sont d'accord avec l'adoption",
+      'Vérifiez que votre logement accepte les animaux de compagnie',
+    ],
+  },
+
+  {
+    id: 2,
+    title: 'Santé et bien-être',
+    text: 'Un animal nécessite des soins vétérinaires réguliers et une alimentation adaptée pour rester en bonne santé.',
+    items: [
+      'Visites vétérinaires annuelles et vaccinations obligatoires',
+      "Budget mensuel pour la nourriture, les soins et les accessoires (environ 50-100€ selon l'animal)",
+      "Prévoyance pour les frais vétérinaires d'urgence (assurance ou épargne)",
+      "Stérilisation recommandée pour le bien-être de l'animal",
+    ],
+  },
+  {
+    id: 3,
+    title: 'Un environnement adapté',
+    text: "Chaque animal a des besoins spécifiques en termes d'espace et d'environnement.",
+    items: [
+      "Les chiens de grande taille nécessitent de l'espace et des promenades quotidiennes",
+      "Les chats d'intérieur ont besoin d'enrichissement (arbres à chat, jouets, stimulation)",
+      'Sécuriser votre logement (fenêtres, balcons, produits toxiques)',
+      "Prévoir un espace dédié pour le repos et l'intimité de l'animal",
+    ],
+  },
+  {
+    id: 4,
+    title: 'Temps et disponibilité',
+    text: 'Un animal a besoin de votre présence et de votre attention au quotidien.',
+    items: [
+      'Les chiens nécessitent au minimum 2 sorties par jour, dont une longue promenade',
+      "Les chats demandent du temps de jeu et d'interaction quotidien",
+      'Prévoir une solution pour les vacances et absences (famille, pension, garde à domicile)',
+      "Période d'adaptation de plusieurs semaines nécessaire",
+    ],
+  },
+  {
+    id: 5,
+    title: 'Responsabilités légales',
+    text: 'En tant que propriétaire, vous avez des obligations légales envers votre animal et la société.',
+    items: [
+      'Identification obligatoire par puce électronique ou tatouage',
+      'Vaccination antirabique obligatoire pour les chiens (recommandée pour les chats)',
+      'Assurance responsabilité civile pour couvrir les dommages causés par votre animal',
+      "Respect du bien-être animal : interdiction de maltraitance et d'abandon",
+    ],
+  },
+];

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SectionAdmin } from '../../components/ui/Sections';
 import { useFetch } from '../../hooks/useFetch';
-import AnimalRow from '../../components/ui/AnimalRow';
+import AnimalRow from '../../components/animal/AnimalRow';
 import Pagination from '../../components/ui/Pagination';
 import SearchBar from '../../components/ui/SearchBar';
 import { TableHead } from '../../components/ui/Field';
@@ -42,7 +42,7 @@ export default function AnimalManagement() {
       }
     }
     loadAnimals();
-  }, [page, search]); //Les dépendances
+  }, [page, search, apiFetch]); //Les dépendances
 
   const totalPages = Math.ceil(total / limit); // Arrondit (1.22 devient 2)
 
@@ -141,13 +141,14 @@ export default function AnimalManagement() {
               ))
             )}
           </tbody>
-          <ConfirmationModal
-            isOpen={animalToDelete !== null} // Ouvre le modal si un ID est stocké
-            onClose={() => setAnimalToDelete(null)} // Ferme la modal sans supprimer
-            onConfirm={handleConfirmDelete} // Suppression
-            message="Êtes-vous sûr de vouloir supprimer cet animal ? Cette action est irréversible."
-          />
         </table>
+
+        <ConfirmationModal
+          isOpen={animalToDelete !== null} // Ouvre le modal si un ID est stocké
+          onClose={() => setAnimalToDelete(null)} // Ferme la modal sans supprimer
+          onConfirm={handleConfirmDelete} // Suppression
+          message="Êtes-vous sûr de vouloir supprimer cet animal ? Cette action est irréversible."
+        />
 
         <Pagination
           currentPage={page}

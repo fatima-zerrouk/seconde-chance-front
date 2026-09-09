@@ -1,17 +1,18 @@
-// import './App.css';
 import { Routes, Route } from 'react-router-dom';
-// import { Header } from './components/layout/Header';
 import Home from './pages/Home';
-// import { Footer } from './components/layout/Footer';
 import Login from './pages/Login';
-import Dashboard from './pages/DashboardAdmin/Dashboard';
+import Dashboard from './pages/dashboard-admin/Dashboard';
 import PrivateRoute from './routes/PrivateRoute';
 import { Toaster } from 'sonner';
 import PublicLayout from './components/layout/PublicLayout';
 import AdminLayout from './components/layout/AdminLayout';
-import AddAnimal from './pages/DashboardAdmin/AddAnimal';
-import UpdateAnimal from './pages/DashboardAdmin/UpdateAnimal';
-import AnimalManagement from './pages/DashboardAdmin/AnimalManagement';
+import AnimalAdd from './pages/dashboard-admin/AnimalAdd';
+import AnimalUpdate from './pages/dashboard-admin/AnimalUpdate';
+import AnimalManagement from './pages/dashboard-admin/AnimalManagement';
+import AnimalCatalog from './pages/AnimalCatalog';
+import AnimalDetails from './pages/AnimalDetails';
+import AnimalTerms from './pages/AnimalTerms';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -28,7 +29,11 @@ function App() {
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/terms" element={<AnimalTerms />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/catalog" element={<AnimalCatalog />} />
+          <Route path="/catalog/:id" element={<AnimalDetails />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
 
         {/* Routes layout ADMIN */}
@@ -57,7 +62,7 @@ function App() {
             path="/dashboard/add"
             element={
               <PrivateRoute role={'admin'}>
-                <AddAnimal />
+                <AnimalAdd />
               </PrivateRoute>
             }
           >
@@ -68,7 +73,7 @@ function App() {
             path="/dashboard/update/:id"
             element={
               <PrivateRoute role={'admin'}>
-                <UpdateAnimal />
+                <AnimalUpdate />
               </PrivateRoute>
             }
           ></Route>

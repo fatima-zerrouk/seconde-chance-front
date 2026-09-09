@@ -4,10 +4,12 @@ import { TableData } from '../ui/Field';
 import { useState } from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { toast } from 'sonner';
+import { optimizeCloudinaryUrl } from '../../utils/cloudinary';
 
 export default function AnimalRow({ animal, onDelete }) {
   const { apiFetch } = useFetch();
   const [status, setStatus] = useState(animal.status); // Initialise avec le statut
+  const imageUrl = optimizeCloudinaryUrl(animal.picture_url, 350);
 
   const handleStatus = async e => {
     const newStatus = e.target.value; // Récupère statut sélectionné
@@ -22,20 +24,6 @@ export default function AnimalRow({ animal, onDelete }) {
       toast.error("Impossible de modifier le statut de l'animal", error);
     }
   };
-
-  // Fonction pour optimiser l'URL Cloudinary
-  const optimizeCloudinaryUrl = url => {
-    if (!url)
-      return 'https://cdn.phototourl.com/free/2026-07-16-68b65eb2-6d21-4c71-a9a7-4e251506c9b1.png';
-
-    // Si c'est une URL Cloudinary, injecte les paramètres d'optimisation
-    if (url.includes('cloudinary.com')) {
-      return url.replace('/upload/', '/upload/f_auto,q_auto,w_150,c_scale/');
-    }
-
-    return url;
-  };
-  const imageUrl = optimizeCloudinaryUrl(animal.picture_url);
 
   return (
     <tr className="block md:table-row border md:border-none rounded-(--radius-card) shadow-(--shadow-card) md:shadow-none p-6 mb-6 md:mb-0">
@@ -63,7 +51,7 @@ export default function AnimalRow({ animal, onDelete }) {
         >
           <option value="available">Disponible</option>
           <option value="in_progress">En cours d&apos;adoption</option>
-          <option value="adopted">Adopter</option>
+          <option value="adopted">Adopté</option>
         </select>
       </TableData>
 
@@ -88,7 +76,7 @@ export default function AnimalRow({ animal, onDelete }) {
 
       <TableData td={'Page détail :'}>
         <NavLink
-          to={`/dashboard/animals/${animal.id}`}
+          to={`/catalog/${animal.id}`}
           className="inline-flex p-2 hover:bg-brown hover:text-lin rounded-(--radius-input) transition duration-150 ease-in-out"
           aria-label={`Lien vers la page détail de ${animal.name}`}
         >

@@ -40,7 +40,7 @@ export default function Login() {
       }
 
       login(result.token);
-      navigate('/dashboard');
+      navigate('/dashboard/animals');
     } catch (error) {
       // Si l'erreur vient des identifiants, erreur 401 du back
       if (error.message === 'Identifiants incorrects') {
@@ -57,7 +57,7 @@ export default function Login() {
         <title>Connexion</title>
       </Helmet>
 
-      <section className="px-(--margin-mobile) py-26 bg-cream flex justify-center">
+      <section className="px-(--margin-mobile) py-26 bg-cream flex-1 flex justify-center items-center">
         <form
           onSubmit={handleSubmit(handleSubmitForm)}
           className="rounded-(--radius-card) shadow-card w-100 bg-white p-8 lg:w-110 h-auto transition-all duration-300 ease-in-out"
@@ -65,6 +65,7 @@ export default function Login() {
           <h1 className="title-h1 text-center font-semibold">Connexion</h1>
 
           <fieldset className="grid grid-cols-1 mt-6">
+            <legend className="sr-only">Forumalaire de connexion</legend>
             <label htmlFor="email" className="font-medium">
               Votre email
             </label>
@@ -84,7 +85,7 @@ export default function Login() {
             <label htmlFor="psw" className="font-medium mt-8">
               Votre mot de passe
             </label>
-            <div className="relative">
+            <div className="relative flex items-center">
               <Field
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Entrer votre mot de passe"
@@ -94,29 +95,30 @@ export default function Login() {
                   required: 'Le mot de passe est obligatoire.',
                 })}
               />
-              {errors.password && (
-                <p className="text-red-700">{errors.password.message}</p>
-              )}
 
-              <div
-                className="absolute  top-5 left-70 lg:left-84"
+              <button
+                type="button"
+                className="absolute right-6"
                 onClick={() => {
                   setShowPassword(!showPassword);
                 }}
+                aria-label={
+                  showPassword
+                    ? 'Masquer le mot de passe'
+                    : 'Afficher le mot de passe'
+                }
               >
                 {showPassword ? (
-                  <LiaEyeSolid
-                    className="text-2xl "
-                    aria-label="Icone d'un oeil ouvert pour afficher le mot de passe "
-                  />
+                  <LiaEyeSolid className="text-2xl " />
                 ) : (
-                  <LiaEyeSlashSolid
-                    className="text-2xl"
-                    aria-label="Icone d'un oeil fermer pour ne plus afficher le mot de passe "
-                  />
+                  <LiaEyeSlashSolid className="text-2xl" />
                 )}
-              </div>
+              </button>
             </div>
+            {errors.password && (
+              <p className="text-red-700">{errors.password.message}</p>
+            )}
+
             <ButtonTerracota
               type="submit"
               value={'Se connecter'}
